@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El AAMERY Ilyas - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: rgb(161, 154, 154);
+            color: white;
+            padding: 0.1em 1em;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        header p {
+            margin: 0.5em 0 0;
+            font-size: 1em;
+            font-weight: 300;
+        }
+
+        header nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1.5em;
+            margin-top: 1em;
+        }
+
+        header nav ul li {
+            display: inline;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1em;
+            transition: color 0.3s;
+        }
+
+        header nav ul li a:hover {
+            color: black;
+        }
+
+        section {
+            max-width: 1300px;
+            margin: 5em auto 2em auto;
+            padding: 2em;
+            background-color: rgba(255, 255, 255, 0.6); /* Blanc avec 80% d'opacité */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            scroll-margin-top: 150px;
+            text-align: center;
+        }
+
+        .photo-section {
+            text-align: center;
+            margin-top: 7em;
+        }
+
+        .photo-section img {
+            width: 150px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1em;
+          
+        }
+
+        .photo-section p {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        h2 {
+            color: rgb(85, 80, 80);
+            font-size: 1.8em;
+            margin-bottom: 1em;
+            border-bottom: 2px solid rgb(85, 80, 80);
+            padding-bottom: 0.5em;
+        }
+
+        p, ul {
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 1em;
+            font-size: 1.1em;
+        }
+
+        li a {
+            color: #2d3748;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        li a:hover {
+            color: #ff0000;
+        }
+
+        footer {
+            background-color: rgb(161, 154, 154);
+            color: white;
+            text-align: center;
+            padding: 1em;
+            font-size: 0.9em;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgb(161, 154, 154);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50%;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgb(161, 154, 154);
+            display: none;
+        }
+
+        .back-to-top:hover {
+            background-color: #000000;
+        }
+
+        .contact-section {
+            text-align: center;
+        }
+
+        .contact-section a {
+            display: inline-block;
+            margin-top: 1em;
+            padding: 0.8em 1.5em;
+            background-color: rgb(161, 154, 154);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+        }
+
+        .contact-section a:hover {
+            background-color: #000000;
+        }
+
+        .intro-section {
+            align-items: center;
+            justify-content: center;
+            color: rgb(85, 80, 80);
+            margin-top: 150px;
+        }
+
+        .intro-section.hidden {
+            display: none;
+        }
+
+        .intro-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .intro-section img {
+            height: 180px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgb(85, 80, 80);
+        }
+
+
+        .intro-text h2 {
+            margin: 0 0 1em;
+            color: rgb(85, 80, 80);
+            font-size: 1.8em;
+            border-bottom: 2px solid rgb(85, 80, 80);
+            padding-bottom: 0.5em;
+        }
+
+        .intro-text p {
+            margin: 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .section-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2em; 
+            flex-wrap: wrap; 
+        }
+
+        .section-description {
+            flex: 1;
+            text-align: left;
+        }
+
+        .section-video {
+            flex: 1;
+            text-align: right;
+        }
+
+        .section-container.reverse .section-description {
+            order: 2; 
+            text-align: right; 
+        }
+
+        .section-container.reverse .section-video {
+            order: 1; 
+            text-align: left; 
+        }
+
+        h2 {
+            color: rgb(85, 80, 80);
+            font-size: 2.2em;
+            margin-bottom: 1.5em;
+            border-bottom: 3px solid rgb(85, 80, 80);
+            padding-bottom: 1em;
+        }
+
+        #backToTop {
+            position: fixed; 
+            bottom: 20px; 
+            right: 20px; 
+            display: none; 
+            background-color: rgb(85, 80, 80);
+            color: white; 
+            border: none;
+            border-radius: 50%;
+            padding: 10px 15px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            font-size: 35px;
+            width: 70px;
+            z-index: 1000;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        #backToTop:hover {
+            background-color: black;
+            transform: scale(1.1);
+        }
+
+        #language-selector {
+            position: relative;
+            display: inline-block;
+            font-family: Arial, sans-serif;
+            margin: 0 100px;
+        }
+
+        #current-language {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #current-language:hover {
+            background-color: white;
+        }
+
+        #language-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: none;
+            z-index: 10;
+        }
+
+        #language-menu li {
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #language-menu li:hover {
+            background-color: black;
+        }
+
+        .flag {
+            width: 20px;
+            height: auto;
+            border-radius: 3px;
+        }
+
+        .section-video {
+            position: relative;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .section-video::before{
+            content: "";
+            display: block;
+            padding-top: 56.25%;
+        }
+
+        .download-btn, .download-btn2, .download-btn3, .download-btn4 {
+            display: inline-block;
+            background-color: rgb(161, 154, 154);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .download-btn:hover, .download-btn2:hover, .download-btn3:hover, .download-btn4:hover {
+            background-color: black;
+            transform: scale(1.05);
+        }
+
+        .download-btn:active, .download-btn2:active, .download-btn3.active, .download-btn4:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .download-btn img, .download-btn2 img, .download-btn3 img, .download-btn4 img {
+            width: 20px;
+            height: auto;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        .other-content {
+            display: block;
+        }
+
+        .mobile-message {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            section {
+                padding: 1.5em;
+            }
+
+            header h1 {
+                font-size: 1.6em;
+            }
+
+            header p {
+                font-size: 0.9em;
+            }
+
+            .photo-section img {
+                margin-bottom: 1em;
+            }
+            .intro-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .intro-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .intro-container img {
+                margin-bottom: 1em;
+            }
+
+            .section-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .section-description {
+                max-width: 50%; 
+                text-align: center;
+            }
+
+            #JeuX .jeuX-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #JeuX .description {
+                text-align: center;
+                margin-bottom: 15px;
+            }
+
+            .video{
+                max-width: 200px;
+                max-height: 200px;
+            }
+        }
+
+        @media only screen and (max-width: 768px) {
+            .other-content {
+            display: none;
+            }
+
+            .mobile-message {
+                display: block;
+                text-align: center;
+                font-size: 18px;
+                padding: 20px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="mobile-message">
+        <p> Please open on PC </p>
+        <p> Mobile version coming soon...</p>
+        <p>--------------------------</p>
+        <p>Ouvrir sur ordinateur s'il vous plaît</p>
+        <p>La verison mobile arrive bientôt</p>
+    </div>     
+
+    <div class="other-content">
+        <header>
+            <h1 data-translate="name">El Aamery Ilyas</h1>
+            <nav>
+                <ul>
+                    <li><a href="#AboutMe" data-translate="AboutMe">About Me</a></li>
+                    <li><a href="#Skills" data-translate="Skills">Skills</a></li>
+                    <li><a href="#ProgrammingLanguages" data-translate="ProgrammingLanguages">Programming Languages</a></li>
+                    <li><a href="#Projects" data-translate="Projects">Projects</a></li>
+                    <li><a href="#ContactMe" data-translate="ContactMe">Contact Me</a></li>
+                </ul>
+            </nav>
+            <div id="language-selector">
+                <button id="current-language" onclick="toggleLanguageMenu()">
+                    <img src="https://flagcdn.com/w40/gb.png" alt="English" class="flag">
+                </button>
+                <ul id="language-menu">
+                    <li onclick="selectLanguage('en')">
+                        <img src="https://flagcdn.com/w40/gb.png" alt="English" class="flag">
+                    </li>
+                    <li onclick="selectLanguage('fr')">
+                        <img src="https://flagcdn.com/w40/fr.png" alt="Français" class="flag">
+                    </li>
+                </ul>
+            </div>               
+        </header>
+
+        <section class="intro-section" id="AboutMe">
+            <div class="intro-container">
+                <img src="Photo Ilyas.jpeg" alt="El Aamery Ilyas">
+                <div class="intro-text">
+                    <h2 data-translate="AboutMe">About Me</h2>
+                    <p data-translate="introText"></p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 data-translate="languages">Languages</h2>
+            <ul>
+                <li>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" alt="French Flag" style="width: 24px; height: 16px; vertical-align: middle;">
+                    <span data-translate="french">French</span>
+                </li>
+                <li>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/0/03/Flag_of_Italy.svg" alt="Italian Flag" style="width: 24px; height: 16px; vertical-align: middle;">
+                    <span data-translate="italian">Italian</span>
+                </li>
+                <li>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="English Flag" style="width: 24px; height: 16px; vertical-align: middle;">
+                    <span data-translate="english">English</span>
+                </li>
+                <li>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Flag_of_Morocco_%28large_stroke%29.svg" alt="Arabic Flag" style="width: 24px; height: 16px; vertical-align: middle;">
+                    <span data-translate="arabic">Arabic</span>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2 data-translate="education">Education</h2>
+            <ul>
+                <li data-translate="education_bachelor">Bachelor's in Computer Science - Lorraine University (2024 - Present)</li>
+                <li data-translate="education_baccalaureat">High School Baccalaureate in IT and English - Lycée Hélène Boucher (2024)</li>
+                <li data-translate="education_certificate">Cambridge English Proficiency Certificate - Cambridge English B2 (2024)</li>
+            </ul>
+        </section>
+
+        <section id="Skills">
+            <h2 data-translate="Skills">Skills</h2>
+            <ul>
+                <li data-translate="skills_programming">Programming (VS Code)</li>
+                <li data-translate="skills_database">Database Management</li>
+                <li data-translate="skills_project_management">Project Management</li>
+                <li data-translate="skills_linux">Linux Bash</li>
+            </ul>
+        </section>
+
+        <section id="ProgrammingLanguages">
+            <h2 data-translate="ProgrammingLanguages">Programming Languages</h2>
+            <ul>
+                <li>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/C_Programming_Language.svg" alt="C Language" style="width: 24px; height: 24px; vertical-align: middle;"> C
+                </li>
+                <li>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt="HTML5" style="width: 24px; height: 24px; vertical-align: middle;"> HTML 5
+                </li>
+                <li>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" alt="CSS3" style="width: 24px; height: 24px; vertical-align: middle;"> CSS 3
+                </li>
+                <li>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Sql_data_base_with_logo.svg" alt="SQL" style="width: 24px; height: 24px; vertical-align: middle;"> SQL
+                </li>
+                <li>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python" style="width: 24px; height: 24px; vertical-align: middle;"> Python
+                </li>
+                <li>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg" alt="JavaScript" style="width: 24px; height: 24px; vertical-align: middle;"> JavaScript
+                </li>
+            </ul>
+        </section>
+
+        <section id="Projects">
+            <h2 data-translate="Projects">Projects</h2>
+            <ul>
+                <li><a href="#JeuX">JeuX</a> - C Language</li>
+                <li><a href="#JeuDeNim">Jeu de Nim</a> - C Language</li>
+                <li><a href="#LogsConnexions">Logs Connexions</a> - Bash Linux</li>
+                <li><a href="#PuebloZoo">Pueblo Zoo</a> - SQL</li>
+                <li><a href="#Formule1">Formule 1 Site</a> - HTML/CSS</li>
+            </ul>
+        </section>
+
+        <section id="JeuX">
+            <h2>JeuX</h2>
+            <div>
+                <button data-translate="download-btn" onclick="downloadFile()" class="download-btn">
+                    Download JeuX.zip
+                </button>
+            </div>
+            <div class="section-container">
+                <div class="section-description">
+                    <p data-translate ="JeuX-description"></p>
+                </div>
+                <div class="section-video">
+                    <video controls width="600">
+                        <source src="Jeux.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <section id="JeuDeNim">
+            <h2>Jeu de Nim</h2>
+            <div>
+                <button data-translate="download-btn2" onclick="downloadFile2()" class="download-btn2">
+                    Download Jeu_de_Nim.zip
+                </button>
+            </div>
+            <div class="section-container reverse">
+                <div class="section-description">
+                    <p data-translate ="JeuDeNim-description"></p>
+                </div>
+                <div class="video">
+                    <video controls width="600">
+                        <source src="JeuDeNim.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <section id="LogsConnexions">
+            <h2>Logs Connexions</h2>
+            <div>
+                <button data-translate="download-btn3" onclick="downloadFile3()" class="download-btn3">
+                    Download LogsConnexions.zip
+                </button>
+            </div>
+            <div class="section-container">
+                <div class="section-description">
+                    <p data-translate="LogsConnexion-description"></p>
+                </div>
+                <div class="section-video">
+                    <video controls width="600">
+                        <source src="LogsConnexion.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <section id="PuebloZoo">
+            <h2>Pueblo Zoo</h2>
+            <div>
+                <button data-translate="download-btn4" onclick="downloadFile4()" class="download-btn4">
+                    Download PuebloZoo.zip
+                </button>
+            </div>
+            <div class="section-container reverse">
+                <div class="section-description">
+                    <p data-translate="PuebloZoo-description"></p>
+                </div>
+                <div class="photo-looping">
+                    <a href="Looping.png" target="_blank">
+                        <img src="Looping.png" alt="PuebloZoo Preview" width="600">
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="Formule1">
+            <h2>Site Formule 1</h2>
+            <div class="section-container">
+                <div class="section-description">
+                    <p data-translate="F1-description"></p>
+                </div>
+                <div class="section-video">
+                    <embed src="Maquete_F1.pdf" type="application/pdf" width="100%" height="600px">
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section" id="ContactMe">
+            <h2 data-translate="ContactMe">Contact Me</h2>
+            <p data-translate="Stage" style="font-size: 2em; font-weight: bold;"></p>
+            <p data-translate="contactText">If you would like to get in touch or learn more about me, feel free to contact me or download my CV below:</p>
+            <a href="CV El Aamery Ilyas.pdf">Telecharger mon CV - FR</a>
+            <a href="Curriculum El Aamery Ilyas.pdf">Download my Curriculum - EN</a>
+            <p>E-mail: elaameryilyas12@gmail.com</p>
+        </section>
+
+        <footer>
+            &copy; 2025 El Aamery Ilyas. All Rights Reserved.
+        </footer>
+
+        <script>
+            function scrollToTop() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            }
+
+            window.addEventListener("scroll", function () {
+                const button = document.getElementById("backToTop");
+                if (window.scrollY > 300) {
+                    button.style.display = "block";
+                } else {
+                    button.style.display = "none";
+                }
+            });
+        </script>
+        
+        <script>
+            function changeLanguage(lang) {
+                if (lang === "en") {
+                    console.log("Language switched to English");
+                } else if (lang === "fr") {
+                    console.log("Langue changée en Français");
+                }
+            }
+        </script> 
+        
+        <script>
+            function downloadFile() {
+                const link = document.createElement('a');
+                link.href = 'JeuX.zip';
+                link.download = 'JeuX.zip';
+                link.click();
+            }
+        </script>
+
+        <script>
+            function downloadFile2() {
+                const link = document.createElement('a');
+                link.href = 'Jeu de Nim.zip';
+                link.download = 'Jeu de Nim.zip';
+                link.click();
+            }
+        </script>
+
+        <script>
+            function downloadFile3() {
+                const link = document.createElement('a');
+                link.href = 'LogsConnexion.zip';
+                link.download = 'LogsConnexion.zip';
+                link.click();
+            }
+        </script>
+
+        <script>
+            function downloadFile4() {
+                const link = document.createElement('a');
+                link.href = 'PuebloZoo.zip';
+                link.download = 'PuebloZoo.zip';
+                link.click();
+            }
+        </script>
+
+        <script src="trad.js"></script>
+        <button id="backToTop" onclick="scrollToTop()">⬆</button>
+    </div>
+
+</body>
+</html>
