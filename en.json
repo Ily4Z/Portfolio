@@ -15,8 +15,8 @@
     "Projects": "Projects",
     "ContactMe": "Contact Me",
     "contactText": "If you would like to contact me or learn more, feel free to download my Curriculum below:",
-    "download_cv": "Download My CV",
-    "download_cv_ats": "Download My ATS CV",
+    "download_cv": "Download my resume",
+    "download_cv_ats": "Download my resume",
     "languages": "Languages",
     "french": "French - C2",
     "italian": "Italian - C2",
@@ -32,5 +32,6 @@
     "LogsConnexion-description":"This project, developed in Bash on Linux, allows for analyzing and tracking user access to a file. It consists of a set of scripts designed to enhance security by continuously monitoring user interactions with a specific file. When the script is executed, it records various details such as the username, host, IP address, device used, as well as the date and time of access. It then allows for data analysis to determine how many times a user has accessed the file per day, week, or month. Additionally, it is possible to display these statistics for a specific user or a group of users, along with all associated details. This project was my first university assignment in Bash.",
     "PuebloZoo-description":"PuebloZoo is a fictional yet fully functional database designed to manage the entire operational system of a zoo. I created it myself and tested it using various SQL queries, which yielded promising results for a student's first database project. My database skills are continuously improving, allowing me to avoid some of the mistakes I currently make. If you’d like to explore and test the database, you can download it via the ZIP link above the photo.",
     "F1-description":"As part of our first web development project at university, we had one month to create a responsive website on a topic of our choice. We were a group of four students and divided the tasks to build this site, which you can see here. We chose the 2010s Formula 1 as our theme. The website includes several pages: a homepage, a section on the history of Formula 1, a ranking table for the 2010 season, and dedicated pages for each driver, customized based on their team. To organize our work, we first created a wireframe to define the website’s design and then decided on our preferred workflow. The project went very smoothly, demonstrating our ability to manage ourselves and work autonomously as a team.",
-    "Stage":"I am looking for an international internship for the period from 06/04 to 29/05/2026"
+    "Stage":"I am looking for an international internship for the period from 13/04 to 05/06/2026"
 }
+
