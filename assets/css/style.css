@@ -190,6 +190,13 @@ ul {
     margin-bottom: 10px;
 }
 
+.tech-list img {
+    width: 40px;       /* Taille idéale pour bureau */
+    height: 40px;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
 #language-selector {
     position: relative;
     margin-left: 20px;
