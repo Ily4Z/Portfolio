@@ -1,0 +1,352 @@
+/* --- RESET ET BASE --- */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f4f4f4;
+    overflow-x: hidden; /* Empêche le défilement horizontal indésirable */
+}
+
+/* --- HEADER (PC) --- */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(161, 154, 154);
+    color: white;
+    padding: 1.5em 2em; /* Ton grand header */
+    text-align: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8em;
+    font-weight: 700;
+    white-space: nowrap; /* Empêche le nom de se casser en deux */
+}
+
+header nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 1.5em;
+    flex-wrap: wrap; /* Permet aux liens de passer à la ligne si nécessaire */
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 1.1em;
+    transition: color 0.3s;
+}
+
+header nav ul li a:hover {
+    color: black;
+}
+
+/* --- MAIN CONTENT --- */
+main {
+    padding-top: 160px; /* Espace pour ne pas être caché par le header */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+section {
+    max-width: 95%;
+    width: 1600px;
+    margin: 2em auto;
+    padding: 3em;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    scroll-margin-top: 180px; /* Ajustement pour l'atterrissage du scroll */
+    text-align: center;
+    box-sizing: border-box;
+}
+
+h2 {
+    color: rgb(85, 80, 80);
+    font-size: 2.2em;
+    margin-bottom: 1em;
+    border-bottom: 3px solid rgb(85, 80, 80);
+    padding-bottom: 0.5em;
+}
+
+p, ul {
+    line-height: 1.8;
+    font-size: 1.1em;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* --- INTRO SECTION --- */
+.intro-section {
+    margin-top: 2em;
+}
+
+.intro-container {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    justify-content: center;
+    text-align: left;
+}
+
+.intro-section img {
+    width: 220px;
+    height: 220px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgb(85, 80, 80);
+    flex-shrink: 0; /* Empêche la photo de s'écraser */
+}
+
+/* --- PROJETS & CONTENU --- */
+.section-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Centré verticalement */
+    gap: 3em; 
+    margin-top: 2em;
+}
+
+.section-description {
+    flex: 1;
+    text-align: justify;
+    font-size: 1.05em;
+}
+
+.section-video, .photo-looping {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.section-video video, .section-video embed, .photo-looping img {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.section-container.reverse {
+    flex-direction: row-reverse;
+}
+
+/* --- BOUTONS --- */
+.download-btn, .btn-secondary {
+    display: inline-block;
+    background-color: rgb(161, 154, 154);
+    color: white;
+    text-decoration: none;
+    padding: 12px 28px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 50px; /* Plus arrondi */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 15px 10px;
+}
+
+.download-btn:hover, .btn-secondary:hover {
+    background-color: black;
+    transform: translateY(-3px); /* Petit effet de levée */
+}
+
+/* --- LANGUAGE & FLAGS --- */
+.mini-flag {
+    width: 24px; 
+    height: 16px; 
+    vertical-align: middle;
+    margin-right: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.tech-list li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#language-selector {
+    position: relative;
+    margin-left: 20px;
+}
+
+#current-language {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+#language-menu {
+    position: absolute;
+    top: 100%;
+    right: 0; /* Aligné à droite pour ne pas sortir de l'écran */
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+    flex-direction: column;
+    min-width: 140px;
+    text-align: left;
+}
+
+#language-menu.show { display: flex; }
+
+#language-menu li {
+    padding: 12px 15px;
+    color: black;
+    border-bottom: 1px solid #eee;
+}
+
+#language-menu li:last-child { border-bottom: none; }
+#language-menu li:hover { background-color: #f0f0f0; }
+
+.flag { width: 30px; border-radius: 3px; }
+
+/* --- BACK TO TOP --- */
+#backToTop {
+    position: fixed; 
+    bottom: 25px; 
+    right: 25px; 
+    display: none; 
+    background-color: rgb(85, 80, 80);
+    color: white; 
+    border: none;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    font-size: 24px;
+    z-index: 1000;
+    transition: transform 0.3s ease, background-color 0.3s;
+}
+
+#backToTop:hover {
+    background-color: black;
+    transform: scale(1.15);
+}
+
+/* --- MOBILE MESSAGE (On le cache pour toujours maintenant) --- */
+.mobile-message {
+    display: none !important;
+}
+
+/* =========================================
+   📱 MEDIA QUERIES (RESPONSIVE MOBILE)
+   ========================================= */
+
+@media screen and (max-width: 900px) {
+    /* 1. Ajustement du Header Mobile */
+    header {
+        flex-direction: column; /* On empile le contenu */
+        padding: 1em;
+        position: relative; /* On le détache pour qu'il scrolle (plus ergonomique sur mobile) */
+        height: auto;
+    }
+
+    header nav ul {
+        margin-top: 15px;
+        gap: 15px;
+        justify-content: center; /* Liens centrés */
+    }
+
+    #language-selector {
+        margin: 15px 0 0 0; /* Un peu d'espace au dessus du drapeau */
+    }
+
+    /* 2. Ajustement du corps de page */
+    main {
+        padding-top: 20px; /* Plus besoin de 150px car le header n'est plus "fixed" sur mobile */
+    }
+
+    /* On force l'affichage du site sur mobile */
+    .main-content {
+        display: block !important;
+    }
+
+    /* 3. Section Intro Mobile */
+    .intro-container {
+        flex-direction: column; /* Photo au dessus, texte en dessous */
+        text-align: center;
+        gap: 20px;
+    }
+
+    .intro-text h2 {
+        border-bottom: none; /* Plus joli sans la ligne sur mobile */
+    }
+
+    /* 4. Sections Projets Mobile */
+    .section-container, .section-container.reverse {
+        flex-direction: column; /* Tout en colonne */
+        gap: 2em;
+    }
+
+    /* On s'assure que la vidéo passe EN DESSOUS du texte sur mobile pour la logique de lecture */
+    .section-container.reverse {
+        flex-direction: column; 
+    }
+
+    .section-description {
+        text-align: center; /* Texte centré sur petit écran */
+    }
+
+    section {
+        padding: 1.5em; /* Moins de marge interne */
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0; /* Pleine largeur */
+        margin: 0 0 2em 0;
+    }
+
+    /* 5. Ajustements visuels divers */
+    h1 { font-size: 1.5em; }
+    h2 { font-size: 1.8em; }
+    
+    .cv-links {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .tech-list img, .mini-flag {
+        width: 30px !important;  /* On force une petite taille */
+        height: 30px !important;
+        flex-shrink: 0;          /* Empêche l'image de s'écraser */
+        object-fit: contain;     /* Garde les proportions */
+    }
+
+    .tech-list li {
+        flex-direction: row;     /* Garde l'image À CÔTÉ du texte, pas au-dessus */
+        justify-content: center;
+    }
+}
