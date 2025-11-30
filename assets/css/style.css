@@ -8,8 +8,30 @@ body {
     margin: 0;
     padding: 0;
     color: #333;
-    background-color: #f4f4f4;
-    overflow-x: hidden; /* Empêche le défilement horizontal indésirable */
+    
+    /* --- NOUVEAU FOND (Plus clair & Dynamique) --- */
+    /* On remplace le noir par des bleus profonds, des bleus roi et des nuances acier */
+    background: linear-gradient(-45deg, #0e289c, #1e3c72, #2a5298, #16222a);
+    /* #05155a : Ton bleu header (Base)
+       #1e3c72 : Bleu Roi (Vibrant)
+       #2a5298 : Bleu Acier (Plus clair/Lumineux)
+       #16222a : Bleu Nuit Gris (Remplace le noir, moins dur)
+    */
+    
+    background-size: 400% 400%;
+    
+    /* Animation accélérée : 10s au lieu de 15s pour que ça "bouge un peu plus" */
+    animation: gradientBG 10s ease infinite;
+    
+    background-attachment: fixed; 
+    overflow-x: hidden;
+}
+
+/* --- ANIMATION (Keyframes) --- */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* --- HEADER (PC) --- */
@@ -17,45 +39,69 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: rgb(161, 154, 154);
-    color: white;
-    padding: 1.5em 2em; /* Ton grand header */
-    text-align: center;
+    
+    /* Couleur de fond sombre (proche de ton image) avec transparence */
+    background-color: rgba(15, 23, 42, 0.85); /* Bleu nuit profond */
+    
+    /* Effet verre */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    
+    /* Positionnement : Flottant et centré */
     position: fixed;
-    top: 0;
-    width: 100%;
+    top: 20px; /* Décollé du haut de page */
+    left: 50%;
+    transform: translateX(-50%); /* Astuce pour centrer parfaitement un élément fixed */
+    
+    /* Taille et Forme */
+    width: auto; /* S'adapte au contenu */
+    max-width: 90%; /* Sécurité pour ne pas déborder sur petits écrans */
+    padding: 10px 30px; /* Plus fin verticalement */
+    border-radius: 50px; /* C'est ça qui donne la forme "Pilule" */
+    
+    /* Ombres et Bordures pour le relief */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(32, 34, 119, 0.1);
+    
     z-index: 1000;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
     transition: all 0.3s ease;
 }
 
+/* Le Nom (H1) */
 header h1 {
-    margin: 0;
-    font-size: 1.8em;
+    margin: 0 20px 0 0; /* Espace à droite du nom */
+    font-size: 1.2em; /* Un peu plus discret pour rentrer dans la capsule */
     font-weight: 700;
-    white-space: nowrap; /* Empêche le nom de se casser en deux */
+    color: white;
+    white-space: nowrap;
 }
 
+/* --- MENU DE NAVIGATION --- */
 header nav ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
     display: flex;
-    gap: 1.5em;
-    flex-wrap: wrap; /* Permet aux liens de passer à la ligne si nécessaire */
+    gap: 5px; /* Espace réduit entre les boutons */
+    align-items: center;
 }
 
 header nav ul li a {
-    color: white;
+    color: rgba(255, 255, 255, 0.8); /* Blanc légèrement atténué */
     text-decoration: none;
-    font-weight: 400;
-    font-size: 1.1em;
-    transition: color 0.3s;
+    font-weight: 500;
+    font-size: 0.95em;
+    padding: 8px 16px; /* Espace interne pour créer la zone cliquable */
+    border-radius: 20px; /* Arrondi des boutons au survol */
+    transition: all 0.3s ease;
+    display: block;
 }
 
+/* Effet au survol (Comme "Présentation" sur ton image) */
 header nav ul li a:hover {
-    color: black;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.15); /* Fond clair transparent */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Petite lueur */
 }
 
 /* --- MAIN CONTENT --- */
@@ -70,19 +116,24 @@ section {
     width: 1600px;
     margin: 2em auto;
     padding: 3em;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(255, 255, 255, 0.10);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     scroll-margin-top: 180px; /* Ajustement pour l'atterrissage du scroll */
     text-align: center;
     box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.75); /* Blanc semi-transparent */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15); /* Ombre plus douce et colorée */
 }
 
 h2 {
-    color: rgb(85, 80, 80);
+    color: rgb(5, 1, 61);
     font-size: 2.2em;
     margin-bottom: 1em;
-    border-bottom: 3px solid rgb(85, 80, 80);
+    border-bottom: 3px solid rgb(5, 1, 61);
     padding-bottom: 0.5em;
 }
 
@@ -156,21 +207,31 @@ ul {
 /* --- BOUTONS --- */
 .download-btn, .btn-secondary {
     display: inline-block;
-    background-color: rgb(161, 154, 154);
+    
+    /* MODIFICATION : Dégradé du Bleu Nuit vers le Bleu Roi (Ton thème) */
+    background: linear-gradient(135deg, #05155a, #2a5298);
+    
     color: white;
     text-decoration: none;
     padding: 12px 28px;
     font-size: 1.1em;
     font-weight: bold;
-    border-radius: 50px; /* Plus arrondi */
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Bordure subtile */
+    cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    
+    /* Ombre portée colorée (Lueur bleue) */
+    box-shadow: 0 4px 15px rgba(5, 21, 90, 0.4);
+    
     margin: 15px 10px;
 }
 
 .download-btn:hover, .btn-secondary:hover {
-    background-color: black;
-    transform: translateY(-3px); /* Petit effet de levée */
+    /* Au survol : on inverse ou on éclaire le dégradé */
+    background: linear-gradient(135deg, #2a5298, #415a77);
+    transform: translateY(-3px); /* Effet de lévitation */
+    box-shadow: 0 6px 20px rgba(42, 82, 152, 0.6); /* La lueur s'intensifie */
 }
 
 /* --- LANGUAGE & FLAGS --- */
@@ -242,9 +303,9 @@ ul {
     bottom: 25px; 
     right: 25px; 
     display: none; 
-    background-color: rgb(85, 80, 80);
+    background-color: #05155a;
     color: white; 
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     width: 55px;
     height: 55px;
     border-radius: 50%;
@@ -252,20 +313,78 @@ ul {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     font-size: 24px;
     z-index: 1000;
     transition: transform 0.3s ease, background-color 0.3s;
 }
 
 #backToTop:hover {
-    background-color: black;
+    background-color: #2a5298;
     transform: scale(1.15);
+    box-shadow: 0 6px 15px rgba(42, 82, 152, 0.5);
 }
 
 /* --- MOBILE MESSAGE (On le cache pour toujours maintenant) --- */
 .mobile-message {
     display: none !important;
+}
+
+section {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section:hover {
+    transform: translateY(-5px); /* Monte légèrement */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2); /* L'ombre grandit */
+}
+
+/* Boutons plus dynamiques */
+.download-btn, .btn-secondary {
+    background: linear-gradient(45deg, #111, #444); /* Dégradé sur le bouton */
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px); /* Décalé vers le bas */
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Style du bouton Hamburger (Caché par défaut sur PC) */
+.hamburger {
+    display: none; /* Invisible sur PC */
+    cursor: pointer;
+    background: none;
+    border: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+}
+
+.hamburger .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Animation du bouton quand il est actif (Transforme en croix X) */
+.hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
 }
 
 /* =========================================
@@ -274,21 +393,48 @@ ul {
 
 @media screen and (max-width: 900px) {
     /* 1. Ajustement du Header Mobile */
+    .hamburger {
+        display: flex; /* Visible sur mobile */
+        margin-left: auto; /* Pousse le bouton à droite */
+    }
+
     header {
-        flex-direction: column; /* On empile le contenu */
-        padding: 1em;
-        position: relative; /* On le détache pour qu'il scrolle (plus ergonomique sur mobile) */
-        height: auto;
+        width: 90%; /* Largeur adaptée */
+        flex-wrap: wrap; /* Permet au menu de passer à la ligne */
+        padding: 10px 20px;
+        border-radius: 20px; /* Coins un peu moins ronds pour le menu déroulant */
+    }
+
+    /* 2. Le Menu de Navigation (Caché par défaut) */
+    .nav-menu {
+        width: 100%;
+        max-height: 0; /* Hauteur 0 = caché */
+        overflow: hidden; /* Cache ce qui dépasse */
+        transition: max-height 0.4s ease-out; /* Animation fluide d'ouverture */
+        margin-top: 0;
+    }
+
+    /* Quand on ajoute la classe "active" via JS, le menu s'ouvre */
+    .nav-menu.active {
+        max-height: 400px; /* Assez grand pour tout montrer */
+        margin-top: 15px; /* Un peu d'espace */
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     header nav ul {
-        margin-top: 15px;
+        flex-direction: column; /* Liste verticale */
         gap: 15px;
-        justify-content: center; /* Liens centrés */
+        padding: 10px 0;
     }
 
+    /* On cache le sélecteur de langue quand le menu est fermé pour garder le header propre */
     #language-selector {
-        margin: 15px 0 0 0; /* Un peu d'espace au dessus du drapeau */
+        display: none; 
+    }
+    /* On l'affiche quand le menu est ouvert */
+    .nav-menu.active ~ #language-selector {
+        display: block;
+        margin: 10px auto;
     }
 
     /* 2. Ajustement du corps de page */
@@ -328,11 +474,21 @@ ul {
     }
 
     section {
-        padding: 1.5em; /* Moins de marge interne */
-        width: 100%;
-        max-width: 100%;
-        border-radius: 0; /* Pleine largeur */
-        margin: 0 0 2em 0;
+        /* MODIFICATION CRUCIALE : On détache les sections des bords */
+        width: 85% !important; /* Laisse 15% d'espace libre pour voir le fond */
+        margin: 20px auto !important; /* Centre la carte et ajoute de l'espace entre elles */
+        
+        /* On remet de beaux arrondis (au lieu des coins carrés) */
+        border-radius: 20px !important; 
+        
+        /* On réduit un peu l'espace à l'intérieur de la carte */
+        padding: 1.5em 1em !important; 
+        
+        /* On force la transparence (ajuste le 0.5 selon tes goûts) */
+        background-color: rgba(255, 255, 255, 0.5) !important;
+        
+        /* Ombre légère pour détacher la carte du fond */
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2) !important;
     }
 
     /* 5. Ajustements visuels divers */

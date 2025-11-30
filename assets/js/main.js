@@ -2,6 +2,34 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // --- GESTION DU BOUTON RETOUR EN HAUT ---
     const backToTopBtn = document.getElementById("backToTop");
+    // --- MENU HAMBURGER MOBILE ---
+    const hamburger = document.querySelector(".hamburger");
+    const navMenu = document.querySelector(".nav-menu");
+    const navLinks = document.querySelectorAll(".nav-menu ul li a");
+
+    if (hamburger) {
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+    }
+
+    // 2. Fermer le menu quand on clique sur un lien
+    navLinks.forEach(link => {
+        link.addEventListener("click", () => {
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
+        });
+    });
+
+    // 3. Fermer le menu si on clique en dehors du header (Optionnel mais recommandé)
+    document.addEventListener("click", (e) => {
+        const header = document.querySelector("header");
+        if (!header.contains(e.target) && navMenu.classList.contains("active")) {
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
+        }
+    });
 
     window.addEventListener("scroll", () => {
         if (window.scrollY > 300) {
@@ -47,4 +75,23 @@ document.addEventListener('DOMContentLoaded', () => {
             langBtn.innerHTML = `<img src="${imgSrc}" alt="${imgAlt}" class="flag">`;
         });
     });
+
+    // --- SCROLL REVEAL ANIMATION ---
+    const revealElements = document.querySelectorAll(".reveal");
+
+    function revealOnScroll() {
+        const windowHeight = window.innerHeight;
+        const elementVisible = 150; // Distance avant déclenchement
+
+        revealElements.forEach((reveal) => {
+            const elementTop = reveal.getBoundingClientRect().top;
+            if (elementTop < windowHeight - elementVisible) {
+                reveal.classList.add("active");
+            }
+        });
+    }
+
+    window.addEventListener("scroll", revealOnScroll);
+    // Déclencher une fois au chargement pour afficher le haut de page
+    revealOnScroll();
 });
