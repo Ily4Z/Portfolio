@@ -429,6 +429,35 @@ section:hover {
     font-weight: bold;
 }
 
+/* --- BOUTON LINKEDIN --- */
+.btn-linkedin {
+    display: inline-flex; /* Pour bien aligner le logo et le texte */
+    align-items: center;
+    justify-content: center;
+    
+    /* Dégradé LinkedIn officiel vers un bleu plus foncé */
+    background: linear-gradient(135deg, #0077b5, #004182);
+    
+    color: white;
+    text-decoration: none;
+    padding: 12px 30px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    /* Ombre bleutée spécifique */
+    box-shadow: 0 4px 15px rgba(0, 119, 181, 0.4);
+}
+
+.btn-linkedin:hover {
+    background: linear-gradient(135deg, #005e93, #0077b5);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 119, 181, 0.6);
+}
+
 /* =========================================
    📱 MEDIA QUERIES (RESPONSIVE MOBILE)
    ========================================= */
