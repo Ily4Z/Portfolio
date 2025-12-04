@@ -431,11 +431,10 @@ section:hover {
 
 /* --- BOUTON LINKEDIN --- */
 .btn-linkedin {
-    display: inline-flex; /* Pour bien aligner le logo et le texte */
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    
-    /* Dégradé LinkedIn officiel vers un bleu plus foncé */
+
     background: linear-gradient(135deg, #0077b5, #004182);
     
     color: white;
