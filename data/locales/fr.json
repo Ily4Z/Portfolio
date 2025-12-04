@@ -1,16 +1,20 @@
 {
     "name": "El Aamery Ilyas",
     "AboutMe": "À propos de moi",
-    "introText": "Je m’appelle Ilyas, j’ai 19 ans et je suis étudiant en informatique à l’Université de Lorraine. Mon parcours dans ce domaine a commencé au lycée avec Python, où j’ai obtenu mon baccalauréat avec mention. J’ai ensuite poursuivi mes études en BUT Informatique, un cursus de trois ans, avec pour objectif d’intégrer un master à l’issue de mon Bachelor. J’ai créé ce portfolio afin de me présenter aux entreprises et de leur offrir un aperçu de mon travail. Vous y trouverez tous mes projets, qu’ils soient académiques ou personnels, avec la possibilité de les consulter ou de les télécharger. Vous pourrez également y découvrir plus d’informations sur moi, mes compétences et mon parcours. Bonne visite !",
+    "introText": "Je m’appelle Ilyas, j’ai 20 ans et je suis étudiant en informatique à l’Université de Lorraine. Mon parcours dans ce domaine a commencé au lycée avec Python, où j’ai obtenu mon baccalauréat avec mention. J’ai ensuite poursuivi mes études en BUT Informatique, un cursus de trois ans, avec pour objectif d’intégrer un master à l’issue de mon Bachelor. J’ai créé ce portfolio afin de me présenter aux entreprises et de leur offrir un aperçu de mon travail. Vous y trouverez tous mes projets, qu’ils soient académiques ou personnels, avec la possibilité de les consulter ou de les télécharger. Vous pourrez également y découvrir plus d’informations sur moi, mes compétences et mon parcours. Bonne visite !",
     "education": "Éducation",
     "education_bachelor": "Bachelor en informatique - Université de Lorraine (2024 - Présent)",
     "education_baccalaureat": "Baccalauréat en Informatique, Mathématiques et Anglais - Lycée Hélène Boucher (2024)",
     "education_certificate": "Certificat de compétence en anglais - Cambridge English B2 (2024)",
     "Skills": "Compétences",
-    "skills_programming": "Programmation (VS Code)",
-    "skills_database": "Gestion de bases de données",
-    "skills_project_management": "Gestion de projet",
-    "skills_linux": "Linux Bash",
+    "skill_network": "<strong>Administration Réseau :</strong> Config (Cisco, VLAN, OSPF, NAT)",
+    "skill_virt": "<strong>Virtualisation & Serveurs :</strong> VMware, Linux, Windows",
+    "skill_web": "<strong>Développement Web :</strong> HTML, CSS, PHP, TypeScript",
+    "skill_db": "<strong>Base de données :</strong> Gestion MySQL / phpMyAdmin",
+    "skill_security": "<strong>Sécurité :</strong> Hébergement et sécurisation web",
+    "skill_tools": "<strong>Outils :</strong> Git, Wireshark, Ligne de commande Linux",
+    "skill_project_management":"<strong>Gestion de Projets</strong>",
+    "skill_excel":"<strong>Excel</strong>",
     "ProgrammingLanguages": "Langages de programmation",
     "Projects": "Projets",
     "ContactMe": "Me contacter",
@@ -33,6 +37,9 @@
     "LogsConnexion-description": "Ce projet, développé en Bash sous Linux, permet d’analyser et de suivre les accès des utilisateurs à un fichier. Il s’agit d’un ensemble de scripts conçu pour renforcer la sécurité en surveillant en permanence les interactions des utilisateurs avec un fichier donné. Lorsqu’on exécute le script, il enregistre diverses informations : le nom d’utilisateur, l’hôte, l’adresse IP, l’appareil utilisé, ainsi que la date et l’heure d’accès. Il permet ensuite d’analyser ces données afin de déterminer combien de fois un utilisateur s’est connecté par jour, par semaine ou par mois. Il est également possible d’afficher ces statistiques pour un utilisateur spécifique ou pour un groupe d’utilisateurs, avec tous les détails associés. Ce projet était mon premier travail universitaire en Bash.",
     "PuebloZoo-description":"PuebloZoo est une base de données fictive mais entièrement fonctionnelle, conçue pour gérer l’ensemble du système de fonctionnement d’un zoo. Je l’ai créée moi-même et l’ai soumise à divers tests à l’aide de requêtes SQL, aboutissant à des résultats satisfaisants pour une première base de données réalisée par un étudiant.Mes compétences en bases de données ne cessent de s’améliorer, ce qui me permettra d’éviter certaines erreurs que je commets actuellement. Si vous souhaitez explorer et tester la base de données, vous pouvez la télécharger via le lien ZIP situé au-dessus de la photo.",
     "F1-description":"Dans le cadre de notre premier projet de développement web à l’université, nous avions un mois pour créer un site web responsive sur un sujet de notre choix. Nous étions un groupe de quatre étudiants et avons réparti les tâches afin de concevoir ce site, que vous pouvez regarder ici. Nous avons choisi comme thème la Formule 1 des années 2010. Le site comprend plusieurs pages : une page d’accueil, une section sur l’histoire de la Formule 1, un tableau des classements de l’année 2010, ainsi que des pages dédiées à chaque pilote, personnalisées selon leur écurie. Pour organiser notre travail, nous avons d’abord conçu une maquette définissant l’esthétique du site, puis nous avons déterminé notre méthode de collaboration. Le projet s’est très bien déroulé, témoignant de notre capacité d’auto-gestion et de notre autonomie dans le travail en équipe.",
-    "Stage":"Je suis à la recherche d'un stage pour la période du 13/04 au 05/06/2026"
+    "Stage":"Je suis à la recherche d'un stage pour la période du 13/04 au 05/06/2026",
+    "parking_title": "Application Parking : Just Park It",
+    "parking_desc": "<strong>Projet en cours (Équipe de 5 - Collab. en Anglais).</strong><br>Conception de l’application mobile connectée <strong>\"Just Park It\"</strong>. Elle est reliée à une base de données MySQL hébergée et sécurisée au sein d'une infrastructure réseau complète (Cisco, Linux) configurée par notre groupe sous VMware. L’application gère la géolocalisation des places et les données utilisateurs.",
+    "wip_badge": "🚧 En cours de développement"
 }
 

@@ -387,6 +387,48 @@ section:hover {
     transform: translateY(-8px) rotate(-45deg);
 }
 
+/* --- STYLE PROJET EN COURS (Si pas déjà présent) --- */
+.wip-badge {
+    background-color: #ff9800;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.badge-mini {
+    background-color: #ff9800;
+    color: white;
+    font-size: 0.7em;
+    padding: 2px 6px;
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.tech-stack-mini {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 0;
+}
+
+.tech-stack-mini li {
+    background-color: rgba(5, 21, 90, 0.1);
+    color: #05155a;
+    border: 1px solid rgba(5, 21, 90, 0.3);
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
 /* =========================================
    📱 MEDIA QUERIES (RESPONSIVE MOBILE)
    ========================================= */

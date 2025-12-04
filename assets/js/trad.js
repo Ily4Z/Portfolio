@@ -17,12 +17,18 @@ async function loadTranslations() {
 }
 
 function applyTranslation(language) {
-    if (!translations[language]) return;
+    if (!translations[language]) {
+        console.error(`Traduction pour la langue "${language}" introuvable.`);
+        return;
+    }
 
-    document.querySelectorAll('[data-translate]').forEach(element => {
+    const elementsToTranslate = document.querySelectorAll('[data-translate]');
+    elementsToTranslate.forEach(element => {
         const key = element.getAttribute('data-translate');
         if (translations[language][key]) {
-            element.textContent = translations[language][key];
+            element.innerHTML = translations[language][key];
+        } else {
+            console.warn(`Clé "${key}" non trouvée pour la langue "${language}".`);
         }
     });
 }

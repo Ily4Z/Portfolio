@@ -1,16 +1,20 @@
 {
     "name": "El Aamery Ilyas",
     "AboutMe": "About Me",
-    "introText": "My name is Ilyas, I’m 19 years old, and I am a Computer Science student at the University of Lorraine. My journey in this field began in high school with Python, where I earned my diploma with honors. I then pursued a three-year Bachelor's degree in Computer Science (BUT Informatique), with the goal of continuing to a Master’s program after graduation. I created this portfolio to introduce myself to companies and showcase my work. Here, you will find all my projects, both academic and personal, with the option to view or download them. You can also learn more about me, my skills, and my background. Enjoy your visit!",
+    "introText": "My name is Ilyas, I’m 20 years old, and I am a Computer Science student at the University of Lorraine. My journey in this field began in high school with Python, where I earned my diploma with honors. I then pursued a three-year Bachelor's degree in Computer Science (BUT Informatique), with the goal of continuing to a Master’s program after graduation. I created this portfolio to introduce myself to companies and showcase my work. Here, you will find all my projects, both academic and personal, with the option to view or download them. You can also learn more about me, my skills, and my background. Enjoy your visit!",
     "education": "Education",
     "education_bachelor": "Bachelor's in Computer Science - University of Lorraine (2024 - Present)",
     "education_baccalaureat": "High School Diploma in Computer Science, Maths and English - Lycée Hélène Boucher (2024)",
     "education_certificate": "Certificate of Proficiency in English - Cambridge English B2 (2024)",
     "Skills": "Skills",
-    "skills_programming": "Programming (VS Code)",
-    "skills_database": "Database Management",
-    "skills_project_management": "Project Management",
-    "skills_linux": "Linux Bash",
+    "skill_network": "<strong>Network Administration:</strong> Config (Cisco, VLAN, OSPF, NAT)",
+    "skill_virt": "<strong>Virtualization & Servers:</strong> VMware, Linux, Windows",
+    "skill_web": "<strong>Web Development:</strong> HTML, CSS, PHP, TypeScript",
+    "skill_db": "<strong>Databases:</strong> MySQL / phpMyAdmin Management",
+    "skill_security": "<strong>Security:</strong> Web Hosting & Securing apps",
+    "skill_tools": "<strong>Tools:</strong> Git, Wireshark, Linux CLI",
+    "skill_project_management":"<strong>Project Management</strong>",
+    "skill_excel":"<strong>Excel</strong>",
     "ProgrammingLanguages": "Programming Languages",
     "Projects": "Projects",
     "ContactMe": "Contact Me",
@@ -32,6 +36,9 @@
     "LogsConnexion-description":"This project, developed in Bash on Linux, allows for analyzing and tracking user access to a file. It consists of a set of scripts designed to enhance security by continuously monitoring user interactions with a specific file. When the script is executed, it records various details such as the username, host, IP address, device used, as well as the date and time of access. It then allows for data analysis to determine how many times a user has accessed the file per day, week, or month. Additionally, it is possible to display these statistics for a specific user or a group of users, along with all associated details. This project was my first university assignment in Bash.",
     "PuebloZoo-description":"PuebloZoo is a fictional yet fully functional database designed to manage the entire operational system of a zoo. I created it myself and tested it using various SQL queries, which yielded promising results for a student's first database project. My database skills are continuously improving, allowing me to avoid some of the mistakes I currently make. If you’d like to explore and test the database, you can download it via the ZIP link above the photo.",
     "F1-description":"As part of our first web development project at university, we had one month to create a responsive website on a topic of our choice. We were a group of four students and divided the tasks to build this site, which you can see here. We chose the 2010s Formula 1 as our theme. The website includes several pages: a homepage, a section on the history of Formula 1, a ranking table for the 2010 season, and dedicated pages for each driver, customized based on their team. To organize our work, we first created a wireframe to define the website’s design and then decided on our preferred workflow. The project went very smoothly, demonstrating our ability to manage ourselves and work autonomously as a team.",
-    "Stage":"I am looking for an international internship for the period from 13/04 to 05/06/2026"
+    "Stage":"I am looking for an international internship for the period from 13/04 to 05/06/2026",
+    "parking_title": "Parking App: Just Park It",
+    "parking_desc": "<strong>Work in Progress (Team of 5 - Collab. in English).</strong><br>Design of the <strong>\"Just Park It\"</strong> connected mobile application. It is linked to a MySQL database hosted and secured within a complete network infrastructure (Cisco, Linux) configured by our group using VMware. The app manages parking space geolocation and user data.",
+    "wip_badge": "🚧 Work in Progress"
 }
 
