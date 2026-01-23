@@ -292,5 +292,49 @@
 
     <script src="assets/js/trad.js"></script>
     <script src="assets/js/main.js"></script>
+
+    <a href="index.html" class="btn-new-portfolio">
+        🕸️ Retour au Réseau Interactif
+    </a>
+
+    <style>
+        /* Style du bouton flottant */
+        .btn-new-portfolio {
+            position: fixed;
+            bottom: 30px;
+            /* MODIFICATION ICI : On le met à GAUCHE au lieu de DROITE */
+            left: 30px; 
+            
+            background: linear-gradient(135deg, #00d2ff, #1e3a8a);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            z-index: 10000;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Effet au survol */
+        .btn-new-portfolio:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 210, 255, 0.6);
+            background: linear-gradient(135deg, #34d399, #059669);
+        }
+
+        /* Version Mobile */
+        @media screen and (max-width: 768px) {
+            .btn-new-portfolio {
+                bottom: 20px;
+                left: 20px; /* On garde à gauche aussi sur mobile */
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </body>
 </html>
