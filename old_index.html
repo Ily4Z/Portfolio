@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El AAMERY Ilyas - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <link rel="icon" type="image/png" href="assets/img/favicon.png?v=2">
+    <link rel="apple-touch-icon" href="assets/img/favicon.png?v=2">
+
+    <meta property="og:title" content="El Aamery Ilyas - Portfolio">
+    <meta property="og:description" content="Étudiant en informatique, Admin Réseau & Développeur Fullstack. Découvrez mes projets (Cisco, Web, C).">
+    
+    <meta property="og:image" content="https://ilyas-elaamery.com/assets/img/photo_ilyas.jpeg">
+    <meta property="og:url" content="https://ilyas-elaamery.com/">
+    <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://ilyas-elaamery.com/assets/img/photo_ilyas.jpeg">
+</head>
+<body>
+
+    <div class="mobile-message">
+        <p>Please open on PC or turn your phone</p>
+        <p>Mobile version coming soon...</p>
+        <p>--------------------------</p>
+        <p>Ouvrez sur ordinateur ou tournez votre mobile s'il vous plaît</p>
+        <p>La version mobile arrive bientôt</p>
+    </div>     
+
+    <div class="main-content">
+        <header>
+            <h1 data-translate="name">El Aamery Ilyas</h1>
+            
+            <button class="hamburger" aria-label="Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#AboutMe" data-translate="AboutMe">About Me</a></li>
+                    <li><a href="#Skills" data-translate="Skills">Skills</a></li>
+                    <li><a href="#ProgrammingLanguages" data-translate="ProgrammingLanguages">Programming Languages</a></li>
+                    <li><a href="#Projects" data-translate="Projects">Projects</a></li>
+                    <li><a href="#ContactMe" data-translate="ContactMe">Contact Me</a></li>
+                </ul>
+            </nav>
+            
+            <div id="language-selector">
+                <button id="current-language" aria-label="Change Language">
+                    <img src="https://flagcdn.com/w40/gb.png" alt="English" class="flag">
+                </button>
+                <ul id="language-menu">
+                    <li data-lang="en"><img src="https://flagcdn.com/w40/gb.png" alt="English" class="flag"> English</li>
+                    <li data-lang="fr"><img src="https://flagcdn.com/w40/fr.png" alt="Français" class="flag"> Français</li>
+                </ul>
+            </div>               
+        </header>
+
+        <main>
+            <section class="intro-section" id="AboutMe" class="reveal">
+                <div class="intro-container" class="reveal">
+                    <img src="assets/img/photo_ilyas.jpeg" alt="El Aamery Ilyas">
+                    <div class="intro-text">
+                        <h2 data-translate="AboutMe">About Me</h2>
+                        <p data-translate="introText"></p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="reveal">
+                <h2 data-translate="languages">Languages</h2>
+                <ul class="language-list">
+                    <li>
+                        <img src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" alt="French Flag" class="mini-flag">
+                        <span data-translate="french">French</span>
+                    </li>
+                    <li>
+                        <img src="https://upload.wikimedia.org/wikipedia/en/0/03/Flag_of_Italy.svg" alt="Italian Flag" class="mini-flag">
+                        <span data-translate="italian">Italian</span>
+                    </li>
+                    <li>
+                        <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="English Flag" class="mini-flag">
+                        <span data-translate="english">English</span>
+                    </li>
+                    <li>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Flag_of_Morocco_%28large_stroke%29.svg" alt="Arabic Flag" class="mini-flag">
+                        <span data-translate="arabic">Arabic</span>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="reveal">
+                <h2 data-translate="education">Education</h2>
+                <ul>
+                    <li data-translate="education_bachelor">Bachelor's in Computer Science...</li>
+                    <li data-translate="education_baccalaureat">High School Baccalaureate...</li>
+                    <li data-translate="education_certificate">Cambridge English Proficiency...</li>
+                </ul>
+            </section>
+
+            <section id="Skills" class="reveal">
+                <h2 data-translate="Skills">Skills</h2>
+                <ul>
+                    <li data-translate="skill_network"><strong>Network:</strong> Config & Admin (Cisco, VLAN, OSPF, NAT)</li>
+                    <li data-translate="skill_virt"><strong>Virtualization:</strong> Servers (VMware, Linux, Windows)</li>
+                    <li data-translate="skill_web"><strong>Web Dev:</strong> HTML, CSS, PHP, TypeScript</li>
+                    <li data-translate="skill_db"><strong>Database:</strong> MySQL / phpMyAdmin</li>
+                    <li data-translate="skill_security"><strong>Hosting:</strong> Web Security & Deployment</li>
+                    <li data-translate="skill_tools"><strong>Tools:</strong> Git, Wireshark, Linux CLI</li>
+                    <li data-translate="skill_project_management"><strong>Project Management</strong></li>
+                    <li data-translate="skill_excel"><strong>Excel</strong></li>
+                </ul>
+            </section>
+
+            <section id="ProgrammingLanguages" class="reveal">
+                <h2 data-translate="ProgrammingLanguages">Programming Languages</h2>
+                <ul class="tech-list">
+                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/1/18/C_Programming_Language.svg" alt="C"> C</li>
+                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt="HTML5"> HTML 5</li>
+                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" alt="CSS3"> CSS 3</li>
+                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Sql_data_base_with_logo.svg" alt="SQL"> SQL</li>
+                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python"> Python</li>
+                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg" alt="JavaScript"> JavaScript</li>
+                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg" alt="TypeScript"> TypeScript</li>
+                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/2/27/PHP-logo.svg" alt="PHP"> PHP</li>
+                </ul>
+            </section>
+
+            <section id="Projects" class="reveal">
+                <h2 data-translate="Projects">Projects</h2>
+                <ul class="project-links">
+                    <li><a href="#ParkingApp">Just Park It</a> - Cisco, VMware, Fullstack<span class="badge-mini">WIP</span></li>
+                    <li><a href="#JeuX">JeuX</a> - C Language</li>
+                    <li><a href="#JeuDeNim">Jeu de Nim</a> - C Language</li>
+                    <li><a href="#LogsConnexions">Logs Connexions</a> - Bash Linux</li>
+                    <li><a href="#PuebloZoo">Pueblo Zoo</a> - SQL</li>
+                    <li><a href="#Formule1">Formule 1 Site</a> - HTML/CSS</li>
+                </ul>
+            </section>
+
+            <section id="ParkingApp" class="reveal">
+                <h2 data-translate="parking_title">Application Parking : Just Park It</h2>
+                <div class="wip-container">
+                    <span class="wip-badge" data-translate="wip_badge">🚧 En cours</span>
+                </div>
+                <ul class="tech-stack-mini">
+                    <li>Cisco</li>
+                    <li>VMware</li>
+                    <li>Linux</li>
+                    <li>MySQL</li>
+                    <li>PHP</li>
+                    <li>TypeScript</li>
+                    <li>HTML/CSS</li>
+                </ul>
+                <div class="section-container">
+                    <div class="section-description">
+                        <p data-translate="parking_desc"></p>
+                    </div> 
+                    <div class="photo-looping"> <a href="assets/img/logo_jp.png" target="_blank">
+                            <img src="assets/img/logo_jp.png" alt="Logo Just Park It" width="500" style="border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.2);">
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="JeuX" class="reveal">
+                <h2>JeuX</h2>
+                <div class="btn-container">
+                    <a href="downloads/JeuX.zip" class="download-btn" download data-translate="download-btn">Download JeuX.zip</a>
+                </div>
+                <ul class="tech-stack-mini">
+                    <li>C</li>
+                </ul>
+                <div class="section-container">
+                    <div class="section-description">
+                        <p data-translate="JeuX-description"></p>
+                    </div>
+                    <div class="section-video">
+                        <video controls width="600">
+                            <source src="assets/video/Jeux.mp4" type="video/mp4">
+                            Votre navigateur ne supporte pas la balise vidéo.
+                        </video>
+                    </div>
+                </div>
+            </section>
+
+            <section id="JeuDeNim" class="reveal">
+                <h2>Jeu de Nim</h2>
+                <div class="btn-container">
+                    <a href="downloads/JeuDeNim.zip" class="download-btn" download data-translate="download-btn2">Download Jeu_de_Nim.zip</a>
+                </div>
+                <ul class="tech-stack-mini">
+                    <li>C</li>
+                </ul>
+                <div class="section-container reverse">
+                    <div class="section-description">
+                        <p data-translate="JeuDeNim-description"></p>
+                    </div>
+                    <div class="section-video">
+                        <video controls width="600">
+                            <source src="assets/video/JeuDeNim.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </section>
+
+            <section id="LogsConnexions" class="reveal">
+                <h2>Logs Connexions</h2>
+                <ul class="tech-stack-mini">
+                    <li>Bash Linux</li>
+                </ul>
+                <div class="btn-container">
+                    <a href="downloads/LogsConnexion.zip" class="download-btn" download data-translate="download-btn3">Download LogsConnexions.zip</a>
+                </div>
+                <div class="section-container">
+                    <div class="section-description">
+                        <p data-translate="LogsConnexion-description"></p>
+                    </div>
+                    <div class="section-video">
+                        <video controls width="600">
+                            <source src="assets/video/LogsConnexion.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </section>
+
+            <section id="PuebloZoo" class="reveal">
+                <h2>Pueblo Zoo</h2>
+                <ul class="tech-stack-mini">
+                    <li>MySQL</li>
+                    <li>phpMyAdmin</li>
+                </ul>
+                <div class="btn-container">
+                    <a href="downloads/PuebloZoo.zip" class="download-btn" download data-translate="download-btn4">Download PuebloZoo.zip</a>
+                </div>
+                <div class="section-container reverse">
+                    <div class="section-description">
+                        <p data-translate="PuebloZoo-description"></p>
+                    </div>
+                    <div class="photo-looping">
+                        <a href="assets/img/looping.png" target="_blank">
+                            <img src="assets/img/looping.png" alt="PuebloZoo Preview" width="600">
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="Formule1" class="reveal">
+                <h2>Site Formule 1</h2>
+                <ul class="tech-stack-mini">
+                    <li>HTML</li>
+                    <li>CSS</li>
+                </ul>
+                <div class="section-container">
+                    <div class="section-description">
+                        <p data-translate="F1-description"></p>
+                    </div>
+                    <div class="section-video">
+                        <embed src="assets/docs/maquete_f1.pdf" type="application/pdf" width="100%" height="600px">
+                    </div>
+                </div>
+            </section>
+
+            <section class="contact-section" id="ContactMe">
+                <h2 data-translate="ContactMe">Contact Me</h2>
+                <p data-translate="contactText" style="margin-bottom: 20px;">If you would like to get in touch...</p>
+                <div class="cv-links" style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+                    <div>
+                        <a href="assets/docs/cv_el-aamery_ilyas.pdf" class="btn-secondary" target="_blank">📄 Télécharger mon CV - FR</a>
+                        <a href="assets/docs/resume_el-aamery_ilyas.pdf" class="btn-secondary" target="_blank">📄 Download my Resume - EN</a>
+                    </div>
+                    <a href="https://www.linkedin.com/in/ilyas-el-aamery-01a0612a9/" target="_blank" class="btn-linkedin">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;"> 
+                        LinkedIn
+                    </a>
+                </div>
+                <p style="margin-top: 30px; font-weight: bold; color: #05155a;">📧 E-mail: elaameryilyas12@gmail.com</p>
+            </section>
+        </main>
+
+        <footer>
+            &copy; 2025 El Aamery Ilyas. All Rights Reserved.
+        </footer>
+
+        <button id="backToTop" aria-label="Back to top">⬆</button>
+    </div>
+
+    <script src="assets/js/trad.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

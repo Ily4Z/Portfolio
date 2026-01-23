@@ -3,294 +3,442 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El AAMERY Ilyas - Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
-
+    <title>Ilyas El Aamery | Portfolio & Network Admin</title>
+    
     <link rel="icon" type="image/png" href="assets/img/favicon.png?v=2">
     <link rel="apple-touch-icon" href="assets/img/favicon.png?v=2">
 
-    <meta property="og:title" content="El Aamery Ilyas - Portfolio">
-    <meta property="og:description" content="Étudiant en informatique, Admin Réseau & Développeur Fullstack. Découvrez mes projets (Cisco, Web, C).">
-    
+    <meta property="og:title" content="Ilyas El Aamery - Network Portfolio">
+    <meta property="og:description" content="Étudiant Admin Réseau & Dev Fullstack. Découvrez mes projets C, Bash, Web et Cisco.">
     <meta property="og:image" content="https://ilyas-elaamery.com/assets/img/photo_ilyas.jpeg">
-    <meta property="og:url" content="https://ilyas-elaamery.com/">
-    <meta property="og:type" content="website">
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://ilyas-elaamery.com/assets/img/photo_ilyas.jpeg">
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- STYLE GLOBAL --- */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #050a14;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+        }
+
+        #mynetwork {
+            width: 100%;
+            height: 100%;
+            display: block;
+            background: radial-gradient(circle at center, #0f172a 0%, #050a14 100%);
+        }
+
+        /* --- LE HUD (Panneau d'information) --- */
+        #info-card {
+            position: fixed;
+            top: 0;
+            right: -650px; /* Caché par défaut */
+            width: 500px; /* Largeur confortable pour les vidéos */
+            max-width: 90%;
+            height: 100vh;
+            background: rgba(10, 15, 30, 0.98);
+            border-left: 1px solid #1e293b;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            box-sizing: border-box;
+            transition: right 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        #info-card.active { right: 0; }
+
+        /* Typographie */
+        .card-header { border-bottom: 2px solid #00d2ff; padding-bottom: 15px; margin-bottom: 20px; }
+        h2 { margin: 0; color: #fff; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 1px; }
+        .subtitle { color: #00d2ff; font-weight: bold; font-size: 0.9rem; margin-top: 5px; display: block; }
+        
+        p { line-height: 1.6; color: #cbd5e1; font-size: 1rem; margin-bottom: 20px; }
+
+        /* Multimédia (Vidéo & Images) */
+        .media-container {
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #334155;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            background: black;
+        }
+        .project-video { width: 100%; display: block; outline: none; }
+        .project-img { width: 100%; display: block; }
+
+        /* Boutons */
+        .btn-group { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+        
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #2563eb;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .btn-download:hover { background: #1d4ed8; }
+        .btn-download.secondary { background: #475569; }
+        .btn-download.secondary:hover { background: #64748b; }
+
+        /* Badges et Listes */
+        .wip-badge { background: #f59e0b; color: black; font-size: 0.75rem; padding: 2px 8px; border-radius: 10px; font-weight: bold; vertical-align: middle; margin-left: 8px; }
+        
+        ul.skills-list { list-style: none; padding: 0; }
+        ul.skills-list li {
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 8px;
+            padding: 10px 15px;
+            border-radius: 6px;
+            border-left: 3px solid #34d399;
+            color: #e2e8f0;
+        }
+
+        /* Divers */
+        .close-btn { position: absolute; top: 20px; right: 20px; background: none; border: none; color: #64748b; font-size: 2rem; cursor: pointer; }
+        .close-btn:hover { color: white; }
+        
+        #intro-overlay {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            text-align: center; pointer-events: none; opacity: 1; transition: opacity 1s;
+        }
+        .intro-text { background: rgba(0,0,0,0.6); padding: 15px 30px; border-radius: 30px; border: 1px solid #334155; color: #94a3b8; }
+
+        /* --- RESPONSIVE MOBILE (Ajout) --- */
+        @media screen and (max-width: 768px) {
+            /* Le panneau prend tout l'écran sur mobile */
+            #info-card {
+                width: 100%;
+                right: -100%; /* Caché complètement */
+                padding: 20px;
+                border-left: none; /* Pas de bordure gauche */
+            }
+            
+            /* Ajustement de la taille des textes */
+            h2 { font-size: 1.5rem; }
+            
+            /* Le bouton fermer est plus gros et plus accessible */
+            .close-btn {
+                top: 15px;
+                right: 15px;
+                font-size: 2.5rem;
+                padding: 10px;
+                z-index: 1001;
+            }
+
+            /* On cache l'instruction "Cliquez..." plus vite sur mobile car ça gêne */
+            #intro-overlay { display: none; }
+        }
+    </style>
 </head>
 <body>
 
-    <div class="mobile-message">
-        <p>Please open on PC or turn your phone</p>
-        <p>Mobile version coming soon...</p>
-        <p>--------------------------</p>
-        <p>Ouvrez sur ordinateur ou tournez votre mobile s'il vous plaît</p>
-        <p>La version mobile arrive bientôt</p>
-    </div>     
+    <div id="mynetwork"></div>
 
-    <div class="main-content">
-        <header>
-            <h1 data-translate="name">El Aamery Ilyas</h1>
-            
-            <button class="hamburger" aria-label="Menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-
-            <nav class="nav-menu">
-                <ul>
-                    <li><a href="#AboutMe" data-translate="AboutMe">About Me</a></li>
-                    <li><a href="#Skills" data-translate="Skills">Skills</a></li>
-                    <li><a href="#ProgrammingLanguages" data-translate="ProgrammingLanguages">Programming Languages</a></li>
-                    <li><a href="#Projects" data-translate="Projects">Projects</a></li>
-                    <li><a href="#ContactMe" data-translate="ContactMe">Contact Me</a></li>
-                </ul>
-            </nav>
-            
-            <div id="language-selector">
-                <button id="current-language" aria-label="Change Language">
-                    <img src="https://flagcdn.com/w40/gb.png" alt="English" class="flag">
-                </button>
-                <ul id="language-menu">
-                    <li data-lang="en"><img src="https://flagcdn.com/w40/gb.png" alt="English" class="flag"> English</li>
-                    <li data-lang="fr"><img src="https://flagcdn.com/w40/fr.png" alt="Français" class="flag"> Français</li>
-                </ul>
-            </div>               
-        </header>
-
-        <main>
-            <section class="intro-section" id="AboutMe" class="reveal">
-                <div class="intro-container" class="reveal">
-                    <img src="assets/img/photo_ilyas.jpeg" alt="El Aamery Ilyas">
-                    <div class="intro-text">
-                        <h2 data-translate="AboutMe">About Me</h2>
-                        <p data-translate="introText"></p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="reveal">
-                <h2 data-translate="languages">Languages</h2>
-                <ul class="language-list">
-                    <li>
-                        <img src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" alt="French Flag" class="mini-flag">
-                        <span data-translate="french">French</span>
-                    </li>
-                    <li>
-                        <img src="https://upload.wikimedia.org/wikipedia/en/0/03/Flag_of_Italy.svg" alt="Italian Flag" class="mini-flag">
-                        <span data-translate="italian">Italian</span>
-                    </li>
-                    <li>
-                        <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="English Flag" class="mini-flag">
-                        <span data-translate="english">English</span>
-                    </li>
-                    <li>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Flag_of_Morocco_%28large_stroke%29.svg" alt="Arabic Flag" class="mini-flag">
-                        <span data-translate="arabic">Arabic</span>
-                    </li>
-                </ul>
-            </section>
-
-            <section class="reveal">
-                <h2 data-translate="education">Education</h2>
-                <ul>
-                    <li data-translate="education_bachelor">Bachelor's in Computer Science...</li>
-                    <li data-translate="education_baccalaureat">High School Baccalaureate...</li>
-                    <li data-translate="education_certificate">Cambridge English Proficiency...</li>
-                </ul>
-            </section>
-
-            <section id="Skills" class="reveal">
-                <h2 data-translate="Skills">Skills</h2>
-                <ul>
-                    <li data-translate="skill_network"><strong>Network:</strong> Config & Admin (Cisco, VLAN, OSPF, NAT)</li>
-                    <li data-translate="skill_virt"><strong>Virtualization:</strong> Servers (VMware, Linux, Windows)</li>
-                    <li data-translate="skill_web"><strong>Web Dev:</strong> HTML, CSS, PHP, TypeScript</li>
-                    <li data-translate="skill_db"><strong>Database:</strong> MySQL / phpMyAdmin</li>
-                    <li data-translate="skill_security"><strong>Hosting:</strong> Web Security & Deployment</li>
-                    <li data-translate="skill_tools"><strong>Tools:</strong> Git, Wireshark, Linux CLI</li>
-                    <li data-translate="skill_project_management"><strong>Project Management</strong></li>
-                    <li data-translate="skill_excel"><strong>Excel</strong></li>
-                </ul>
-            </section>
-
-            <section id="ProgrammingLanguages" class="reveal">
-                <h2 data-translate="ProgrammingLanguages">Programming Languages</h2>
-                <ul class="tech-list">
-                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/1/18/C_Programming_Language.svg" alt="C"> C</li>
-                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt="HTML5"> HTML 5</li>
-                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" alt="CSS3"> CSS 3</li>
-                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Sql_data_base_with_logo.svg" alt="SQL"> SQL</li>
-                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python"> Python</li>
-                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg" alt="JavaScript"> JavaScript</li>
-                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg" alt="TypeScript"> TypeScript</li>
-                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/2/27/PHP-logo.svg" alt="PHP"> PHP</li>
-                </ul>
-            </section>
-
-            <section id="Projects" class="reveal">
-                <h2 data-translate="Projects">Projects</h2>
-                <ul class="project-links">
-                    <li><a href="#ParkingApp">Just Park It</a> - Cisco, VMware, Fullstack<span class="badge-mini">WIP</span></li>
-                    <li><a href="#JeuX">JeuX</a> - C Language</li>
-                    <li><a href="#JeuDeNim">Jeu de Nim</a> - C Language</li>
-                    <li><a href="#LogsConnexions">Logs Connexions</a> - Bash Linux</li>
-                    <li><a href="#PuebloZoo">Pueblo Zoo</a> - SQL</li>
-                    <li><a href="#Formule1">Formule 1 Site</a> - HTML/CSS</li>
-                </ul>
-            </section>
-
-            <section id="ParkingApp" class="reveal">
-                <h2 data-translate="parking_title">Application Parking : Just Park It</h2>
-                <div class="wip-container">
-                    <span class="wip-badge" data-translate="wip_badge">🚧 En cours</span>
-                </div>
-                <ul class="tech-stack-mini">
-                    <li>Cisco</li>
-                    <li>VMware</li>
-                    <li>Linux</li>
-                    <li>MySQL</li>
-                    <li>PHP</li>
-                    <li>TypeScript</li>
-                    <li>HTML/CSS</li>
-                </ul>
-                <div class="section-container">
-                    <div class="section-description">
-                        <p data-translate="parking_desc"></p>
-                    </div> 
-                    <div class="photo-looping"> <a href="assets/img/logo_jp.png" target="_blank">
-                            <img src="assets/img/logo_jp.png" alt="Logo Just Park It" width="500" style="border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.2);">
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-            <section id="JeuX" class="reveal">
-                <h2>JeuX</h2>
-                <div class="btn-container">
-                    <a href="downloads/JeuX.zip" class="download-btn" download data-translate="download-btn">Download JeuX.zip</a>
-                </div>
-                <ul class="tech-stack-mini">
-                    <li>C</li>
-                </ul>
-                <div class="section-container">
-                    <div class="section-description">
-                        <p data-translate="JeuX-description"></p>
-                    </div>
-                    <div class="section-video">
-                        <video controls width="600">
-                            <source src="assets/video/Jeux.mp4" type="video/mp4">
-                            Votre navigateur ne supporte pas la balise vidéo.
-                        </video>
-                    </div>
-                </div>
-            </section>
-
-            <section id="JeuDeNim" class="reveal">
-                <h2>Jeu de Nim</h2>
-                <div class="btn-container">
-                    <a href="downloads/JeuDeNim.zip" class="download-btn" download data-translate="download-btn2">Download Jeu_de_Nim.zip</a>
-                </div>
-                <ul class="tech-stack-mini">
-                    <li>C</li>
-                </ul>
-                <div class="section-container reverse">
-                    <div class="section-description">
-                        <p data-translate="JeuDeNim-description"></p>
-                    </div>
-                    <div class="section-video">
-                        <video controls width="600">
-                            <source src="assets/video/JeuDeNim.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
-            </section>
-
-            <section id="LogsConnexions" class="reveal">
-                <h2>Logs Connexions</h2>
-                <ul class="tech-stack-mini">
-                    <li>Bash Linux</li>
-                </ul>
-                <div class="btn-container">
-                    <a href="downloads/LogsConnexion.zip" class="download-btn" download data-translate="download-btn3">Download LogsConnexions.zip</a>
-                </div>
-                <div class="section-container">
-                    <div class="section-description">
-                        <p data-translate="LogsConnexion-description"></p>
-                    </div>
-                    <div class="section-video">
-                        <video controls width="600">
-                            <source src="assets/video/LogsConnexion.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
-            </section>
-
-            <section id="PuebloZoo" class="reveal">
-                <h2>Pueblo Zoo</h2>
-                <ul class="tech-stack-mini">
-                    <li>MySQL</li>
-                    <li>phpMyAdmin</li>
-                </ul>
-                <div class="btn-container">
-                    <a href="downloads/PuebloZoo.zip" class="download-btn" download data-translate="download-btn4">Download PuebloZoo.zip</a>
-                </div>
-                <div class="section-container reverse">
-                    <div class="section-description">
-                        <p data-translate="PuebloZoo-description"></p>
-                    </div>
-                    <div class="photo-looping">
-                        <a href="assets/img/looping.png" target="_blank">
-                            <img src="assets/img/looping.png" alt="PuebloZoo Preview" width="600">
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-            <section id="Formule1" class="reveal">
-                <h2>Site Formule 1</h2>
-                <ul class="tech-stack-mini">
-                    <li>HTML</li>
-                    <li>CSS</li>
-                </ul>
-                <div class="section-container">
-                    <div class="section-description">
-                        <p data-translate="F1-description"></p>
-                    </div>
-                    <div class="section-video">
-                        <embed src="assets/docs/maquete_f1.pdf" type="application/pdf" width="100%" height="600px">
-                    </div>
-                </div>
-            </section>
-
-            <section class="contact-section" id="ContactMe">
-                <h2 data-translate="ContactMe">Contact Me</h2>
-                <p data-translate="contactText" style="margin-bottom: 20px;">If you would like to get in touch...</p>
-                <div class="cv-links" style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
-                    <div>
-                        <a href="assets/docs/cv_el-aamery_ilyas.pdf" class="btn-secondary" target="_blank">📄 Télécharger mon CV - FR</a>
-                        <a href="assets/docs/resume_el-aamery_ilyas.pdf" class="btn-secondary" target="_blank">📄 Download my Resume - EN</a>
-                    </div>
-                    <a href="https://www.linkedin.com/in/ilyas-el-aamery-01a0612a9/" target="_blank" class="btn-linkedin">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;"> 
-                        LinkedIn
-                    </a>
-                </div>
-                <p style="margin-top: 30px; font-weight: bold; color: #05155a;">📧 E-mail: elaameryilyas12@gmail.com</p>
-            </section>
-        </main>
-
-        <footer>
-            &copy; 2025 El Aamery Ilyas. All Rights Reserved.
-        </footer>
-
-        <button id="backToTop" aria-label="Back to top">⬆</button>
+    <div id="intro-overlay">
+        <div class="intro-text">🖱️ Cliquez sur un nœud pour afficher les détails & vidéos</div>
     </div>
 
-    <script src="assets/js/trad.js"></script>
-    <script src="assets/js/main.js"></script>
+    <div id="info-card">
+        <button class="close-btn" onclick="closeCard()">×</button>
+        <div id="card-content">
+            </div>
+    </div>
+
+    <script type="text/javascript">
+        // ==========================================
+        // 1. DATA (TITRES, VIDÉOS, LIENS)
+        // ==========================================
+        const contentData = {
+            // --- NOEUD CENTRAL ---
+            1: {
+                title: "Ilyas El Aamery",
+                subtitle: "Admin Réseau & Dev Fullstack",
+                html: `
+                    <div class="media-container" style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto; border: 3px solid #00d2ff;">
+                        <img src="assets/img/photo_ilyas.jpeg" class="project-img" style="height:100%; object-fit:cover;">
+                    </div>
+                    
+                    <p style="text-align:center; margin-top:15px;">
+                        Bienvenue sur mon infrastructure numérique. 
+                        Naviguez à travers les nœuds ou consultez la version classique de mon portfolio ci-dessous.
+                    </p>
+                    
+                    <div class="btn-group" style="justify-content:center;">
+                        <a href="https://www.linkedin.com/in/ilyas-el-aamery-01a0612a9/" target="_blank" class="btn-download">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+                        
+                        <a href="old_index.html" class="btn-download secondary" target="_blank">
+                            <i class="fas fa-history"></i> Version Classique
+                        </a>
+                    </div>
+                `
+            },
+
+            // --- CATEGORIES ---
+            2: { title: "PROJETS", subtitle: "Portfolio complet", html: "<p>Sélectionnez un projet spécifique pour voir sa démo vidéo.</p>" },
+            3: { title: "COMPÉTENCES", subtitle: "Hard Skills", html: "<p>Mes domaines d'expertise technique.</p>" },
+            4: { title: "CONTACT", subtitle: "CV & Réseaux", html: "" }, 
+
+            // ===================================
+            // --- PROJETS DÉTAILLÉS ---
+            // ===================================
+
+            // 1. JUST PARK IT
+            21: { 
+                title: "Just Park It",
+                subtitle: "App Mobile & Infra Cisco",
+                html: `
+                    <span class="wip-badge">🚧 En cours</span>
+                    <p>Projet transversal (Équipe de 5) : Conception d'une application de parking intelligent avec infrastructure complète.</p>
+                    <div class="media-container">
+                        <img src="assets/img/logo_jp.png" class="project-img" alt="Logo JP">
+                    </div>
+                    <ul class="skills-list">
+                        <li><strong>Réseau :</strong> Topologie Cisco sécurisée (VLAN, ACL).</li>
+                        <li><strong>Système :</strong> Serveurs Linux virtualisés sur VMware.</li>
+                        <li><strong>Dev :</strong> App Mobile TypeScript + Backend PHP/MySQL.</li>
+                    </ul>
+                `
+            },
+
+            // 2. JEUX (Langage C)
+            22: {
+                title: "JeuX",
+                subtitle: "Jeu de plateau en Langage C",
+                html: `
+                    <p>Un jeu de stratégie pour deux joueurs sur un plateau dynamique. L'objectif est de calculer la somme des pions pour gagner la partie.</p>
+                    
+                    <div class="media-container">
+                        <video controls class="project-video">
+                            <source src="assets/video/Jeux.mp4" type="video/mp4">
+                            Votre navigateur ne supporte pas la vidéo.
+                        </video>
+                    </div>
+
+                    <p><strong>Tech :</strong> Langage C, Algorithmique, Gestion mémoire.</p>
+                `
+            },
+
+            // 3. JEU DE NIM (Langage C)
+            23: {
+                title: "Jeu de Nim",
+                subtitle: "Algorithmique & IA Simple",
+                html: `
+                    <p>Implémentation classique du Jeu de Nim. Le programme inclut une IA capable de jouer contre l'utilisateur avec différents niveaux de difficulté.</p>
+                    
+                    <div class="media-container">
+                        <video controls class="project-video">
+                            <source src="assets/video/JeuDeNim.mp4" type="video/mp4">
+                            Votre navigateur ne supporte pas la vidéo.
+                        </video>
+                    </div>
+
+                    <p><strong>Tech :</strong> C, Logique binaire.</p>
+                `
+            },
+
+            // 4. LOGS CONNEXIONS (Bash)
+            24: {
+                title: "Analyseur de Logs",
+                subtitle: "Scripting Bash & Linux",
+                html: `
+                    <p>Script d'automatisation pour analyser les fichiers de logs serveur. Il détecte les tentatives d'intrusion et génère des rapports statistiques.</p>
+                    
+                    <div class="media-container">
+                        <video controls class="project-video">
+                            <source src="assets/video/LogsConnexion.mp4" type="video/mp4">
+                            Votre navigateur ne supporte pas la vidéo.
+                        </video>
+                    </div>
+
+                    <p><strong>Tech :</strong> Bash, Regex, Linux CLI.</p>
+                `
+            },
+
+            // 5. PUEBLO ZOO (SQL)
+            25: {
+                title: "Pueblo Zoo",
+                subtitle: "Gestion de Base de Données",
+                html: `
+                    <p>Conception et gestion d'une base de données relationnelle pour un parc zoologique. Gestion des animaux, des enclos, des soigneurs et de l'alimentation.</p>
+                    <p><strong>Tech :</strong> SQL, Modélisation MCD/MLD.</p>
+                `
+            },
+
+             // 6. FORMULE 1 SITE
+             26: {
+                title: "Site Formule 1",
+                subtitle: "Web Design HTML/CSS",
+                html: `
+                    <p>Mon tout premier site web statique dédié à la Formule 1. Présentation des écuries, des pilotes et du calendrier.</p>
+                    <p><strong>Tech :</strong> HTML5, CSS3.</p>
+                    
+                    <div class="btn-group">
+                        <a href="assets/docs/maquete_f1.pdf" class="btn-download" target="_blank">
+                            <i class="fas fa-file-pdf"></i> Voir la Maquette (PDF)
+                        </a>
+                    </div>
+                `
+            },
+
+            // --- NOEUDS COMPÉTENCES ---
+            31: { title: "Réseau (Cisco)", html: "<ul class='skills-list'><li>VLAN, OSPF, STP</li><li>ACL, NAT/PAT</li><li>Packet Tracer / GNS3</li></ul>" },
+            32: { title: "SysAdmin", html: "<ul class='skills-list'><li>Linux (Debian)</li><li>VMware ESXi</li><li>Scripting Bash</li></ul>" },
+            33: { title: "Dev Web", html: "<ul class='skills-list'><li>PHP, SQL</li><li>HTML/CSS, JS</li><li>TypeScript</li></ul>" },
+
+            // --- CONTACT ---
+            4: {
+                title: "Contact & CV",
+                subtitle: "Documents",
+                html: `
+                    <p>Je suis à la recherche d'une alternance ou d'un stage.</p>
+                    <div class="btn-group">
+                        <a href="assets/docs/cv_el-aamery_ilyas.pdf" target="_blank" class="btn-download">
+                            <i class="fas fa-file-pdf"></i> CV (Français)
+                        </a>
+                        <a href="assets/docs/resume_el-aamery_ilyas.pdf" target="_blank" class="btn-download secondary">
+                            <i class="fas fa-file-pdf"></i> Resume (English)
+                        </a>
+                    </div>
+                    <hr style="border-color:#334155; margin: 20px 0;">
+                    <p>📧 elaameryilyas12@gmail.com</p>
+                `
+            }
+        };
+
+        // ==========================================
+        // 2. TOPOLOGIE DU RÉSEAU
+        // ==========================================
+        var nodes = new vis.DataSet([
+            // Centre
+            { id: 1, shape: 'circularImage', image: 'assets/img/photo_ilyas.jpeg', size: 55, borderWidth: 4, color: { border: '#fff', background: '#fff' }, label: "ILYAS" },
+
+            // Planètes principales
+            { id: 2, label: 'PROJETS', shape: 'dot', size: 25, color: '#00d2ff', font:{color:'white', size:16} },
+            { id: 3, label: 'SKILLS', shape: 'dot', size: 25, color: '#34d399', font:{color:'white', size:16} },
+            { id: 4, label: 'CONTACT', shape: 'dot', size: 25, color: '#f472b6', font:{color:'white', size:16} },
+
+            // --- PROJETS ---
+            // Just Park It
+            { id: 21, label: 'Just Park It\n(App)', shape: 'circularImage', image: 'assets/img/logo_jp.png', size: 35, borderWidth: 2, color: {border:'#00d2ff'} },
+            
+            // Projets C
+            { id: 22, label: 'JeuX\n(C)', shape: 'box', color: '#1e3a8a', font:{color:'white'} },
+            { id: 23, label: 'Nim\n(C)', shape: 'box', color: '#1e3a8a', font:{color:'white'} },
+            
+            // Scripts & Data
+            { id: 24, label: 'Logs\n(Bash)', shape: 'box', color: '#4c1d95', font:{color:'white'} },
+            { id: 25, label: 'Zoo\n(SQL)', shape: 'box', color: '#4c1d95', font:{color:'white'} },
+            
+            // Web
+            { id: 26, label: 'F1 Site\n(Web)', shape: 'box', color: '#c2410c', font:{color:'white'} },
+
+            // --- SKILLS ---
+            { id: 31, label: 'Cisco', shape: 'ellipse', color: '#064e3b', font:{color:'#a7f3d0'} },
+            { id: 32, label: 'SysAdmin', shape: 'ellipse', color: '#064e3b', font:{color:'#a7f3d0'} },
+            { id: 33, label: 'Dev', shape: 'ellipse', color: '#064e3b', font:{color:'#a7f3d0'} },
+        ]);
+
+        var edges = new vis.DataSet([
+            // Liens Principaux
+            { from: 1, to: 2, width: 3, color: { color: 'rgba(255,255,255,0.1)' } },
+            { from: 1, to: 3, width: 3, color: { color: 'rgba(255,255,255,0.1)' } },
+            { from: 1, to: 4, width: 3, color: { color: 'rgba(255,255,255,0.1)' } },
+
+            // Liens Projets
+            { from: 2, to: 21, length: 180, color: '#00d2ff', width: 2 },
+            { from: 2, to: 22, length: 150, color: '#1e3a8a' },
+            { from: 2, to: 23, length: 150, color: '#1e3a8a' },
+            { from: 2, to: 24, length: 150, color: '#4c1d95' },
+            { from: 2, to: 25, length: 150, color: '#4c1d95' },
+            { from: 2, to: 26, length: 150, color: '#c2410c' },
+
+            // Liens Skills
+            { from: 3, to: 31, color: '#34d399' },
+            { from: 3, to: 32, color: '#34d399' },
+            { from: 3, to: 33, color: '#34d399' },
+        ]);
+
+        // ==========================================
+        // 3. INITIALISATION & LOGIQUE
+        // ==========================================
+        var container = document.getElementById('mynetwork');
+        var data = { nodes: nodes, edges: edges };
+        var options = {
+            nodes: {
+                font: { face: 'Segoe UI', color: '#ffffff', size: 14 },
+                borderWidth: 1,
+                shadow: true
+            },
+            edges: {
+                width: 1,
+                smooth: { type: 'continuous', forceDirection: 'none' }
+            },
+            physics: {
+                stabilization: false,
+                barnesHut: { gravitationalConstant: -3500, springConstant: 0.03, springLength: 200 }
+            },
+            interaction: { hover: true }
+        };
+
+        var network = new vis.Network(container, data, options);
+
+        network.on("click", function (params) {
+            document.getElementById('intro-overlay').style.opacity = '0'; // Cacher intro
+
+            if (params.nodes.length > 0) {
+                const nodeId = params.nodes[0];
+                const info = contentData[nodeId];
+
+                if (info) {
+                    // Injecter le contenu HTML
+                    const htmlContent = `
+                        <div class="card-header">
+                            <h2>${info.title}</h2>
+                            <span class="subtitle">${info.subtitle || ''}</span>
+                        </div>
+                        <div>${info.html}</div>
+                    `;
+                    document.getElementById('card-content').innerHTML = htmlContent;
+                    document.getElementById('info-card').classList.add('active');
+
+                    // --- NOUVELLE LOGIQUE RESPONSIVE ---
+                    // Si l'écran est petit (mobile), on ne décale pas (x: 0)
+                    // Sinon (PC), on décale de 250px pour laisser place au panneau
+                    const isMobile = window.innerWidth < 768;
+                    const offsetX = isMobile ? 0 : -250;
+                    const newScale = isMobile ? 0.9 : 1.2; // Zoom un peu moins fort sur mobile
+
+                    network.focus(nodeId, {
+                        scale: newScale,
+                        offset: { x: offsetX, y: 0 },
+                        animation: { duration: 800, easingFunction: "easeInOutQuad" }
+                    });
+                }
+            } else {
+                closeCard();
+            }
+        });
+
+        function closeCard() {
+            document.getElementById('info-card').classList.remove('active');
+            network.fit({ animation: { duration: 800, easingFunction: "easeInOutQuad" } });
+        }
+    </script>
 </body>
 </html>
