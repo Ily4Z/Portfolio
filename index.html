@@ -221,19 +221,56 @@
 
             // --- PROJETS DÉTAILLÉS ---
             21: { 
-                title: "Just Park It",
-                subtitle: "Infrastructure Mobile Connectée",
+                title: "Just Park It (SAé 3.01)",
+                subtitle: "App de Mobilité & Infrastructure Complète",
                 html: `
-                    <span class="wip-badge">🚧 En cours</span>
-                    <p>Conception complète en équipe (5 personnes) d'une solution de parking intelligent avec gestion réseau isolée.</p>
-                    <div class="media-container">
-                        <img src="assets/img/logo_jp.png" class="project-img" alt="Logo JP">
+                    <span class="live-badge" style="background:#2563eb;">🚀 Projet Majeur</span>
+                    <p style="margin-top: 15px;">
+                        Conception globale d'une application client/serveur d'aide à la mobilité urbaine. 
+                        L'objectif : géolocaliser et guider les conducteurs en temps réel vers des places de stationnement disponibles.
+                    </p>
+                    
+                    <div class="media-container" style="background: white; padding: 10px;">
+                        <img src="assets/img/jpi_flyer.png" class="project-img" alt="Affiche Just Park It" style="max-height: 400px; object-fit: contain; margin-bottom: 0;">
                     </div>
+
+                    <h3 style="color:#00d2ff; margin-top:25px; font-size:1.2rem; border-bottom:1px solid #1e293b; padding-bottom:5px;">1. Infrastructure & Réseau</h3>
+                    <p>Déploiement d'une architecture sécurisée sur matériel Cisco pour isoler et héberger les services.</p>
                     <ul class="skills-list">
-                        <li><strong>Réseau :</strong> Maquette Cisco isolée et sécurisée par listes d'accès (ACL).</li>
-                        <li><strong>Virtualisation :</strong> Déploiement des serveurs de services sous VMware ESXi.</li>
-                        <li><strong>Application :</strong> Frontend en TypeScript connecté à une base relationnelle SQL.</li>
+                        <li><strong>Topologie :</strong> Routage inter-VLAN, création d'une zone DMZ pour l'exposition de l'API.</li>
+                        <li><strong>Matériel :</strong> Configuration de Routeurs (Série 2911) et de Switches (Série 2960).</li>
+                        <li><strong>Services :</strong> Serveurs Linux virtualisés pour le Web et la Base de données.</li>
                     </ul>
+                    <div class="media-container">
+                        <img src="assets/img/jpi_reseau.png" class="project-img" alt="Topologie Cisco Packet Tracer" style="margin-bottom: 0;">
+                    </div>
+
+                    <h3 style="color:#00d2ff; margin-top:25px; font-size:1.2rem; border-bottom:1px solid #1e293b; padding-bottom:5px;">2. Base de Données</h3>
+                    <p>Modélisation et requêtage (MySQL) pour gérer l'état du parc de stationnement et les utilisateurs.</p>
+                    <ul class="skills-list">
+                        <li><strong>Conception :</strong> Rédaction du MCD/MLD.</li>
+                        <li><strong>Gestion :</strong> Profils utilisateurs, favoris, types de véhicules et accessibilité (PMR).</li>
+                    </ul>
+                    <div class="media-container">
+                        <img src="assets/img/jpi_bdd.png" class="project-img" alt="Schéma relationnel MySQL" style="margin-bottom: 0;">
+                    </div>
+
+                    <h3 style="color:#00d2ff; margin-top:25px; font-size:1.2rem; border-bottom:1px solid #1e293b; padding-bottom:5px;">3. Application (Frontend)</h3>
+                    <p>Interface utilisateur dynamique intégrant une carte interactive.</p>
+                    <ul class="skills-list">
+                        <li><strong>Stack :</strong> TypeScript, librairie Leaflet (Cartographie).</li>
+                        <li><strong>Fonctionnalités :</strong> Calcul d'itinéraire (distance/durée), affichage des places en temps réel et navigation étape par étape.</li>
+                    </ul>
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                        <img src="assets/img/jpi_cox.png" style="width: 48%; border-radius: 8px; border: 1px solid #334155; object-fit: cover;">
+                        <img src="assets/img/jpi_park.png" style="width: 48%; border-radius: 8px; border: 1px solid #334155; object-fit: cover;">
+                    </div>
+
+                    <h3 style="color:#00d2ff; margin-top:25px; font-size:1.2rem; border-bottom:1px solid #1e293b; padding-bottom:5px;">4. Gestion de Projet</h3>
+                    <p>Travail collaboratif (5 membres) piloté via des méthodes agiles et un suivi rigoureux des itérations.</p>
+                    <div class="media-container">
+                        <img src="assets/img/jpi_gannt.png" class="project-img" alt="Diagramme de Gantt" style="margin-bottom: 0;">
+                    </div>
                 `
             },
             22: {

@@ -153,18 +153,55 @@
                     <li>VMware</li>
                     <li>Linux</li>
                     <li>MySQL</li>
-                    <li>PHP</li>
                     <li>TypeScript</li>
                     <li>HTML/CSS</li>
                 </ul>
-                <div class="section-container">
-                    <div class="section-description">
-                        <p data-translate="parking_desc"></p>
-                    </div> 
-                    <div class="photo-looping"> <a href="assets/img/logo_jp.png" target="_blank">
-                            <img src="assets/img/logo_jp.png" alt="Logo Just Park It" width="500" style="border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.2);">
-                        </a>
+                
+                <div class="project-card" style="border: 1px dashed currentColor; padding: 25px; margin-top: 25px; margin-bottom: 30px; text-align: left; background-color: rgba(0,0,0,0.2);">
+                    
+                    <h3 style="text-transform: uppercase; margin-top: 0; font-size: 1.2rem;">> Just Park It (SAé 3.01)</h3>
+                    <p style="margin-bottom: 20px; line-height: 1.6;">
+                        Conception globale d'une application client/serveur d'aide à la mobilité urbaine (Équipe de 5). 
+                        L'objectif : géolocaliser et guider les conducteurs en temps réel vers des places de stationnement disponibles.
+                    </p>
+
+                    <div style="text-align: center; margin: 25px 0;">
+                        <img src="assets/img/jpi_flyer.png" alt="Flyer Just Park It" style="max-width: 30%; height: auto; border: 1px solid currentColor; display: block; margin: 0 auto;">
                     </div>
+
+                    <hr style="border: 0; border-bottom: 1px dashed currentColor; margin: 30px 0;">
+
+                    <h4 style="margin-bottom: 10px; font-size: 1.1rem;">[1] Infrastructure & Réseau</h4>
+                    <p style="margin-bottom: 10px;">Déploiement d'une architecture sécurisée sur matériel Cisco pour isoler et héberger les services sous VMware.</p>
+                    <ul style="margin-bottom: 20px; padding-left: 20px; list-style-type: square;">
+                        <li><strong>Topologie :</strong> Routage inter-VLAN, création d'une zone DMZ pour l'exposition de l'API.</li>
+                        <li><strong>Matériel :</strong> Routeurs (Série 2911) et Switches (Série 2960).</li>
+                    </ul>
+                    <div style="text-align: center;">
+                        <img src="assets/img/jpi_reseau.png" alt="Topologie Réseau" style="max-width: 30%; height: auto; border: 1px solid currentColor; margin-bottom: 30px;">
+                    </div>
+
+                    <h4 style="margin-bottom: 10px; font-size: 1.1rem;">[2] Base de Données</h4>
+                    <p style="margin-bottom: 15px;">Modélisation et requêtage (MySQL) pour gérer l'état du parc de stationnement, les profils utilisateurs et l'accessibilité (PMR).</p>
+                    <div style="text-align: center;">
+                        <img src="assets/img/jpi_bdd.png" alt="Schéma BDD" style="max-width: 30%; height: auto; border: 1px solid currentColor; margin-bottom: 30px;">
+                    </div>
+
+                    <h4 style="margin-bottom: 10px; font-size: 1.1rem;">[3] Application (Frontend)</h4>
+                    <p style="margin-bottom: 15px;">Interface utilisateur dynamique (TypeScript + Leaflet) intégrant le calcul d'itinéraire et la navigation en temps réel.</p>
+                    
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-bottom: 30px; max-width: 30%; margin-left: auto; margin-right: auto;">
+                        <img src="assets/img/jpi_cox.png" alt="Écran Connexion" style="width: 30%; min-width: 150px; border: 1px solid currentColor; border-radius: 4px;">
+                        <img src="assets/img/jpi_park.png" alt="Écran Carte" style="width: 30%; min-width: 150px; border: 1px solid currentColor; border-radius: 4px;">
+                        <img src="assets/img/jpi_navig.png" alt="Écran Navigation" style="width: 30%; min-width: 150px; border: 1px solid currentColor; border-radius: 4px;">
+                    </div>
+
+                    <h4 style="margin-bottom: 10px; font-size: 1.1rem;">[4] Gestion de Projet</h4>
+                    <p style="margin-bottom: 15px;">Travail collaboratif piloté via des méthodes agiles et un suivi rigoureux des itérations.</p>
+                    <div style="text-align: center;">
+                        <img src="assets/img/jpi_gannt.png" alt="Diagramme de Gantt" style="max-width: 30%; height: auto; border: 1px solid currentColor;">
+                    </div>
+
                 </div>
             </section>
 
@@ -302,7 +339,6 @@
         .btn-new-portfolio {
             position: fixed;
             bottom: 30px;
-            /* MODIFICATION ICI : On le met à GAUCHE au lieu de DROITE */
             left: 30px; 
             
             background: linear-gradient(135deg, #00d2ff, #1e3a8a);
@@ -330,7 +366,7 @@
         @media screen and (max-width: 768px) {
             .btn-new-portfolio {
                 bottom: 20px;
-                left: 20px; /* On garde à gauche aussi sur mobile */
+                left: 20px;
                 padding: 10px 15px;
                 font-size: 0.9rem;
             }
