@@ -9,7 +9,7 @@
     <link rel="apple-touch-icon" href="assets/img/favicon.png?v=2">
 
     <meta property="og:title" content="Ilyas El Aamery - Network Portfolio">
-    <meta property="og:description" content="Étudiant Admin Réseau & Dev Fullstack. Découvrez mes projets C, Bash, Web et Cisco.">
+    <meta property="og:description" content="Étudiant Admin Réseau & Dev Fullstack. Découvrez mes projets et mon profil pour une alternance.">
     <meta property="og:image" content="https://ilyas-elaamery.com/assets/img/photo_ilyas.jpeg">
 
     <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
@@ -40,7 +40,7 @@
             position: fixed;
             top: 0;
             right: -650px; /* Caché par défaut */
-            width: 500px; /* Largeur confortable pour les vidéos */
+            width: 500px;
             max-width: 90%;
             height: 100vh;
             background: rgba(10, 15, 30, 0.98);
@@ -93,9 +93,12 @@
         .btn-download:hover { background: #1d4ed8; }
         .btn-download.secondary { background: #475569; }
         .btn-download.secondary:hover { background: #64748b; }
+        .btn-download.accent { background: #d97706; }
+        .btn-download.accent:hover { background: #b45309; }
 
         /* Badges et Listes */
         .wip-badge { background: #f59e0b; color: black; font-size: 0.75rem; padding: 2px 8px; border-radius: 10px; font-weight: bold; vertical-align: middle; margin-left: 8px; }
+        .live-badge { background: #10b981; color: white; font-size: 0.75rem; padding: 2px 8px; border-radius: 10px; font-weight: bold; vertical-align: middle; margin-left: 8px; }
         
         ul.skills-list { list-style: none; padding: 0; }
         ul.skills-list li {
@@ -106,40 +109,29 @@
             border-left: 3px solid #34d399;
             color: #e2e8f0;
         }
+        ul.skills-list.exp li { border-left-color: #a855f7; }
 
         /* Divers */
         .close-btn { position: absolute; top: 20px; right: 20px; background: none; border: none; color: #64748b; font-size: 2rem; cursor: pointer; }
         .close-btn:hover { color: white; }
         
         #intro-overlay {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            position: absolute; top: 30px; left: 50%; transform: translateX(-50%);
             text-align: center; pointer-events: none; opacity: 1; transition: opacity 1s;
+            z-index: 10;
         }
-        .intro-text { background: rgba(0,0,0,0.6); padding: 15px 30px; border-radius: 30px; border: 1px solid #334155; color: #94a3b8; }
+        .intro-text { background: rgba(10, 15, 30, 0.8); padding: 10px 25px; border-radius: 30px; border: 1px solid #1e293b; color: #94a3b8; font-size: 0.9rem; }
 
-        /* --- RESPONSIVE MOBILE (Ajout) --- */
+        /* --- RESPONSIVE MOBILE --- */
         @media screen and (max-width: 768px) {
-            /* Le panneau prend tout l'écran sur mobile */
             #info-card {
                 width: 100%;
-                right: -100%; /* Caché complètement */
+                right: -100%;
                 padding: 20px;
-                border-left: none; /* Pas de bordure gauche */
+                border-left: none;
             }
-            
-            /* Ajustement de la taille des textes */
             h2 { font-size: 1.5rem; }
-            
-            /* Le bouton fermer est plus gros et plus accessible */
-            .close-btn {
-                top: 15px;
-                right: 15px;
-                font-size: 2.5rem;
-                padding: 10px;
-                z-index: 1001;
-            }
-
-            /* On cache l'instruction "Cliquez..." plus vite sur mobile car ça gêne */
+            .close-btn { top: 15px; right: 15px; font-size: 2.5rem; padding: 10px; z-index: 1001; }
             #intro-overlay { display: none; }
         }
     </style>
@@ -149,7 +141,7 @@
     <div id="mynetwork"></div>
 
     <div id="intro-overlay">
-        <div class="intro-text">🖱️ Cliquez sur un nœud pour afficher les détails & vidéos</div>
+        <div class="intro-text">🖱️ Explorez la topologie ou cliquez sur les alertes pour interagir</div>
     </div>
 
     <div id="info-card">
@@ -160,28 +152,22 @@
 
     <script type="text/javascript">
         // ==========================================
-        // 1. DATA (TITRES, VIDÉOS, LIENS)
+        // 1. DATA (TEXTES, MEDIAS & STRUCTURE)
         // ==========================================
         const contentData = {
             // --- NOEUD CENTRAL ---
             1: {
                 title: "Ilyas El Aamery",
-                subtitle: "Étudiant en BUT 2",
+                subtitle: "Admin Réseau & Dev Fullstack",
                 html: `
                     <div class="media-container" style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto; border: 3px solid #00d2ff;">
                         <img src="assets/img/photo_ilyas.jpeg" class="project-img" style="height:100%; object-fit:cover;">
                     </div>
-                    
-                    <p style="text-align:center; margin-top:15px;">
-                        Bienvenue sur mon infrastructure numérique. 
-                        Naviguez à travers les nœuds ou consultez la version classique de mon portfolio ci-dessous.
-                    </p>
-                    
+                    <p style="text-align:center; margin-top:15px;">Étudiant technicien supérieur modélisant mes compétences et architectures sous forme de topologie interactive.</p>
                     <div class="btn-group" style="justify-content:center;">
                         <a href="https://www.linkedin.com/in/ilyas-el-aamery-01a0612a9/" target="_blank" class="btn-download">
                             <i class="fab fa-linkedin"></i> LinkedIn
                         </a>
-                        
                         <a href="old_index.html" class="btn-download secondary" target="_blank">
                             <i class="fas fa-history"></i> Version Classique
                         </a>
@@ -189,247 +175,243 @@
                 `
             },
 
-            // --- CATEGORIES ---
-            2: { title: "PROJETS", subtitle: "Portfolio complet", html: "<p>Sélectionnez un projet spécifique pour voir sa démo vidéo.</p>" },
-            3: { title: "COMPÉTENCES", subtitle: "Hard Skills", html: "<p>Mes domaines d'expertise technique.</p>" },
-            4: { title: "CONTACT", subtitle: "CV & Réseaux", html: "" }, 
-
-            // ===================================
-            // --- PROJETS DÉTAILLÉS ---
-            // ===================================
-
-            // 1. JUST PARK IT
-            21: { 
-                title: "Just Park It",
-                subtitle: "App Mobile & Infra Cisco",
+            // --- RECHERCHE ALTERNANCE (NŒUD D'ALERTE) ---
+            5: {
+                title: "Recherche Alternance",
+                subtitle: "Contrat d'Apprentissage — Rentrée 2026",
                 html: `
-                    <span class="wip-badge">🚧 En cours</span>
-                    <p>Projet transversal (Équipe de 5) : Conception d'une application de parking intelligent avec infrastructure complète.</p>
-                    <div class="media-container">
-                        <img src="assets/img/logo_jp.png" class="project-img" alt="Logo JP">
+                    <span class="live-badge">Disponibilité : Septembre 2026</span>
+                    <p style="margin-top:15px;">Dans le cadre de ma troisième année de formation, je recherche activement une entreprise d'accueil pour concrétiser mes compétences de terrain.</p>
+                    <ul class="skills-list" style="border-left-color: #f59e0b;">
+                        <li><strong>Poste visé :</strong> Administrateur Systèmes, Réseaux et Sécurité</li>
+                        <li><strong>Formation :</strong> BUT Informatique (Parcours Déploiement d'Applications Communiquantes et Sécurisées)</li>
+                        <li><strong>Rythme :</strong> Alternance par périodes de blocs spécifiques</li>
+                        <li><strong>Mobilité :</strong> Metz / Nancy et environs</li>
+                    </ul>
+                    <div class="btn-group">
+                        <a href="assets/docs/cv_el-aamery_ilyas.pdf" target="_blank" class="btn-download accent">
+                            <i class="fas fa-file-pdf"></i> Consulter mon CV (FR)
+                        </a>
+                        <a href="assets/docs/resume_el-aamery_ilyas.pdf" target="_blank" class="btn-download secondary">
+                            <i class="fas fa-file-pdf"></i> Resume (EN)
+                        </a>
                     </div>
-                    <ul class="skills-list">
-                        <li><strong>Réseau :</strong> Topologie Cisco sécurisée (VLAN, ACL).</li>
-                        <li><strong>Système :</strong> Serveurs Linux virtualisés sur VMware.</li>
-                        <li><strong>Dev :</strong> App Mobile TypeScript + Backend PHP/MySQL.</li>
+                `
+            },
+
+            // --- CATEGORIES ---
+            2: { title: "PROJETS", subtitle: "Portfolio de réalisations", html: "<p>Sélectionnez un équipement ou projet connecté pour visionner la démonstration.</p>" },
+            3: { title: "COMPÉTENCES", subtitle: "Hard Skills & Outils", html: "<p>Détail de mes pôles de compétences opérationnels.</p>" },
+            6: { title: "EXPÉRIENCES PRO", subtitle: "Parcours en Entreprise", html: "<p>Cliquez sur les infrastructures d'accueil pour voir le détail de mes missions.</p>" },
+            4: { title: "CONTACT", subtitle: "Coordonnées", html: "<p>Pour toute proposition ou échange technique :<br><br>📧 elaameryilyas12@gmail.com</p>" },
+
+            // --- EXPERIENCES EN ENTREPRISE ---
+            61: {
+                title: "Demathieu Bard",
+                subtitle: "Stage Support Informatique N2 — Direction Générale",
+                html: `
+                    <p>Immersion au sein de la cellule support et exploitation pour assurer la continuité des services et la maintenance du parc.</p>
+                    <ul class="skills-list exp">
+                        <li><strong>Support N2 :</strong> Résolution d'incidents matériels, systèmes et connectivités.</li>
+                        <li><strong>Système :</strong> Exploitation et gestion des demandes utilisateurs via Active Directory et environnements Windows Server.</li>
+                        <li><strong>Réseau :</strong> Diagnostic d'architecture locale et brassage de prises sur switchs de distribution.</li>
                     </ul>
                 `
             },
 
-            // 2. JEUX (Langage C)
+            // --- PROJETS DÉTAILLÉS ---
+            21: { 
+                title: "Just Park It",
+                subtitle: "Infrastructure Mobile Connectée",
+                html: `
+                    <span class="wip-badge">🚧 En cours</span>
+                    <p>Conception complète en équipe (5 personnes) d'une solution de parking intelligent avec gestion réseau isolée.</p>
+                    <div class="media-container">
+                        <img src="assets/img/logo_jp.png" class="project-img" alt="Logo JP">
+                    </div>
+                    <ul class="skills-list">
+                        <li><strong>Réseau :</strong> Maquette Cisco isolée et sécurisée par listes d'accès (ACL).</li>
+                        <li><strong>Virtualisation :</strong> Déploiement des serveurs de services sous VMware ESXi.</li>
+                        <li><strong>Application :</strong> Frontend en TypeScript connecté à une base relationnelle SQL.</li>
+                    </ul>
+                `
+            },
             22: {
                 title: "JeuX",
-                subtitle: "Jeu de plateau en Langage C",
+                subtitle: "Application de plateau en Langage C",
                 html: `
-                    <p>Un jeu de stratégie pour deux joueurs sur un plateau dynamique. L'objectif est de calculer la somme des pions pour gagner la partie.</p>
-                    
+                    <p>Développement d'un moteur de jeu de stratégie bidimensionnel intégrant le calcul dynamique matriciel des scores.</p>
                     <div class="media-container">
                         <video controls class="project-video">
                             <source src="assets/video/Jeux.mp4" type="video/mp4">
-                            Votre navigateur ne supporte pas la vidéo.
+                            Navigateur obsolète.
                         </video>
                     </div>
-
-                    <p><strong>Tech :</strong> Langage C, Algorithmique, Gestion mémoire.</p>
+                    <p><strong>Pôle :</strong> Algorithmique pure, allocation dynamique de mémoire, compilation GCC.</p>
                 `
             },
-
-            // 3. JEU DE NIM (Langage C)
             23: {
                 title: "Jeu de Nim",
-                subtitle: "Algorithmique & IA Simple",
+                subtitle: "Logique algorithmique appliquée",
                 html: `
-                    <p>Implémentation classique du Jeu de Nim. Le programme inclut une IA capable de jouer contre l'utilisateur avec différents niveaux de difficulté.</p>
-                    
+                    <p>Création du traditionnel jeu de Nim exécutable en ligne de commande, proposant un algorithme d'opposition (IA basique).</p>
                     <div class="media-container">
                         <video controls class="project-video">
                             <source src="assets/video/JeuDeNim.mp4" type="video/mp4">
-                            Votre navigateur ne supporte pas la vidéo.
+                            Navigateur obsolète.
                         </video>
                     </div>
-
-                    <p><strong>Tech :</strong> C, Logique binaire.</p>
+                    <p><strong>Pôle :</strong> Langage C, structures conditionnelles complexes.</p>
                 `
             },
-
-            // 4. LOGS CONNEXIONS (Bash)
             24: {
                 title: "Analyseur de Logs",
-                subtitle: "Scripting Bash & Linux",
+                subtitle: "Automatisation de scripts système",
                 html: `
-                    <p>Script d'automatisation pour analyser les fichiers de logs serveur. Il détecte les tentatives d'intrusion et génère des rapports statistiques.</p>
-                    
+                    <p>Script système conçu pour automatiser l'extraction et l'analyse de fichiers d'événements Linux (logs de connexions).</p>
                     <div class="media-container">
                         <video controls class="project-video">
                             <source src="assets/video/LogsConnexion.mp4" type="video/mp4">
-                            Votre navigateur ne supporte pas la vidéo.
+                            Navigateur obsolète.
                         </video>
                     </div>
-
-                    <p><strong>Tech :</strong> Bash, Regex, Linux CLI.</p>
+                    <p><strong>Pôle :</strong> Scripting Bash, expressions régulières (Regex), sécurité système.</p>
                 `
             },
-
-            // 5. PUEBLO ZOO (SQL)
             25: {
                 title: "Pueblo Zoo",
-                subtitle: "Gestion de Base de Données",
+                subtitle: "Modélisation Relationnelle (SQL)",
                 html: `
-                    <p>Conception et gestion d'une base de données relationnelle pour un parc zoologique. Gestion des animaux, des enclos, des soigneurs et de l'alimentation.</p>
-                    <p><strong>Tech :</strong> SQL, Modélisation MCD/MLD.</p>
+                    <p>Étude, conception et requêtage d'une base de données complexe simulant la gestion d'un parc animalier (animaux, enclos, affectations).</p>
+                    <p><strong>Pôle :</strong> Rédaction des modèles conceptuels (MCD/MLD), requêtes imbriquées, jointures avancées.</p>
                 `
             },
-
-             // 6. FORMULE 1 SITE
-             26: {
-                title: "Site Formule 1",
-                subtitle: "Web Design HTML/CSS",
+            26: {
+                title: "E-Vitrine Formule 1",
+                subtitle: "Intégration Web Responsive",
                 html: `
-                    <p>Mon tout premier site web statique dédié à la Formule 1. Présentation des écuries, des pilotes et du calendrier.</p>
-                    <p><strong>Tech :</strong> HTML5, CSS3.</p>
-                    
+                    <p>Développement d'un portail web informatif dédié à l'univers de la F1 mettant en avant la conformité des maquettes graphiques.</p>
                     <div class="btn-group">
                         <a href="assets/docs/maquete_f1.pdf" class="btn-download" target="_blank">
-                            <i class="fas fa-file-pdf"></i> Voir la Maquette (PDF)
+                            <i class="fas fa-file-pdf"></i> Ouvrir la Maquette (PDF)
                         </a>
                     </div>
                 `
             },
 
-            // --- NOEUDS COMPÉTENCES ---
-            31: { title: "Réseau (Cisco)", html: "<ul class='skills-list'><li>VLAN, OSPF, STP</li><li>ACL, NAT/PAT</li><li>Packet Tracer / GNS3</li></ul>" },
-            32: { title: "SysAdmin", html: "<ul class='skills-list'><li>Linux (Debian)</li><li>VMware ESXi</li><li>Scripting Bash</li></ul>" },
-            33: { title: "Dev Web", html: "<ul class='skills-list'><li>PHP, SQL</li><li>HTML/CSS, JS</li><li>TypeScript</li></ul>" },
-
-            // --- CONTACT ---
-            4: {
-                title: "Contact & CV",
-                subtitle: "Documents",
-                html: `
-                    <p>Je suis à la recherche d'une alternance ou d'un stage.</p>
-                    <div class="btn-group">
-                        <a href="assets/docs/cv_el-aamery_ilyas.pdf" target="_blank" class="btn-download">
-                            <i class="fas fa-file-pdf"></i> CV (Français)
-                        </a>
-                        <a href="assets/docs/resume_el-aamery_ilyas.pdf" target="_blank" class="btn-download secondary">
-                            <i class="fas fa-file-pdf"></i> Resume (English)
-                        </a>
-                    </div>
-                    <hr style="border-color:#334155; margin: 20px 0;">
-                    <p>📧 elaameryilyas12@gmail.com</p>
-                `
-            }
+            // --- COMPÉTENCES ---
+            31: { title: "Réseau (Cisco)", html: "<ul class='skills-list'><li>Architecture VLAN, Trunking 802.1Q</li><li>Routage dynamique OSPF, statique, NAT/PAT</li><li>Filtrage par ACL (Access Control Lists)</li></ul>" },
+            32: { title: "SysAdmin", html: "<ul class='skills-list'><li>Administration Linux (Debian, Ubuntu Server)</li><li>Hyperviseurs VMware ESXi / Workstation</li><li>Gestion Active Directory (Utilisateurs/Droits)</li></ul>" },
+            33: { title: "Développement", html: "<ul class='skills-list'><li>Backend / Données : PHP, requêtes SQL</li><li>Frontend : HTML5, CSS3, TypeScript</li><li>Méthodologie : Versioning via Git / GitHub</li></ul>" }
         };
 
         // ==========================================
-        // 2. TOPOLOGIE DU RÉSEAU
+        // 2. CONFIGURATION DE LA TOPOLOGIE (VIS.JS)
         // ==========================================
         var nodes = new vis.DataSet([
             // Centre
-            { id: 1, shape: 'circularImage', image: 'assets/img/photo_ilyas.jpeg', size: 55, borderWidth: 4, color: { border: '#fff', background: '#fff' }, label: "ILYAS" },
+            { id: 1, shape: 'circularImage', image: 'assets/img/photo_ilyas.jpeg', size: 55, borderWidth: 4, color: { border: '#00d2ff', background: '#fff' }, label: "ILYAS" },
+
+            // ALERTE CRITIQUE (Alternance)
+            { id: 5, label: '🚨 ALTERNANCE\nSEPT. 2026', shape: 'dot', size: 26, color: '#f59e0b', font:{color:'#f59e0b', size:15, bold:true} },
 
             // Planètes principales
-            { id: 2, label: 'PROJETS', shape: 'dot', size: 25, color: '#00d2ff', font:{color:'white', size:16} },
-            { id: 3, label: 'SKILLS', shape: 'dot', size: 25, color: '#34d399', font:{color:'white', size:16} },
-            { id: 4, label: 'CONTACT', shape: 'dot', size: 25, color: '#f472b6', font:{color:'white', size:16} },
+            { id: 2, label: 'PROJETS', shape: 'dot', size: 22, color: '#00d2ff', font:{color:'white', size:15} },
+            { id: 6, label: 'EXPÉRIENCES', shape: 'dot', size: 22, color: '#a855f7', font:{color:'white', size:15} },
+            { id: 3, label: 'SKILLS', shape: 'dot', size: 22, color: '#34d399', font:{color:'white', size:15} },
+            { id: 4, label: 'CONTACT', shape: 'dot', size: 18, color: '#f472b6', font:{color:'white', size:14} },
 
-            // --- PROJETS ---
-            // Just Park It
-            { id: 21, label: 'Just Park It\n(App)', shape: 'circularImage', image: 'assets/img/logo_jp.png', size: 35, borderWidth: 2, color: {border:'#00d2ff'} },
-            
-            // Projets C
+            // --- SOUS-NŒUDS EXPÉRIENCES ---
+            { id: 61, label: 'Stage IT\n(Demathieu Bard)', shape: 'box', color: '#581c87', font:{color:'white'} },
+
+            // --- SOUS-NŒUDS PROJETS ---
+            { id: 21, label: 'Just Park It\n(Transversal)', shape: 'circularImage', image: 'assets/img/logo_jp.png', size: 35, borderWidth: 2, color: {border:'#00d2ff'} },
             { id: 22, label: 'JeuX\n(C)', shape: 'box', color: '#1e3a8a', font:{color:'white'} },
             { id: 23, label: 'Nim\n(C)', shape: 'box', color: '#1e3a8a', font:{color:'white'} },
-            
-            // Scripts & Data
-            { id: 24, label: 'Logs\n(Bash)', shape: 'box', color: '#4c1d95', font:{color:'white'} },
-            { id: 25, label: 'Zoo\n(SQL)', shape: 'box', color: '#4c1d95', font:{color:'white'} },
-            
-            // Web
-            { id: 26, label: 'F1 Site\n(Web)', shape: 'box', color: '#c2410c', font:{color:'white'} },
+            { id: 24, label: 'Logs\n(Bash)', shape: 'box', color: '#1e3a8a', font:{color:'white'} },
+            { id: 25, label: 'Zoo\n(SQL)', shape: 'box', color: '#1e3a8a', font:{color:'white'} },
+            { id: 26, label: 'F1 Site\n(Web)', shape: 'box', color: '#1e3a8a', font:{color:'white'} },
 
-            // --- SKILLS ---
+            // --- SOUS-NŒUDS SKILLS ---
             { id: 31, label: 'Cisco', shape: 'ellipse', color: '#064e3b', font:{color:'#a7f3d0'} },
             { id: 32, label: 'SysAdmin', shape: 'ellipse', color: '#064e3b', font:{color:'#a7f3d0'} },
-            { id: 33, label: 'Dev', shape: 'ellipse', color: '#064e3b', font:{color:'#a7f3d0'} },
+            { id: 33, label: 'Dev', shape: 'ellipse', color: '#064e3b', font:{color:'#a7f3d0'} }
         ]);
 
         var edges = new vis.DataSet([
-            // Liens Principaux
-            { from: 1, to: 2, width: 3, color: { color: 'rgba(255,255,255,0.1)' } },
-            { from: 1, to: 3, width: 3, color: { color: 'rgba(255,255,255,0.1)' } },
-            { from: 1, to: 4, width: 3, color: { color: 'rgba(255,255,255,0.1)' } },
+            // Liens vers le centre
+            { from: 1, to: 2, width: 2, color: { color: 'rgba(255,255,255,0.1)' } },
+            { from: 1, to: 3, width: 2, color: { color: 'rgba(255,255,255,0.1)' } },
+            { from: 1, to: 4, width: 2, color: { color: 'rgba(255,255,255,0.1)' } },
+            { from: 1, to: 6, width: 2, color: { color: 'rgba(255,255,255,0.1)' } },
+            
+            // Lien d'alerte haute priorité (Alternance)
+            { from: 1, to: 5, width: 4, color: '#f59e0b', dashes: true, length: 140 },
 
-            // Liens Projets
+            // Branche Expériences
+            { from: 6, to: 61, length: 140, color: '#a855f7', width: 2 },
+
+            // Branche Projets
             { from: 2, to: 21, length: 180, color: '#00d2ff', width: 2 },
             { from: 2, to: 22, length: 150, color: '#1e3a8a' },
             { from: 2, to: 23, length: 150, color: '#1e3a8a' },
-            { from: 2, to: 24, length: 150, color: '#4c1d95' },
-            { from: 2, to: 25, length: 150, color: '#4c1d95' },
-            { from: 2, to: 26, length: 150, color: '#c2410c' },
+            { from: 2, to: 24, length: 150, color: '#1e3a8a' },
+            { from: 2, to: 25, length: 150, color: '#1e3a8a' },
+            { from: 2, to: 26, length: 150, color: '#1e3a8a' },
 
-            // Liens Skills
+            // Branche Skills
             { from: 3, to: 31, color: '#34d399' },
             { from: 3, to: 32, color: '#34d399' },
-            { from: 3, to: 33, color: '#34d399' },
+            { from: 3, to: 33, color: '#34d399' }
         ]);
 
-        // ==========================================
-        // 3. INITIALISATION & LOGIQUE
-        // ==========================================
+        // Moteur de rendu
         var container = document.getElementById('mynetwork');
         var data = { nodes: nodes, edges: edges };
         var options = {
-            nodes: {
-                font: { face: 'Segoe UI', color: '#ffffff', size: 14 },
-                borderWidth: 1,
-                shadow: true
-            },
-            edges: {
-                width: 1,
-                smooth: { type: 'continuous', forceDirection: 'none' }
-            },
-            physics: {
-                stabilization: false,
-                barnesHut: { gravitationalConstant: -3500, springConstant: 0.03, springLength: 200 }
-            },
+            nodes: { font: { face: 'Segoe UI', color: '#ffffff', size: 14 }, borderWidth: 1, shadow: true },
+            edges: { width: 1, smooth: { type: 'continuous', forceDirection: 'none' } },
+            physics: { stabilization: false, barnesHut: { gravitationalConstant: -3800, springConstant: 0.03, springLength: 180 } },
             interaction: { hover: true }
         };
 
         var network = new vis.Network(container, data, options);
 
+        // ==========================================
+        // 3. LOGIQUE D'INTERACTION ET SÉQUENCE AUTOMATIQUE
+        // ==========================================
+        
+        // Fonction d'ouverture d'une fiche
+        function openNodeCard(nodeId) {
+            const info = contentData[nodeId];
+            if (info) {
+                const htmlContent = `
+                    <div class="card-header">
+                        <h2>${info.title}</h2>
+                        <span class="subtitle">${info.subtitle || ''}</span>
+                    </div>
+                    <div>${info.html}</div>
+                `;
+                document.getElementById('card-content').innerHTML = htmlContent;
+                document.getElementById('info-card').classList.add('active');
+
+                const isMobile = window.innerWidth < 768;
+                const offsetX = isMobile ? 0 : -250;
+                const newScale = isMobile ? 0.9 : 1.2;
+
+                network.focus(nodeId, {
+                    scale: newScale,
+                    offset: { x: offsetX, y: 0 },
+                    animation: { duration: 800, easingFunction: "easeInOutQuad" }
+                });
+            }
+        }
+
+        // Clic utilisateur
         network.on("click", function (params) {
-            document.getElementById('intro-overlay').style.opacity = '0'; // Cacher intro
-
+            document.getElementById('intro-overlay').style.opacity = '0';
             if (params.nodes.length > 0) {
-                const nodeId = params.nodes[0];
-                const info = contentData[nodeId];
-
-                if (info) {
-                    // Injecter le contenu HTML
-                    const htmlContent = `
-                        <div class="card-header">
-                            <h2>${info.title}</h2>
-                            <span class="subtitle">${info.subtitle || ''}</span>
-                        </div>
-                        <div>${info.html}</div>
-                    `;
-                    document.getElementById('card-content').innerHTML = htmlContent;
-                    document.getElementById('info-card').classList.add('active');
-
-                    // --- NOUVELLE LOGIQUE RESPONSIVE ---
-                    // Si l'écran est petit (mobile), on ne décale pas (x: 0)
-                    // Sinon (PC), on décale de 250px pour laisser place au panneau
-                    const isMobile = window.innerWidth < 768;
-                    const offsetX = isMobile ? 0 : -250;
-                    const newScale = isMobile ? 0.9 : 1.2; // Zoom un peu moins fort sur mobile
-
-                    network.focus(nodeId, {
-                        scale: newScale,
-                        offset: { x: offsetX, y: 0 },
-                        animation: { duration: 800, easingFunction: "easeInOutQuad" }
-                    });
-                }
+                openNodeCard(params.nodes[0]);
             } else {
                 closeCard();
             }
@@ -439,6 +421,14 @@
             document.getElementById('info-card').classList.remove('active');
             network.fit({ animation: { duration: 800, easingFunction: "easeInOutQuad" } });
         }
+
+        // --- BOOT SEQUENCE : OUVERTURE AUTOMATIQUE SUR L'ALTERNANCE ---
+        // Exécution automatique après stabilisation initiale du graphe (1,2 seconde)
+        setTimeout(() => {
+            network.selectNodes([5]); // Met en surbrillance le nœud d'alternance
+            openNodeCard(5);          // Ouvre automatiquement sa fiche descriptive
+        }, 1200);
+
     </script>
 </body>
 </html>
