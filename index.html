@@ -180,20 +180,21 @@
                 title: "Recherche Alternance",
                 subtitle: "Contrat d'Apprentissage — Rentrée 2026",
                 html: `
-                    <span class="live-badge">Disponibilité : Septembre 2026</span>
-                    <p style="margin-top:15px;">Dans le cadre de ma troisième année de formation, je recherche activement une entreprise d'accueil pour concrétiser mes compétences de terrain.</p>
+                    <span class="live-badge" style="background:#f59e0b; color:black;">Disponibilité : Septembre 2026</span>
+                    
+                    <h3 style="color:#00d2ff; font-size:1.1rem; border-bottom:1px solid #1e293b; padding-bottom:5px; margin-top:20px;">Mon Objectif</h3>
+                    <p>Actuellement en route pour ma 3ème année de BUT Informatique (Spécialité Administration Systèmes, Réseaux et Cybersécurité) à l'IUT de Nancy, je recherche l'entreprise qui m'accompagnera en alternance dès septembre 2026.</p>
+                    <p><strong>Mon ambition ?</strong> Intégrer une DSI exigeante sur un poste d'Administrateur Systèmes & Réseaux ou de Technicien Support Escalade (Niveau 2 / Niveau 3).</p>
+
+                    <h3 style="color:#00d2ff; font-size:1.1rem; border-bottom:1px solid #1e293b; padding-bottom:5px; margin-top:20px;">Pourquoi mon profil fait la différence</h3>
                     <ul class="skills-list" style="border-left-color: #f59e0b;">
-                        <li><strong>Poste visé :</strong> Administrateur Systèmes, Réseaux et Sécurité</li>
-                        <li><strong>Formation :</strong> BUT Informatique (Parcours Déploiement d'Applications Communiquantes et Sécurisées)</li>
-                        <li><strong>Rythme :</strong> Alternance par périodes de blocs spécifiques</li>
-                        <li><strong>Mobilité :</strong> Metz / Nancy et environs</li>
+                        <li><strong>Immédiatement opérationnel :</strong> Fort d'une immersion réussie en DSI de grand groupe, je maîtrise déjà les standards de production (Active Directory, SCCM, Réseaux Cisco) et le traitement des incidents complexes via les processus ITIL.</li>
+                        <li><strong>Une vision à 360° :</strong> Capable d'évoluer sur le maintien d'infrastructures critiques tout en concevant des applications web complètes de A à Z (React/Firebase), je comprends les enjeux techniques de bout en bout.</li>
+                        <li><strong>Calendrier stratégique :</strong> Mon rythme d'alternance est conçu pour une véritable intégration d'équipe. Après une première partie de cours (Septembre - Février), je basculerai à temps plein en entreprise de Février à Septembre, garantissant un suivi de projet ininterrompu.</li>
                     </ul>
                     <div class="btn-group">
                         <a href="assets/docs/cv_el-aamery_ilyas.pdf" target="_blank" class="btn-download accent">
                             <i class="fas fa-file-pdf"></i> Consulter mon CV (FR)
-                        </a>
-                        <a href="assets/docs/resume_el-aamery_ilyas.pdf" target="_blank" class="btn-download secondary">
-                            <i class="fas fa-file-pdf"></i> Resume (EN)
                         </a>
                     </div>
                 `
@@ -207,21 +208,23 @@
 
             // --- EXPERIENCES EN ENTREPRISE ---
             61: {
-                title: "Demathieu Bard",
-                subtitle: "Stage Support Informatique N2 — Direction Générale",
+                title: "Demathieu Bard (DSI)",
+                subtitle: "Stage Administrateur Système, Réseaux & Cybersécurité",
                 html: `
-                    <p>Immersion au sein de la cellule support et exploitation pour assurer la continuité des services et la maintenance du parc.</p>
+                    <span class="live-badge" style="background:#581c87;">Avril – Juin 2026</span>
+                    <p style="margin-top:15px;">Immersion au sein de la Direction des Systèmes d'Information. Maintien en conditions opérationnelles et sécurisation des infrastructures.</p>
                     <ul class="skills-list exp">
-                        <li><strong>Support N2 :</strong> Résolution d'incidents matériels, systèmes et connectivités.</li>
-                        <li><strong>Système :</strong> Exploitation et gestion des demandes utilisateurs via Active Directory et environnements Windows Server.</li>
-                        <li><strong>Réseau :</strong> Diagnostic d'architecture locale et brassage de prises sur switchs de distribution.</li>
+                        <li><strong>Admin. Système & Déploiement :</strong> Industrialisation de la masterisation d'un parc de 500 postes clients via Microsoft SCCM (PXE) et automatisation de la migration des données par scripts PowerShell.</li>
+                        <li><strong>Infrastructures & Réseaux :</strong> Déploiement et administration de serveurs d'impression sécurisés (Active Directory, SafeQ, LDAP, SSO). Résolution d'incidents critiques sur architectures distribuées (VLAN, DHCP, DNS).</li>
+                        <li><strong>Cybersécurité & Gouvernance :</strong> Isolation réseau et remédiation via EDR CrowdStrike. Automatisation de la rotation des mots de passe locaux (LAPS UI) et audits des vulnérabilités de l'AD.</li>
                     </ul>
+                    <p style="font-style: italic; font-size: 0.85em; color: #94a3b8; margin-top: 15px;">* Référence managériale (Responsable Production Informatique) disponible sur demande.</p>
                 `
             },
 
             // --- PROJETS DÉTAILLÉS ---
             21: { 
-                title: "Just Park It (SAé 3.01)",
+                title: "Just Park It",
                 subtitle: "App de Mobilité & Infrastructure Complète",
                 html: `
                     <span class="live-badge" style="background:#2563eb;">🚀 Projet Majeur</span>
@@ -335,11 +338,101 @@
                     </div>
                 `
             },
+            // 7. FINANCE APP (REACT/FIREBASE)
+            27: {
+                title: "Finance App (PWA)",
+                subtitle: "Application de Gestion Financière",
+                html: `
+                    <span class="live-badge" style="background:#0ea5e9;">⚛️ React.js & Firebase</span>
+                    <p style="margin-top: 15px;">Une Progressive Web App (PWA) de gestion de finances personnelles. Conçue en "mobile-first", elle permet de suivre revenus, dépenses, budgets et investissements en temps réel.</p>
+                    
+                    <h3 style="color:#00d2ff; font-size:1.1rem; border-bottom:1px solid #1e293b; padding-bottom:5px; margin-top:20px;">1. Sécurité & Authentification</h3>
+                    <p>Tunnel d'authentification privé via <strong>Firebase Auth</strong> avec persistance de session et déconnexion automatique d'inactivité.</p>
+                    <div style="text-align: center; margin-bottom: 25px;">
+                        <img src="assets/img/FA_coffre_fort.png" alt="Authentification" style="width: 45%; max-width: 200px; border: 1px solid #334155; border-radius: 8px;">
+                    </div>
+
+                    <h3 style="color:#00d2ff; font-size:1.1rem; border-bottom:1px solid #1e293b; padding-bottom:5px;">2. Dashboard & Budget Intelligent</h3>
+                    <p>Tableau de bord dynamique intégrant des graphiques SVG (<strong>Recharts</strong>) et un système d'enveloppes budgétaires pour calculer automatiquement le reste à vivre.</p>
+                    <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 25px;">
+                        <img src="assets/img/FA_home_page.png" alt="Dashboard" style="width: 48%; border: 1px solid #334155; border-radius: 6px;">
+                        <img src="assets/img/FA_visu_mensuelle.png" alt="Bilan" style="width: 48%; border: 1px solid #334155; border-radius: 6px;">
+                    </div>
+
+                    <h3 style="color:#00d2ff; font-size:1.1rem; border-bottom:1px solid #1e293b; padding-bottom:5px;">3. Saisie & Automatisation CSV</h3>
+                    <p>Ajout manuel des transactions catégorisées ou automatisation de masse via l'importation de relevés bancaires format CSV (parsés avec <strong>PapaParse</strong>).</p>
+                    <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 25px;">
+                        <img src="assets/img/FA_trans_man.png" alt="Transactions" style="width: 48%; border: 1px solid #334155; border-radius: 6px;">
+                        <img src="assets/img/FA_import_csv.png" alt="Import CSV" style="width: 48%; border: 1px solid #334155; border-radius: 6px;">
+                    </div>
+
+                    <h3 style="color:#00d2ff; font-size:1.1rem; border-bottom:1px solid #1e293b; padding-bottom:5px;">4. Patrimoine & Investissements</h3>
+                    <p>Vue globale des comptes courants, barres de progression vers les objectifs d'épargne et suivi en temps réel du portefeuille d'investissement.</p>
+                    <div style="display: flex; gap: 5px; justify-content: space-between; margin-bottom: 25px;">
+                        <img src="assets/img/FA_accounts.png" alt="Comptes" style="width: 32%; border: 1px solid #334155; border-radius: 6px;">
+                        <img src="assets/img/FA_objectives.png" alt="Objectifs" style="width: 32%; border: 1px solid #334155; border-radius: 6px;">
+                        <img src="assets/img/FA_invest.png" alt="Investissements" style="width: 32%; border: 1px solid #334155; border-radius: 6px;">
+                    </div>
+
+                    <h3 style="color:#00d2ff; font-size:1.1rem; border-bottom:1px solid #1e293b; padding-bottom:5px;">Architecture Technique</h3>
+                    <ul class="skills-list">
+                        <li><strong>Frontend (UI/UX) :</strong> React.js (Vite), Tailwind CSS (v3), Mode Sombre adaptatif, 100% Responsive.</li>
+                        <li><strong>Logique Applicative :</strong> Context API, Hooks, manipulation de tableaux JS (map, filter, reduce).</li>
+                        <li><strong>Backend & BDD :</strong> Firebase Firestore (NoSQL en temps réel).</li>
+                    </ul>
+                `
+            },
 
             // --- COMPÉTENCES ---
-            31: { title: "Réseau (Cisco)", html: "<ul class='skills-list'><li>Architecture VLAN, Trunking 802.1Q</li><li>Routage dynamique OSPF, statique, NAT/PAT</li><li>Filtrage par ACL (Access Control Lists)</li></ul>" },
-            32: { title: "SysAdmin", html: "<ul class='skills-list'><li>Administration Linux (Debian, Ubuntu Server)</li><li>Hyperviseurs VMware ESXi / Workstation</li><li>Gestion Active Directory (Utilisateurs/Droits)</li></ul>" },
-            33: { title: "Développement", html: "<ul class='skills-list'><li>Backend / Données : PHP, requêtes SQL</li><li>Frontend : HTML5, CSS3, TypeScript</li><li>Méthodologie : Versioning via Git / GitHub</li></ul>" }
+            31: { 
+                title: "Systèmes & Infrastructures", 
+                html: `
+                    <ul class='skills-list'>
+                        <li><strong>Écosystème Microsoft :</strong> Administration Active Directory (GPO, gestion des droits), Industrialisation et déploiement via Microsoft SCCM.</li>
+                        <li><strong>Environnements OS :</strong> Windows Server & Windows 11. Administration Linux (Debian, Ubuntu, Red Hat).</li>
+                        <li><strong>Écosystème Apple :</strong> Gestion MacOS et MDM.</li>
+                    </ul>
+                ` 
+            },
+            32: { 
+                title: "Réseaux & Cybersécurité", 
+                html: `
+                    <ul class='skills-list'>
+                        <li><strong>Administration réseau :</strong> Configuration des équipements Cisco (LAN, WLAN).</li>
+                        <li><strong>Diagnostic :</strong> Maîtrise des couches TCP/IP, DNS, DHCP, VLANs.</li>
+                        <li><strong>Sécurité :</strong> Sensibilisation et application stricte des bonnes pratiques de Cybersécurité.</li>
+                    </ul>
+                ` 
+            },
+            33: { 
+                title: "Support & Outils (ITSM)", 
+                html: `
+                    <ul class='skills-list' style='border-left-color: #ef4444;'>
+                        <li><strong>Support Technique :</strong> Gestion des incidents et requêtes de niveau 1 et 2.</li>
+                        <li><strong>ITSM :</strong> Maîtrise des outils de ticketing (EasyVista) en environnements ITIL.</li>
+                        <li><strong>Processus :</strong> Rédaction de documentation technique et procédures d'exploitation.</li>
+                    </ul>
+                ` 
+            },
+            34: { 
+                title: "Développement & Web", 
+                html: `
+                    <ul class='skills-list'>
+                        <li><strong>Frontend :</strong> React, Tailwind CSS. Conception UI/UX avec approche "Mobile-First" et intégration de graphiques dynamiques.</li>
+                        <li><strong>Backend / BaaS :</strong> Firebase (Authentification sécurisée, Base de données temps réel).</li>
+                    </ul>
+                ` 
+            },
+            35: {
+                title: "Soft Skills",
+                html: `
+                    <ul class='skills-list' style='border-left-color: #3b82f6;'>
+                        <li><strong>Savoir-être :</strong> Résilience et gestion des urgences (forgées en service client). Autonomie en production et grande capacité d'adaptation.</li>
+                        <li><strong>Langues :</strong> Anglais technique B2 (Niveau C1 opérationnel).</li>
+                        <li><strong>Créativité :</strong> Montage vidéo et retouche d'image (Adobe Premiere Pro, Photoshop).</li>
+                    </ul>
+                `
+            }
         };
 
         // ==========================================
@@ -368,11 +461,14 @@
             { id: 24, label: 'Logs\n(Bash)', shape: 'box', color: '#1e3a8a', font:{color:'white'} },
             { id: 25, label: 'Zoo\n(SQL)', shape: 'box', color: '#1e3a8a', font:{color:'white'} },
             { id: 26, label: 'F1 Site\n(Web)', shape: 'box', color: '#1e3a8a', font:{color:'white'} },
+            { id: 27, label: 'Finance App\n(React)', shape: 'circularImage', image: 'assets/img/FA_logo.png', size: 35, borderWidth: 2, color: {border:'#0ea5e9'} },
 
-            // --- SOUS-NŒUDS SKILLS ---
-            { id: 31, label: 'Cisco', shape: 'ellipse', color: '#064e3b', font:{color:'#a7f3d0'} },
-            { id: 32, label: 'SysAdmin', shape: 'ellipse', color: '#064e3b', font:{color:'#a7f3d0'} },
-            { id: 33, label: 'Dev', shape: 'ellipse', color: '#064e3b', font:{color:'#a7f3d0'} }
+            // --- SKILLS ---
+            { id: 31, label: 'Systèmes\n& Infra', shape: 'ellipse', color: '#064e3b', font:{color:'#a7f3d0'} },
+            { id: 32, label: 'Réseaux\n& Cyber', shape: 'ellipse', color: '#064e3b', font:{color:'#a7f3d0'} },
+            { id: 33, label: 'Support\n& ITSM', shape: 'ellipse', color: '#991b1b', font:{color:'#fca5a5'} },
+            { id: 34, label: 'Dev\n& Web', shape: 'ellipse', color: '#064e3b', font:{color:'#a7f3d0'} },
+            { id: 35, label: 'Soft\nSkills', shape: 'ellipse', color: '#1e3a8a', font:{color:'#bfdbfe'} }
         ]);
 
         var edges = new vis.DataSet([
@@ -395,11 +491,14 @@
             { from: 2, to: 24, length: 150, color: '#1e3a8a' },
             { from: 2, to: 25, length: 150, color: '#1e3a8a' },
             { from: 2, to: 26, length: 150, color: '#1e3a8a' },
+            { from: 2, to: 27, length: 150, color: '#0ea5e9' },
 
-            // Branche Skills
+            // Liens Skills
             { from: 3, to: 31, color: '#34d399' },
             { from: 3, to: 32, color: '#34d399' },
-            { from: 3, to: 33, color: '#34d399' }
+            { from: 3, to: 33, color: '#ef4444', width: 2 }, // Lien rouge pour l'ITSM
+            { from: 3, to: 34, color: '#34d399' },
+            { from: 3, to: 35, color: '#3b82f6', width: 2 }  // Lien bleu pour les Soft Skills
         ]);
 
         // Moteur de rendu

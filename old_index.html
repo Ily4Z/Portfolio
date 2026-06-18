@@ -135,6 +135,7 @@
                 <h2 data-translate="Projects">Projects</h2>
                 <ul class="project-links">
                     <li><a href="#ParkingApp">Just Park It</a> - Cisco, VMware, Fullstack<span class="badge-mini">WIP</span></li>
+                    <li><a href="#FinanceApp">Finance App (PWA)</a> - React, Firebase, Tailwind CSS</li>
                     <li><a href="#JeuX">JeuX</a> - C Language</li>
                     <li><a href="#JeuDeNim">Jeu de Nim</a> - C Language</li>
                     <li><a href="#LogsConnexions">Logs Connexions</a> - Bash Linux</li>
@@ -201,6 +202,71 @@
                     <div style="text-align: center;">
                         <img src="assets/img/jpi_gannt.png" alt="Diagramme de Gantt" style="max-width: 30%; height: auto; border: 1px solid currentColor;">
                     </div>
+
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- SECTION : FINANCE APP (REACT)              -->
+            <!-- ========================================== -->
+            <section id="FinanceApp" class="reveal">
+                <h2>Application Finance : PWA Sécurisée</h2>
+                <ul class="tech-stack-mini">
+                    <li>React.js</li>
+                    <li>Firebase</li>
+                    <li>Tailwind CSS</li>
+                    <li>NoSQL</li>
+                </ul>
+                
+                <div class="project-card" style="border: 1px dashed currentColor; padding: 25px; margin-top: 25px; margin-bottom: 30px; text-align: left; background-color: rgba(0,0,0,0.2);">
+                    
+                    <h3 style="text-transform: uppercase; margin-top: 0; font-size: 1.2rem;">> Finance App (Progressive Web App)</h3>
+                    <p style="margin-bottom: 30px; line-height: 1.6;">
+                        Conception et développement de A à Z d'une PWA de gestion de finances personnelles. 
+                        Créée en approche "Mobile-First", elle intègre une authentification privée et synchronise en temps réel les budgets, 
+                        comptes courants et investissements via une base de données NoSQL (Firestore).
+                    </p>
+
+                    <!-- ÉTAPE 1 : SÉCURITÉ -->
+                    <h4 style="margin-bottom: 10px; font-size: 1.1rem; color: #00d2ff;">[1] Sécurité & Authentification</h4>
+                    <p style="margin-bottom: 15px; line-height: 1.6;">Mise en place d'un tunnel d'authentification via Firebase Auth (gestion des sessions et déconnexion automatique).</p>
+                    <div style="text-align: center; margin-bottom: 40px;">
+                        <img src="assets/img/FA_coffre_fort.png" alt="Authentification" style="max-width: 30%; min-width: 150px; border: 1px solid currentColor; border-radius: 8px;">
+                    </div>
+
+                    <!-- ÉTAPE 2 : DASHBOARD -->
+                    <h4 style="margin-bottom: 10px; font-size: 1.1rem; color: #00d2ff;">[2] Dashboard & Budget Intelligent</h4>
+                    <p style="margin-bottom: 15px; line-height: 1.6;">Tableau de bord dynamique intégrant des graphiques SVG interactifs (Recharts) et un système d'enveloppes budgétaires alertant sur le dépassement.</p>
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px;">
+                        <img src="assets/img/FA_home_page.png" alt="Accueil" style="width: 40%; min-width: 200px; border: 1px solid currentColor; border-radius: 8px;">
+                        <img src="assets/img/FA_visu_mensuelle.png" alt="Bilan" style="width: 40%; min-width: 200px; border: 1px solid currentColor; border-radius: 8px;">
+                    </div>
+
+                    <!-- ÉTAPE 3 : SAISIE & IMPORT -->
+                    <h4 style="margin-bottom: 10px; font-size: 1.1rem; color: #00d2ff;">[3] Saisie & Automatisation CSV</h4>
+                    <p style="margin-bottom: 15px; line-height: 1.6;">Saisie manuelle des transactions avec catégories, ou automatisation complète via l'importation de relevés bancaires convertis par le script PapaParse.</p>
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px;">
+                        <img src="assets/img/FA_trans_man.png" alt="Transactions" style="width: 40%; min-width: 200px; border: 1px solid currentColor; border-radius: 8px;">
+                        <img src="assets/img/FA_import_csv.png" alt="Import" style="width: 40%; min-width: 200px; border: 1px solid currentColor; border-radius: 8px;">
+                    </div>
+
+                    <!-- ÉTAPE 4 : PATRIMOINE -->
+                    <h4 style="margin-bottom: 10px; font-size: 1.1rem; color: #00d2ff;">[4] Suivi Patrimonial & Investissements</h4>
+                    <p style="margin-bottom: 15px; line-height: 1.6;">Gestion globale des comptes courants, barres de progression vers les objectifs d'épargne et suivi macro du portefeuille boursier.</p>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px;">
+                        <img src="assets/img/FA_accounts.png" alt="Comptes" style="width: 28%; min-width: 150px; border: 1px solid currentColor; border-radius: 8px;">
+                        <img src="assets/img/FA_objectives.png" alt="Objectifs" style="width: 28%; min-width: 150px; border: 1px solid currentColor; border-radius: 8px;">
+                        <img src="assets/img/FA_invest.png" alt="Investissements" style="width: 28%; min-width: 150px; border: 1px solid currentColor; border-radius: 8px;">
+                    </div>
+
+                    <hr style="border: 0; border-bottom: 1px dashed currentColor; margin: 30px 0;">
+
+                    <h4 style="margin-bottom: 10px; font-size: 1.1rem;">[+] Architecture Technique</h4>
+                    <ul style="padding-left: 20px; list-style-type: square; line-height: 1.6;">
+                        <li><strong>SPA / React :</strong> Initialisation avec Vite, gestion des états globaux via Context API, maîtrise des Hooks.</li>
+                        <li><strong>Data Manipulation :</strong> Haut niveau de requêtage et transformation de données (map, filter, reduce).</li>
+                        <li><strong>UI / Design :</strong> Tailwind CSS pour le Dark Mode et la compatibilité Responsive.</li>
+                    </ul>
 
                 </div>
             </section>
