@@ -3,568 +3,1494 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ilyas El Aamery | Portfolio & Network Admin</title>
-    
+    <meta name="description" content="Portfolio d'Ilyas El Aamery — étudiant en 3e année de BUT Informatique, orienté systèmes, réseaux et cybersécurité.">
+    <meta name="theme-color" content="#090d13">
+    <meta property="og:title" content="Ilyas El Aamery — Systèmes, Réseaux & Cybersécurité">
+    <meta property="og:description" content="Un profil systèmes, réseau et cybersécurité qui construit, automatise et sécurise.">
+    <meta property="og:image" content="https://ilyas-elaamery.com/assets/img/photo_ilyas.jpeg">
+    <meta property="og:type" content="website">
+    <title>Ilyas El Aamery — Systèmes, Réseaux & Cybersécurité</title>
+
     <link rel="icon" type="image/png" href="assets/img/favicon.png?v=2">
     <link rel="apple-touch-icon" href="assets/img/favicon.png?v=2">
-
-    <meta property="og:title" content="Ilyas El Aamery - Network Portfolio">
-    <meta property="og:description" content="Étudiant Admin Réseau & Dev Fullstack. Découvrez mes projets et mon profil pour une alternance.">
-    <meta property="og:image" content="https://ilyas-elaamery.com/assets/img/photo_ilyas.jpeg">
-
-    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <style>
-        /* --- STYLE GLOBAL --- */
-        body, html {
+        :root {
+            --ink: #eaf5ff;
+            --muted: #94a9bd;
+            --dark: #07111f;
+            --dark-2: #0a1727;
+            --surface: rgba(16, 35, 55, .62);
+            --surface-solid: #10253b;
+            --line: rgba(173, 219, 255, .16);
+            --cyan: #66e3ff;
+            --cyan-deep: #00a7cc;
+            --lime: #b8f86b;
+            --orange: #ffb25b;
+            --violet: #b99cff;
+            --danger: #ff6b8a;
+            --radius: 24px;
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
             margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: #050a14;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: white;
+            overflow-x: hidden;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 8% 8%, rgba(0, 167, 204, .16), transparent 23rem),
+                radial-gradient(circle at 95% 22%, rgba(185, 156, 255, .12), transparent 27rem),
+                linear-gradient(150deg, #07111f 0%, #071625 48%, #09121f 100%);
+            font-family: "Manrope", Arial, sans-serif;
+            line-height: 1.55;
         }
 
-        #mynetwork {
-            width: 100%;
-            height: 100%;
-            display: block;
-            background: radial-gradient(circle at center, #0f172a 0%, #050a14 100%);
-        }
-
-        /* --- LE HUD (Panneau d'information) --- */
-        #info-card {
+        body::before {
+            content: "";
             position: fixed;
-            top: 0;
-            right: -650px; /* Caché par défaut */
-            width: 500px;
-            max-width: 90%;
-            height: 100vh;
-            background: rgba(10, 15, 30, 0.98);
-            border-left: 1px solid #1e293b;
-            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.8);
-            padding: 30px;
-            box-sizing: border-box;
-            transition: right 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-            z-index: 1000;
-            overflow-y: auto;
+            z-index: -1;
+            inset: 0;
+            pointer-events: none;
+            opacity: .36;
+            background-image:
+                linear-gradient(rgba(101, 207, 255, .04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(101, 207, 255, .04) 1px, transparent 1px);
+            background-size: 52px 52px;
+            mask-image: linear-gradient(to bottom, black, transparent 75%);
         }
 
-        #info-card.active { right: 0; }
+        a { color: inherit; }
+        button { font: inherit; }
+        ::selection { color: #07111f; background: var(--lime); }
 
-        /* Typographie */
-        .card-header { border-bottom: 2px solid #00d2ff; padding-bottom: 15px; margin-bottom: 20px; }
-        h2 { margin: 0; color: #fff; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 1px; }
-        .subtitle { color: #00d2ff; font-weight: bold; font-size: 0.9rem; margin-top: 5px; display: block; }
-        
-        p { line-height: 1.6; color: #cbd5e1; font-size: 1rem; margin-bottom: 20px; }
-
-        /* Multimédia (Vidéo & Images) */
-        .media-container {
-            margin-bottom: 20px;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid #334155;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            background: black;
+        .skip-link {
+            position: fixed;
+            z-index: 100;
+            top: -4rem;
+            left: 1rem;
+            padding: .75rem 1rem;
+            color: #07111f;
+            background: var(--lime);
+            border-radius: .5rem;
+            transition: top .2s;
         }
-        .project-video { width: 100%; display: block; outline: none; }
-        .project-img { width: 100%; display: block; }
+        .skip-link:focus { top: 1rem; }
 
-        /* Boutons */
-        .btn-group { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
-        
-        .btn-download {
+        .shell {
+            width: min(1180px, calc(100% - 2.5rem));
+            margin: 0 auto;
+        }
+
+        .eyebrow {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: #2563eb;
+            gap: .55rem;
+            margin: 0 0 1rem;
+            color: var(--cyan);
+            font-family: "DM Mono", monospace;
+            font-size: .76rem;
+            font-weight: 500;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: .5rem;
+            height: .5rem;
+            border-radius: 50%;
+            background: currentColor;
+            box-shadow: 0 0 16px currentColor;
+        }
+
+        .section-heading {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(15rem, .72fr);
+            align-items: end;
+            gap: 2rem;
+            margin-bottom: 2.8rem;
+        }
+
+        h1, h2, h3, p { margin-top: 0; }
+
+        h2 {
+            max-width: 13ch;
+            margin-bottom: 0;
+            font-size: clamp(2rem, 4vw, 3.65rem);
+            line-height: 1.05;
+            letter-spacing: -.065em;
+        }
+
+        .section-heading > p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 1rem;
+        }
+
+        .nav-wrap {
+            position: fixed;
+            z-index: 50;
+            top: 1rem;
+            left: 50%;
+            width: min(1140px, calc(100% - 2rem));
+            transform: translateX(-50%);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 60px;
+            padding: .55rem .7rem .55rem 1.1rem;
+            border: 1px solid rgba(190, 230, 255, .17);
+            border-radius: 18px;
+            background: rgba(7, 17, 31, .76);
+            box-shadow: 0 12px 38px rgba(0, 0, 0, .24);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: .7rem;
             color: white;
-            padding: 10px 20px;
             text-decoration: none;
-            border-radius: 6px;
-            font-size: 0.9em;
-            font-weight: bold;
-            transition: background 0.2s;
+            font-family: "DM Mono", monospace;
+            font-size: .88rem;
+            font-weight: 500;
+            letter-spacing: -.04em;
+            white-space: nowrap;
         }
-        .btn-download:hover { background: #1d4ed8; }
-        .btn-download.secondary { background: #475569; }
-        .btn-download.secondary:hover { background: #64748b; }
-        .btn-download.accent { background: #d97706; }
-        .btn-download.accent:hover { background: #b45309; }
 
-        /* Badges et Listes */
-        .wip-badge { background: #f59e0b; color: black; font-size: 0.75rem; padding: 2px 8px; border-radius: 10px; font-weight: bold; vertical-align: middle; margin-left: 8px; }
-        .live-badge { background: #10b981; color: white; font-size: 0.75rem; padding: 2px 8px; border-radius: 10px; font-weight: bold; vertical-align: middle; margin-left: 8px; }
-        
-        ul.skills-list { list-style: none; padding: 0; }
-        ul.skills-list li {
-            background: rgba(255, 255, 255, 0.05);
-            margin-bottom: 8px;
-            padding: 10px 15px;
-            border-radius: 6px;
-            border-left: 3px solid #34d399;
-            color: #e2e8f0;
+        .brand-mark {
+            display: grid;
+            width: 30px;
+            height: 30px;
+            place-items: center;
+            color: var(--dark);
+            background: var(--lime);
+            border-radius: 9px;
+            box-shadow: 0 0 24px rgba(184, 248, 107, .25);
         }
-        ul.skills-list.exp li { border-left-color: #a855f7; }
 
-        /* Divers */
-        .close-btn { position: absolute; top: 20px; right: 20px; background: none; border: none; color: #64748b; font-size: 2rem; cursor: pointer; }
-        .close-btn:hover { color: white; }
-        
-        #intro-overlay {
-            position: absolute; top: 30px; left: 50%; transform: translateX(-50%);
-            text-align: center; pointer-events: none; opacity: 1; transition: opacity 1s;
-            z-index: 10;
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: .2rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
         }
-        .intro-text { background: rgba(10, 15, 30, 0.8); padding: 10px 25px; border-radius: 30px; border: 1px solid #1e293b; color: #94a3b8; font-size: 0.9rem; }
 
-        /* --- RESPONSIVE MOBILE --- */
-        @media screen and (max-width: 768px) {
-            #info-card {
-                width: 100%;
-                right: -100%;
-                padding: 20px;
-                border-left: none;
+        .nav-links a {
+            display: block;
+            padding: .5rem .7rem;
+            color: #b6c8d8;
+            border-radius: .65rem;
+            font-size: .81rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: color .2s, background .2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus-visible {
+            color: white;
+            background: rgba(102, 227, 255, .1);
+            outline: none;
+        }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .7rem .95rem;
+            color: #07111f;
+            background: var(--lime);
+            border-radius: .7rem;
+            font-size: .78rem;
+            font-weight: 800;
+            text-decoration: none;
+            transition: transform .2s, box-shadow .2s;
+            white-space: nowrap;
+        }
+
+        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(184, 248, 107, .24); }
+
+        .menu-button {
+            display: none;
+            width: 42px;
+            height: 42px;
+            color: var(--ink);
+            border: 1px solid var(--line);
+            border-radius: .7rem;
+            background: rgba(255,255,255,.04);
+            cursor: pointer;
+        }
+
+        .hero {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(0, 1.08fr) minmax(25rem, .92fr);
+            align-items: center;
+            min-height: 800px;
+            padding: 9.7rem 0 4.5rem;
+            gap: 3.5rem;
+        }
+
+        .hero-copy { position: relative; z-index: 2; }
+
+        .availability {
+            display: inline-flex;
+            align-items: center;
+            gap: .6rem;
+            margin-bottom: 1.35rem;
+            padding: .44rem .72rem;
+            color: #ddffc1;
+            border: 1px solid rgba(184, 248, 107, .25);
+            border-radius: 100px;
+            background: rgba(184, 248, 107, .08);
+            font-family: "DM Mono", monospace;
+            font-size: .7rem;
+            letter-spacing: .055em;
+            text-transform: uppercase;
+        }
+
+        .pulse {
+            width: .5rem;
+            height: .5rem;
+            border-radius: 50%;
+            background: var(--lime);
+            box-shadow: 0 0 0 0 rgba(184, 248, 107, .6);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            70% { box-shadow: 0 0 0 .55rem rgba(184, 248, 107, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(184, 248, 107, 0); }
+        }
+
+        h1 {
+            max-width: 9.5ch;
+            margin-bottom: 1.4rem;
+            font-size: clamp(3.2rem, 7vw, 6.4rem);
+            font-weight: 800;
+            line-height: .93;
+            letter-spacing: -.08em;
+        }
+
+        h1 .accent {
+            display: block;
+            color: var(--cyan);
+            text-shadow: 0 0 40px rgba(102, 227, 255, .16);
+        }
+
+        .hero-lede {
+            max-width: 58ch;
+            margin-bottom: 2rem;
+            color: #b1c4d5;
+            font-size: clamp(1rem, 1.45vw, 1.15rem);
+            line-height: 1.75;
+        }
+
+        .hero-lede strong { color: white; font-weight: 700; }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: .65rem;
+            min-height: 48px;
+            padding: .75rem 1rem;
+            border: 1px solid transparent;
+            border-radius: .8rem;
+            font-size: .86rem;
+            font-weight: 800;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform .2s, border .2s, background .2s, box-shadow .2s;
+        }
+
+        .button:hover { transform: translateY(-3px); }
+
+        .button-primary {
+            color: #07111f;
+            background: var(--lime);
+            box-shadow: 0 11px 24px rgba(184, 248, 107, .14);
+        }
+
+        .button-primary:hover { box-shadow: 0 15px 28px rgba(184, 248, 107, .26); }
+
+        .button-quiet {
+            color: var(--ink);
+            border-color: var(--line);
+            background: rgba(255,255,255,.035);
+        }
+
+        .button-quiet:hover { border-color: rgba(102, 227, 255, .6); background: rgba(102, 227, 255, .08); }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.3rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .hero-meta li {
+            position: relative;
+            padding-left: 1rem;
+            color: #8fa7bb;
+            font-family: "DM Mono", monospace;
+            font-size: .68rem;
+            line-height: 1.5;
+            letter-spacing: .025em;
+            text-transform: uppercase;
+        }
+
+        .hero-meta li::before {
+            content: "";
+            position: absolute;
+            top: .38rem;
+            left: 0;
+            width: .4rem;
+            height: .4rem;
+            border-radius: 50%;
+            background: var(--cyan);
+        }
+
+        .hero-visual {
+            position: relative;
+            min-height: 520px;
+            isolation: isolate;
+        }
+
+        .orbital-glow {
+            position: absolute;
+            z-index: -1;
+            top: 8%;
+            right: -2%;
+            width: 20rem;
+            height: 20rem;
+            border-radius: 50%;
+            background: rgba(102, 227, 255, .14);
+            filter: blur(50px);
+        }
+
+        .profile-assembly {
+            position: absolute;
+            top: 2.2rem;
+            right: 4%;
+            display: grid;
+            width: min(355px, 78%);
+            aspect-ratio: 1;
+            place-items: center;
+            border: 1px solid rgba(102, 227, 255, .3);
+            border-radius: 50%;
+            background: rgba(15, 35, 55, .36);
+        }
+
+        .profile-assembly::before,
+        .profile-assembly::after {
+            content: "";
+            position: absolute;
+            border: 1px dashed rgba(184, 248, 107, .45);
+            border-radius: 50%;
+        }
+
+        .profile-assembly::before { inset: 1.15rem; }
+        .profile-assembly::after { inset: -1.9rem; border-color: rgba(102, 227, 255, .18); }
+
+        .profile-frame {
+            position: relative;
+            width: 61%;
+            aspect-ratio: 1;
+            overflow: hidden;
+            border: 5px solid #102b42;
+            border-radius: 50%;
+            box-shadow: 0 0 0 2px var(--cyan), 0 18px 40px rgba(0, 0, 0, .35);
+        }
+
+        .profile-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+        .node {
+            position: absolute;
+            display: inline-flex;
+            align-items: center;
+            gap: .55rem;
+            padding: .55rem .68rem;
+            color: #d8ecfb;
+            border: 1px solid var(--line);
+            border-radius: .7rem;
+            background: rgba(8, 25, 41, .88);
+            box-shadow: 0 10px 25px rgba(0,0,0,.25);
+            font-family: "DM Mono", monospace;
+            font-size: .67rem;
+            letter-spacing: .025em;
+            backdrop-filter: blur(10px);
+            animation: float 5.5s ease-in-out infinite;
+        }
+
+        .node i { color: var(--lime); }
+        .node.one { top: 8%; left: 0; animation-delay: -.5s; }
+        .node.two { top: 46%; left: -5%; animation-delay: -2.5s; }
+        .node.three { right: 0; bottom: 12%; animation-delay: -1.4s; }
+        .node.four { bottom: 0; left: 20%; animation-delay: -3.8s; }
+
+        @keyframes float {
+            50% { transform: translateY(-10px); }
+        }
+
+        .terminal {
+            position: absolute;
+            right: 0;
+            bottom: -.6rem;
+            width: min(330px, 72%);
+            padding: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(102, 227, 255, .28);
+            border-radius: 15px;
+            background: rgba(6, 17, 30, .9);
+            box-shadow: 0 18px 40px rgba(0,0,0,.28);
+            font-family: "DM Mono", monospace;
+            font-size: .66rem;
+        }
+
+        .terminal-top {
+            display: flex;
+            align-items: center;
+            gap: .35rem;
+            margin-bottom: .75rem;
+        }
+
+        .terminal-top span { width: .48rem; height: .48rem; border-radius: 50%; background: #ff6b8a; }
+        .terminal-top span:nth-child(2) { background: var(--orange); }
+        .terminal-top span:nth-child(3) { background: var(--lime); }
+        .terminal code { color: #d9e7f4; }
+        .terminal p { margin: .3rem 0; color: #829bb0; }
+        .terminal .command { color: var(--cyan); }
+        .terminal .success { color: var(--lime); }
+
+        .signal-bar {
+            padding: .7rem 0;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            background: rgba(4, 13, 24, .3);
+        }
+
+        .signals {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: var(--line);
+        }
+
+        .signal {
+            display: flex;
+            align-items: center;
+            gap: .85rem;
+            min-height: 74px;
+            padding: .9rem 1rem;
+            background: #0a192a;
+        }
+
+        .signal-icon {
+            display: grid;
+            flex: 0 0 auto;
+            width: 34px;
+            height: 34px;
+            place-items: center;
+            color: var(--cyan);
+            border-radius: .6rem;
+            background: rgba(102, 227, 255, .1);
+        }
+
+        .signal:nth-child(2) .signal-icon { color: var(--lime); background: rgba(184, 248, 107, .1); }
+        .signal:nth-child(3) .signal-icon { color: var(--violet); background: rgba(185, 156, 255, .12); }
+        .signal small { display: block; color: #7e97aa; font-family: "DM Mono", monospace; font-size: .61rem; letter-spacing: .08em; text-transform: uppercase; }
+        .signal strong { display: block; font-size: .82rem; }
+
+        section { scroll-margin-top: 6rem; }
+        .section { padding: 7.25rem 0; }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .value-card {
+            position: relative;
+            min-height: 246px;
+            padding: 1.55rem;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: linear-gradient(145deg, rgba(20, 48, 73, .7), rgba(10, 26, 42, .72));
+        }
+
+        .value-card::after {
+            content: attr(data-index);
+            position: absolute;
+            right: .8rem;
+            bottom: -1.45rem;
+            color: rgba(102, 227, 255, .06);
+            font-size: 8rem;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -.1em;
+        }
+
+        .value-card .value-icon {
+            display: grid;
+            width: 44px;
+            height: 44px;
+            margin-bottom: 2.7rem;
+            place-items: center;
+            color: var(--lime);
+            border: 1px solid rgba(184, 248, 107, .25);
+            border-radius: .75rem;
+            background: rgba(184, 248, 107, .08);
+        }
+
+        .value-card:nth-child(2) .value-icon { color: var(--cyan); border-color: rgba(102,227,255,.25); background: rgba(102,227,255,.08); }
+        .value-card:nth-child(3) .value-icon { color: var(--violet); border-color: rgba(185,156,255,.25); background: rgba(185,156,255,.09); }
+        .value-card:nth-child(4) .value-icon { color: var(--orange); border-color: rgba(255,178,91,.25); background: rgba(255,178,91,.09); }
+        .value-card h3 { position: relative; margin-bottom: .65rem; font-size: 1.25rem; letter-spacing: -.035em; }
+        .value-card p { position: relative; margin: 0; color: var(--muted); font-size: .92rem; }
+
+        .profile-summary {
+            margin: 1.35rem 0 0;
+            color: #a9c1d0;
+            font-size: .9rem;
+            text-align: center;
+        }
+
+        .experience-card {
+            display: grid;
+            grid-template-columns: .9fr 1.35fr;
+            gap: clamp(2rem, 5vw, 5.2rem);
+            padding: clamp(1.45rem, 4vw, 3.5rem);
+            border: 1px solid rgba(185,156,255,.22);
+            border-radius: 28px;
+            background:
+                radial-gradient(circle at 3% 100%, rgba(185,156,255,.12), transparent 25rem),
+                linear-gradient(135deg, rgba(23, 26, 56, .85), rgba(12, 30, 48, .78));
+        }
+
+        .case-label {
+            display: inline-flex;
+            gap: .5rem;
+            align-items: center;
+            padding: .38rem .62rem;
+            color: #e0d7ff;
+            border: 1px solid rgba(185,156,255,.24);
+            border-radius: 999px;
+            background: rgba(185,156,255,.1);
+            font-family: "DM Mono", monospace;
+            font-size: .65rem;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+        }
+
+        .experience-intro h3 {
+            margin: 1rem 0;
+            font-size: clamp(1.65rem, 3vw, 2.6rem);
+            line-height: 1.05;
+            letter-spacing: -.06em;
+        }
+
+        .experience-intro p { max-width: 34ch; color: var(--muted); }
+
+        .metric {
+            display: flex;
+            align-items: baseline;
+            gap: .65rem;
+            margin-top: 2rem;
+        }
+
+        .metric strong { color: var(--lime); font-family: "DM Mono", monospace; font-size: 2.6rem; letter-spacing: -.1em; }
+        .metric span { color: #9eb2c5; font-size: .78rem; }
+
+        .mission-list { display: grid; gap: .85rem; margin: 0; padding: 0; list-style: none; }
+        .mission-list li {
+            position: relative;
+            padding: .95rem 1rem .95rem 3.35rem;
+            border: 1px solid rgba(197, 218, 236, .1);
+            border-radius: 13px;
+            background: rgba(2, 12, 24, .22);
+        }
+        .mission-list li::before {
+            position: absolute;
+            top: .95rem;
+            left: 1rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            display: grid;
+            place-items: center;
+            color: var(--cyan);
+            border-radius: 50%;
+            background: rgba(102,227,255,.1);
+            content: "↗";
+            font-family: "DM Mono", monospace;
+            font-size: .8rem;
+        }
+        .mission-list strong { display: block; margin-bottom: .18rem; font-size: .86rem; }
+        .mission-list span { color: var(--muted); font-size: .8rem; }
+
+        .projects { background: rgba(3, 12, 22, .25); border-top: 1px solid rgba(173, 219, 255, .08); border-bottom: 1px solid rgba(173, 219, 255, .08); }
+        .project-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1rem; }
+
+        .project-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 290px;
+            padding: 1.35rem;
+            overflow: hidden;
+            color: var(--ink);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            background: #0b1b2d;
+            text-align: left;
+            transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+        }
+
+        .project-card:hover { z-index: 2; transform: translateY(-6px); border-color: rgba(102, 227, 255, .5); box-shadow: 0 20px 35px rgba(0,0,0,.25); }
+        .project-card.featured { grid-column: span 7; min-height: 410px; }
+        .project-card.finance { grid-column: span 5; min-height: 410px; }
+        .project-card.log, .project-card.game, .project-card.database { grid-column: span 4; }
+        .project-card.web { grid-column: span 4; }
+
+        .project-bg {
+            position: absolute;
+            z-index: 0;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: .2;
+            object-fit: cover;
+            object-position: center;
+            transition: opacity .35s, transform .6s;
+        }
+        .project-card:hover .project-bg { opacity: .33; transform: scale(1.04); }
+        .project-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background: linear-gradient(90deg, rgba(8, 23, 39, .95) 5%, rgba(8, 23, 39, .66) 74%, rgba(8,23,39,.35));
+        }
+        .project-card.finance::after { background: linear-gradient(125deg, rgba(8, 23, 39, .96), rgba(8,23,39,.58)); }
+        .project-card > * { position: relative; z-index: 1; }
+
+        .project-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+        .tag { display: inline-flex; padding: .33rem .5rem; color: var(--cyan); border: 1px solid rgba(102,227,255,.24); border-radius: .45rem; background: rgba(7,17,31,.46); font-family: "DM Mono", monospace; font-size: .61rem; letter-spacing: .06em; text-transform: uppercase; }
+        .project-number { color: rgba(231,245,255,.65); font-family: "DM Mono", monospace; font-size: .68rem; }
+        .project-card h3 { max-width: 13ch; margin: auto 0 .45rem; font-size: clamp(1.45rem, 2.7vw, 2rem); line-height: .99; letter-spacing: -.06em; }
+        .project-card p { max-width: 53ch; margin: 0 0 1.1rem; color: #b1c5d7; font-size: .83rem; }
+        .project-tech { display: flex; flex-wrap: wrap; gap: .35rem; margin: 0 0 1.1rem; padding: 0; list-style: none; }
+        .project-tech li { padding: .24rem .43rem; color: #d9eafa; border: 1px solid rgba(218,238,255,.16); border-radius: .35rem; background: rgba(4,15,28,.45); font-family: "DM Mono", monospace; font-size: .6rem; }
+        .project-open { align-self: flex-start; padding: 0; color: var(--lime); border: 0; background: none; font-size: .76rem; font-weight: 800; cursor: pointer; }
+        .project-open i { margin-left: .35rem; transition: transform .2s; }
+        .project-open:hover i { transform: translateX(4px); }
+
+        .capability-layout { display: grid; grid-template-columns: .84fr 1.16fr; gap: 1rem; }
+
+        .profile-note {
+            padding: 1.8rem;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: linear-gradient(140deg, rgba(17, 44, 66, .75), rgba(9, 25, 40, .76));
+        }
+        .profile-note .quote-mark { display: block; margin-bottom: .35rem; color: var(--lime); font-family: Georgia, serif; font-size: 4rem; line-height: .65; }
+        .profile-note h3 { margin-bottom: .8rem; font-size: 1.55rem; line-height: 1.08; letter-spacing: -.045em; }
+        .profile-note p { margin-bottom: 1.55rem; color: var(--muted); font-size: .9rem; }
+        .profile-note a { color: var(--cyan); font-size: .8rem; font-weight: 800; text-decoration: none; }
+
+        .skill-groups { display: grid; gap: .7rem; }
+        .skill-group {
+            display: grid;
+            grid-template-columns: 10.5rem 1fr;
+            align-items: center;
+            gap: 1.25rem;
+            min-height: 76px;
+            padding: 1rem 1.1rem;
+            border: 1px solid var(--line);
+            border-radius: 15px;
+            background: rgba(11, 29, 46, .55);
+        }
+        .skill-group h3 { margin: 0; color: var(--cyan); font-family: "DM Mono", monospace; font-size: .69rem; letter-spacing: .08em; text-transform: uppercase; }
+        .skill-group:nth-child(2) h3 { color: var(--lime); }
+        .skill-group:nth-child(3) h3 { color: var(--violet); }
+        .skill-group:nth-child(4) h3 { color: var(--orange); }
+        .skill-list { display: flex; flex-wrap: wrap; gap: .36rem; margin: 0; padding: 0; list-style: none; }
+        .skill-list li { padding: .25rem .48rem; color: #c6dae9; border-radius: .4rem; background: rgba(181, 216, 241, .07); font-size: .74rem; }
+
+        .trajectory {
+            display: grid;
+            grid-template-columns: .9fr 1.1fr;
+            gap: 1rem;
+            align-items: stretch;
+            padding: 1.4rem;
+            border: 1px solid rgba(184,248,107,.2);
+            border-radius: 25px;
+            background: linear-gradient(120deg, rgba(27, 54, 40, .65), rgba(11, 28, 43, .7));
+        }
+
+        .trajectory h2 { font-size: clamp(1.75rem, 3.7vw, 2.8rem); }
+        .trajectory > p { margin: 1rem 0 0; color: #adc7b5; font-size: .9rem; }
+        .roadmap { display: grid; gap: .6rem; margin: 0; padding: 0; list-style: none; }
+        .roadmap li { display: grid; grid-template-columns: 1.9rem 1fr; gap: .85rem; align-items: center; padding: .75rem .9rem; border-radius: .75rem; background: rgba(4, 16, 26, .34); }
+        .roadmap .road-step { display: grid; width: 1.9rem; height: 1.9rem; place-items: center; color: #07111f; border-radius: 50%; background: var(--lime); font-family: "DM Mono", monospace; font-size: .7rem; font-weight: 700; }
+        .roadmap strong { display: block; font-size: .82rem; }
+        .roadmap span { display: block; color: #9bb6a3; font-size: .73rem; }
+
+        .contact {
+            position: relative;
+            overflow: hidden;
+            padding: 7.5rem 0 2rem;
+        }
+        .contact::before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: -10rem;
+            left: 50%;
+            width: 42rem;
+            height: 30rem;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            background: rgba(102, 227, 255, .09);
+            filter: blur(55px);
+        }
+        .contact-box {
+            display: grid;
+            grid-template-columns: 1.3fr .7fr;
+            gap: 2rem;
+            align-items: end;
+            padding: clamp(1.5rem, 5vw, 4rem);
+            border: 1px solid rgba(102,227,255,.22);
+            border-radius: 30px;
+            background: linear-gradient(130deg, rgba(14, 43, 63, .78), rgba(7, 18, 31, .84));
+        }
+        .contact h2 { max-width: 10ch; margin-bottom: 1rem; font-size: clamp(2.3rem, 5vw, 4.5rem); }
+        .contact p { max-width: 47ch; margin: 0; color: #a7c0d0; }
+        .contact-actions { display: flex; flex-direction: column; gap: .7rem; align-items: stretch; }
+        .contact-actions .button { width: 100%; }
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1.8rem 0 .6rem;
+            color: #6f899e;
+            font-family: "DM Mono", monospace;
+            font-size: .65rem;
+        }
+        .footer a { color: #8aa9c0; text-decoration: none; }
+        .footer a:hover { color: var(--cyan); }
+
+        dialog {
+            width: min(820px, calc(100% - 2rem));
+            max-height: min(720px, calc(100% - 2rem));
+            padding: 0;
+            overflow: auto;
+            color: var(--ink);
+            border: 1px solid rgba(102,227,255,.3);
+            border-radius: 20px;
+            background: #0a1b2d;
+            box-shadow: 0 30px 100px rgba(0,0,0,.6);
+        }
+        dialog::backdrop { background: rgba(1, 8, 16, .78); backdrop-filter: blur(5px); }
+        .modal-close { position: sticky; z-index: 5; top: 1rem; float: right; display: grid; width: 38px; height: 38px; margin: 1rem 1rem 0 0; place-items: center; color: var(--ink); border: 1px solid var(--line); border-radius: .6rem; background: rgba(7,17,31,.78); cursor: pointer; }
+        .modal-content { padding: 3.6rem clamp(1.25rem, 4vw, 3rem) 2rem; }
+        .modal-content h2 { max-width: none; margin-bottom: .35rem; font-size: clamp(2rem, 4vw, 3.1rem); }
+        .modal-content > p { max-width: 65ch; color: #afc4d4; }
+        .modal-hero { width: 100%; max-height: 270px; margin: 1.5rem 0; object-fit: cover; border: 1px solid var(--line); border-radius: 12px; }
+        .modal-gallery { margin: 1.5rem 0; }
+        .gallery-stage {
+            position: relative;
+            overflow: hidden;
+            min-height: 220px;
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            background: #06101d;
+        }
+        .gallery-stage img {
+            display: block;
+            width: 100%;
+            min-height: 220px;
+            max-height: 360px;
+            object-fit: contain;
+        }
+        .gallery-control {
+            position: absolute;
+            top: 50%;
+            display: grid;
+            width: 38px;
+            height: 38px;
+            place-items: center;
+            color: var(--ink);
+            border: 1px solid rgba(220, 241, 255, .25);
+            border-radius: 50%;
+            background: rgba(4, 15, 27, .82);
+            cursor: pointer;
+            transform: translateY(-50%);
+            transition: background .2s, transform .2s;
+        }
+        .gallery-control:hover { background: var(--cyan-deep); transform: translateY(-50%) scale(1.08); }
+        .gallery-control.prev { left: .75rem; }
+        .gallery-control.next { right: .75rem; }
+        .gallery-caption { display: flex; justify-content: space-between; gap: .6rem; padding: .65rem .15rem 0; color: #9eb7c8; font-family: "DM Mono", monospace; font-size: .66rem; }
+        .modal-content h3 { margin: 1.6rem 0 .65rem; color: var(--cyan); font-size: 1rem; }
+        .modal-content ul { display: grid; gap: .5rem; padding-left: 1.25rem; color: #bbcfde; font-size: .88rem; }
+        .modal-content video { width: 100%; margin: 1.5rem 0; border: 1px solid var(--line); border-radius: 12px; }
+        .modal-links { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem; }
+
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity .55s ease, transform .55s ease; }
+        .reveal.is-visible { opacity: 1; transform: none; }
+
+        @media (max-width: 900px) {
+            .nav-links, .nav-cta { display: none; }
+            .menu-button { display: grid; place-items: center; }
+            .nav.is-open .nav-links {
+                position: absolute;
+                top: calc(100% + .5rem);
+                right: 0;
+                left: 0;
+                display: grid;
+                gap: .2rem;
+                padding: .65rem;
+                border: 1px solid var(--line);
+                border-radius: 15px;
+                background: rgba(7,17,31,.96);
+                box-shadow: 0 15px 30px rgba(0,0,0,.28);
             }
-            h2 { font-size: 1.5rem; }
-            .close-btn { top: 15px; right: 15px; font-size: 2.5rem; padding: 10px; z-index: 1001; }
-            #intro-overlay { display: none; }
+            .nav.is-open .nav-links a { padding: .7rem; }
+            .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 9rem; gap: 1.5rem; }
+            .hero-visual { width: min(600px, 100%); min-height: 445px; margin: 0 auto; }
+            .profile-assembly { right: 8%; }
+            .section-heading, .experience-card, .capability-layout, .trajectory, .contact-box { grid-template-columns: 1fr; }
+            .section-heading { gap: .9rem; }
+            .value-grid { grid-template-columns: repeat(2, 1fr); }
+            .value-card { min-height: 220px; }
+            .value-card .value-icon { margin-bottom: 2.4rem; }
+            .project-card.featured, .project-card.finance, .project-card.log, .project-card.game, .project-card.database, .project-card.web { grid-column: span 12; }
+            .project-card { min-height: 300px; }
+            .experience-intro p { max-width: 60ch; }
         }
+
+        @media (max-width: 580px) {
+            .shell { width: min(100% - 1.3rem, 1180px); }
+            .nav-wrap { top: .65rem; width: calc(100% - 1.3rem); }
+            .nav { min-height: 55px; padding-left: .75rem; }
+            .brand { font-size: .76rem; }
+            .brand-mark { width: 27px; height: 27px; }
+            .hero { padding-top: 7.6rem; padding-bottom: 3rem; }
+            h1 { max-width: 10ch; font-size: clamp(3rem, 15.6vw, 4.3rem); }
+            .hero-lede { font-size: .96rem; }
+            .hero-meta { display: grid; gap: .55rem; }
+            .hero-visual { min-height: 370px; }
+            .profile-assembly { top: .5rem; right: 13%; width: 280px; }
+            .profile-assembly::after { inset: -1.1rem; }
+            .node { font-size: .55rem; }
+            .node.two { left: 0; }
+            .node.three { right: 0; bottom: 17%; }
+            .node.four { bottom: 2%; left: 2%; }
+            .terminal { right: 2%; bottom: -1.4rem; width: 82%; font-size: .57rem; }
+            .signals { grid-template-columns: 1fr; }
+            .signal { min-height: 63px; }
+            .section { padding: 5rem 0; }
+            h2 { font-size: 2.25rem; }
+            .project-grid { gap: .7rem; }
+            .project-card { min-height: 285px; padding: 1.1rem; }
+            .project-card h3 { font-size: 1.65rem; }
+            .project-card::after { background: linear-gradient(90deg, rgba(8,23,39,.96), rgba(8,23,39,.7)); }
+            .value-grid { grid-template-columns: 1fr; }
+            .skill-group { grid-template-columns: 1fr; gap: .7rem; padding: .9rem; }
+            .contact { padding-top: 5.4rem; }
+            .footer { flex-direction: column; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+            .reveal { opacity: 1; transform: none; }
+        }
+
+        /* Refined portfolio direction */
+        :root { --ink:#f4f5f4; --muted:#a0a9ae; --dark:#090d13; --dark-2:#101820; --surface:#151d25; --surface-solid:#151d25; --line:rgba(210,226,229,.13); --cyan:#94dfce; --cyan-deep:#67c8b3; --lime:#94dfce; --violet:#94dfce; --orange:#94dfce; --radius:20px; }
+        body { background:radial-gradient(circle at 80% 7%,rgba(114,198,179,.1),transparent 30rem),linear-gradient(160deg,#090d13,#101820 55%,#0b1118); }
+        body::before { opacity:.16; background-size:76px 76px; }
+        .shell { width:min(1220px,calc(100% - 3rem)); }
+        .nav { background:rgba(10,15,21,.88); border-radius:14px; }
+        .brand-mark { background:var(--cyan); border-radius:7px; font-family:Manrope,sans-serif; font-weight:800; }
+        .nav-cta,.button-primary { background:var(--cyan); color:#09120f; box-shadow:none; }
+        .hero { grid-template-columns:minmax(0,1fr) minmax(0,.95fr); min-height:690px; padding-top:9rem; gap:4rem; }
+        h1 { max-width:11ch; font-size:clamp(3.8rem,6.5vw,6.7rem); }
+        h1 .accent { color:var(--cyan); text-shadow:none; }
+        .hero-lede { max-width:55ch; }
+        .availability { color:var(--cyan); background:rgba(148,223,206,.07); border-color:rgba(148,223,206,.2); }
+        .pulse { animation:none; }
+        .hero-visual { min-height:500px; }
+        .topology { position:relative; width:100%; height:500px; overflow:hidden; border:1px solid rgba(148,223,206,.2); border-radius:28px; background:radial-gradient(circle at 50% 48%,rgba(88,156,148,.12),transparent 42%),linear-gradient(145deg,#121f25,#0b121a 75%); box-shadow:0 24px 60px rgba(0,0,0,.22); isolation:isolate; }
+        .topology::before { content:""; position:absolute; inset:0; opacity:.26; background-image:linear-gradient(rgba(150,220,211,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(150,220,211,.09) 1px,transparent 1px); background-size:34px 34px; mask-image:radial-gradient(circle,black,transparent 78%); }
+        .topology-top,.topology-caption { position:absolute; z-index:2; left:1.5rem; right:1.5rem; display:flex; justify-content:space-between; gap:1rem; color:#839a9e; font:500 .65rem "DM Mono",monospace; letter-spacing:.09em; }
+        .topology-top { top:1.4rem; } .topology-caption { bottom:1.35rem; align-items:end; letter-spacing:0; }
+        .topology-caption span:first-child { max-width:21ch; line-height:1.5; }
+        .topology-ping,.topology-kicker { color:var(--cyan); } .live-dot { display:inline-block; width:6px; height:6px; margin-right:6px; border-radius:50%; background:var(--cyan); box-shadow:0 0 10px var(--cyan); }
+        .topology-lines { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+        .topology-lines path { fill:none; stroke:rgba(148,223,206,.35); stroke-width:1; stroke-dasharray:4 7; vector-effect:non-scaling-stroke; animation:network-flow 24s linear infinite; }
+        @keyframes network-flow { to { stroke-dashoffset:-88; } }
+        .topology-core { position:absolute; z-index:1; left:50%; top:49%; width:94px; height:94px; display:grid; place-items:center; transform:translate(-50%,-50%); border:1px solid rgba(148,223,206,.6); border-radius:24px; background:#172d30; box-shadow:0 0 0 12px rgba(148,223,206,.04),0 0 50px rgba(111,211,188,.13); color:#d9fff5; font-size:2.7rem; font-weight:800; letter-spacing:-.1em; }
+        .topology-node { position:absolute; z-index:1; display:flex; align-items:center; gap:.65rem; padding:.65rem .8rem; min-width:118px; border:1px solid rgba(148,223,206,.24); border-radius:12px; background:rgba(13,27,32,.95); box-shadow:0 12px 25px rgba(0,0,0,.18); color:#f0f6f3; font-size:.73rem; font-weight:700; transition:transform .3s,border-color .3s,box-shadow .3s; }
+        .topology-node:hover { transform:translateY(-5px); border-color:var(--cyan); box-shadow:0 12px 28px rgba(92,183,163,.13); }
+        .topology-node i { color:var(--cyan); } .topology-node small { display:block; margin-top:.12rem; color:#89a3a1; font:400 .56rem "DM Mono",monospace; }
+        .node-system { left:12%; top:18%; } .node-network { right:8%; top:15%; } .node-security { right:4%; bottom:19%; } .node-build { left:9%; bottom:17%; }
+        .signal-bar { border-color:var(--line); } .signals { border-radius:12px; } .signal { background:#111b22; }
+        .section { padding:6.5rem 0; } .section-heading { margin-bottom:2.5rem; } .section-heading h2 { max-width:15ch; }
+        .projects { background:linear-gradient(180deg,rgba(148,223,206,.035),rgba(148,223,206,0)); }
+        .showcase { display:grid; grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr); min-height:600px; overflow:hidden; border:1px solid rgba(148,223,206,.26); border-radius:26px; background:linear-gradient(130deg,#15242a,#101a23 70%); box-shadow:0 28px 65px rgba(0,0,0,.17); }
+        .showcase-story { display:flex; flex-direction:column; padding:clamp(1.6rem,3.8vw,3.4rem); }
+        .showcase-meta { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.6rem; color:#89a4a3; font:500 .62rem "DM Mono",monospace; text-transform:uppercase; letter-spacing:.08em; }
+        .showcase h3 { margin:2.4rem 0 1rem; font-size:clamp(2.7rem,5vw,5.2rem); line-height:.95; letter-spacing:-.075em; } .title-period { color:var(--cyan); }
+        .showcase-lede { max-width:45ch; color:#cad8d7; font-size:1.02rem; line-height:1.7; }
+        .showcase-facts { display:grid; gap:0; margin:1.25rem 0 1.4rem; border-top:1px solid var(--line); }
+        .showcase-facts div { display:grid; grid-template-columns:6rem 1fr; gap:1rem; padding:.85rem 0; border-bottom:1px solid var(--line); }
+        .showcase-facts small { padding-top:.13rem; color:var(--cyan); font:500 .64rem "DM Mono",monospace; text-transform:uppercase; }
+        .showcase-facts p { margin:0; color:#aebdbd; font-size:.8rem; line-height:1.6; }
+        .showcase .project-tech { margin-top:auto; }
+        .showcase-open { margin-top:.3rem; font-size:.85rem; }
+        .showcase-visual { position:relative; min-height:600px; overflow:hidden; padding:2.2rem 1rem 2.2rem 0; background:radial-gradient(circle at 65% 38%,rgba(148,223,206,.16),transparent 50%); }
+        .showcase-visual figure { position:absolute; overflow:hidden; margin:0; border:1px solid rgba(207,231,227,.18); border-radius:16px; background:#0d171b; box-shadow:0 30px 50px rgba(0,0,0,.35); }
+        .showcase-visual img { display:block; width:100%; height:100%; object-fit:cover; }
+        .showcase-main { top:10%; right:-2%; width:88%; height:62%; transform:rotate(2deg); }
+        .showcase-detail { bottom:7%; left:3%; width:56%; height:39%; transform:rotate(-4deg); }
+        .showcase-visual figcaption { position:absolute; left:.75rem; bottom:.75rem; padding:.4rem .55rem; border:1px solid rgba(148,223,206,.3); border-radius:6px; background:rgba(8,17,21,.87); color:#d9f4ed; font:500 .56rem "DM Mono",monospace; text-transform:uppercase; letter-spacing:.06em; }
+        .project-grid { grid-template-columns:repeat(12,1fr); gap:1rem; margin-top:1rem; }
+        .project-card,.project-card.finance,.project-card.log,.project-card.game,.project-card.database,.project-card.web { grid-column:span 4; min-height:unset; padding:0; border-radius:20px; background:#131d24; }
+        .project-card::after { display:none; } .project-card > * { z-index:auto; }
+        .project-card-media { position:relative; height:210px; overflow:hidden; background:#0d171c; border-bottom:1px solid var(--line); }
+        .project-card-media img,.project-card-media video { display:block; width:100%; height:100%; object-fit:cover; object-position:top center; transition:transform .45s; }
+        .project-card:hover .project-card-media img { transform:scale(1.04); }
+        .video-still { background:radial-gradient(circle at 50% 50%,#2a3c3d,#0e181f); } .video-still video { opacity:.6; }
+        .video-still span { position:absolute; left:1rem; bottom:1rem; padding:.4rem .6rem; border:1px solid var(--line); border-radius:7px; background:rgba(9,17,20,.86); color:#f0f6f4; font:500 .62rem "DM Mono",monospace; }
+        .f1-media { display:grid; place-items:center; background:linear-gradient(130deg,#2b2827,#131b22); color:#f2f0eb; font-size:3rem; font-weight:800; font-style:italic; letter-spacing:-.09em; } .f1-slash { color:var(--cyan); padding:0 .3rem; }
+        .project-card-body { display:flex; flex:1; flex-direction:column; align-items:flex-start; padding:1.35rem; }
+        .project-card h3 { margin:1.3rem 0 .55rem; font-size:1.6rem; }
+        .project-card p { min-height:4.2em; margin:0 0 1.2rem; color:#aebcbd; font-size:.81rem; }
+        .project-card .project-tech { margin-top:auto; } .project-card .project-open { margin-top:.35rem; }
+        .experience-card { background:linear-gradient(135deg,#19272c,#111b22); border-color:var(--line); }
+        .metric strong { color:var(--cyan); } .case-label { color:var(--cyan); border-color:rgba(148,223,206,.25); background:rgba(148,223,206,.07); }
+        .button:focus-visible,.project-open:focus-visible,.topology-node:focus-visible,a:focus-visible,button:focus-visible { outline:2px solid var(--cyan); outline-offset:4px; }
+        @media (max-width:1000px) { .showcase { grid-template-columns:1fr; } .showcase-story { padding:2rem; } .showcase-visual { min-height:420px; padding:0; } .showcase-main { top:4%; height:78%; width:80%; } .showcase-detail { bottom:3%; width:49%; height:43%; } .project-card,.project-card.finance,.project-card.log,.project-card.game,.project-card.database,.project-card.web { grid-column:span 6; } }
+        @media (max-width:900px) { .hero { grid-template-columns:1fr; } .hero-visual { width:min(620px,100%); min-height:500px; } }
+        @media (max-width:600px) { .shell { width:calc(100% - 1.4rem); } .hero { padding-top:7.5rem; gap:2rem; } h1 { font-size:clamp(3.35rem,14vw,4.5rem); } .hero-actions .button { width:100%; } .hero-visual,.topology { min-height:390px; height:390px; } .topology-node { min-width:0; padding:.45rem .5rem; font-size:.6rem; } .topology-node small { font-size:.48rem; } .topology-core { width:72px; height:72px; font-size:2rem; } .node-system { left:5%; top:20%; } .node-network { right:4%; top:18%; } .node-security { right:3%; bottom:21%; } .node-build { left:5%; bottom:18%; } .topology-top,.topology-caption { left:1rem; right:1rem; font-size:.53rem; } .topology-lines { transform:scale(1.15); } .showcase { border-radius:19px; } .showcase-story { padding:1.4rem; } .showcase h3 { margin-top:1.7rem; font-size:3.5rem; } .showcase-facts div { grid-template-columns:1fr; gap:.35rem; } .showcase-visual { min-height:300px; } .showcase-main { top:4%; right:-5%; width:94%; height:71%; } .showcase-detail { bottom:3%; left:2%; width:62%; height:42%; } .project-card,.project-card.finance,.project-card.log,.project-card.game,.project-card.database,.project-card.web { grid-column:span 12; } .project-card-media { height:230px; } .project-card p { min-height:0; } }
+        @media (prefers-reduced-motion:reduce) { .topology-lines path { animation:none; } .topology-node,.project-card-media img { transition:none; } .topology-node:hover,.project-card:hover .project-card-media img { transform:none; } }
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
 
-    <div id="mynetwork"></div>
+    <header class="nav-wrap">
+        <nav class="nav" aria-label="Navigation principale">
+            <a class="brand" href="#top" aria-label="Retour en haut">
+                <span class="brand-mark">I.</span>
+                ILYAS.ELAAMERY
+            </a>
+            <ul class="nav-links">
+                <li><a href="#projets">Projets</a></li>
+                <li><a href="#experience">Expérience</a></li>
+                <li><a href="#competences">Compétences</a></li>
+                <li><a href="#profil">Profil</a></li>
+            </ul>
+            <a class="nav-cta" href="#contact">Me contacter <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            <button class="menu-button" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </nav>
+    </header>
 
-    <div id="intro-overlay">
-        <div class="intro-text">🖱️ Explorez la topologie ou cliquez sur les alertes pour interagir</div>
-    </div>
-
-    <div id="info-card">
-        <button class="close-btn" onclick="closeCard()">×</button>
-        <div id="card-content">
+    <main id="contenu">
+        <section class="hero shell" id="top">
+            <div class="hero-copy">
+                <p class="availability"><span class="pulse"></span> Recherche un stage · systèmes, réseaux & cybersécurité</p>
+                <h1>Je relie les idées <span class="accent">aux systèmes.</span></h1>
+                <p class="hero-lede">
+                    Je suis <strong>Ilyas El Aamery</strong>, étudiant en 3<sup>e</sup> année de BUT Informatique à Nancy.
+                    Je conçois, administre et sécurise des environnements <strong>systèmes et réseaux</strong>,
+                    avec le goût du terrain et des projets qui fonctionnent vraiment.
+                </p>
+                <div class="hero-actions">
+                    <a class="button button-primary" href="assets/docs/cv_el-aamery_ilyas.pdf" target="_blank" rel="noopener">
+                        <i class="fa-solid fa-file-arrow-down"></i> Voir mon CV
+                    </a>
+                    <a class="button button-quiet" href="#projets">
+                        Voir mes projets <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+                    <a class="button button-quiet" href="mailto:elaameryilyas12@gmail.com">
+                        Me contacter <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+                <ul class="hero-meta" aria-label="Informations clés">
+                    <li>Nancy · Grand Est</li>
+                    <li>3<sup>e</sup> année · BUT Informatique DACS</li>
+                    <li>FR C2 · IT C2 · EN B2 · AR B2</li>
+                </ul>
             </div>
-    </div>
 
-    <script type="text/javascript">
-        // ==========================================
-        // 1. DATA (TEXTES, MEDIAS & STRUCTURE)
-        // ==========================================
-        const contentData = {
-            // --- NOEUD CENTRAL ---
-            1: {
-                title: "Ilyas El Aamery",
-                subtitle: "Admin Réseau & Dev Fullstack",
-                html: `
-                    <div class="media-container" style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto; border: 3px solid #00d2ff;">
-                        <img src="assets/img/photo_ilyas.jpeg" class="project-img" style="height:100%; object-fit:cover;">
+            <div class="hero-visual" aria-label="Topologie interactive : projets, systèmes, réseau et sécurité">
+                <div class="topology" id="topology">
+                    <div class="topology-top"><span class="topology-kicker"><span class="live-dot"></span> ILYAS / EN PRATIQUE</span><span>01 — 04</span></div>
+                    <svg class="topology-lines" viewBox="0 0 520 480" preserveAspectRatio="none" aria-hidden="true">
+                        <path d="M260 235 L118 112 M260 235 L400 98 M260 235 L424 356 M260 235 L103 365 M118 112 L400 98 M103 365 L424 356" />
+                    </svg>
+                    <span class="topology-core" aria-hidden="true"><span>I.</span></span>
+                    <span class="topology-node node-system"><i class="fa-solid fa-server"></i><span>Systèmes<small>administrer</small></span></span>
+                    <span class="topology-node node-network"><i class="fa-solid fa-diagram-project"></i><span>Réseaux<small>connecter</small></span></span>
+                    <span class="topology-node node-security"><i class="fa-solid fa-shield-halved"></i><span>Sécurité<small>protéger</small></span></span>
+                    <span class="topology-node node-build"><i class="fa-solid fa-code-branch"></i><span>Projets<small>construire</small></span></span>
+                    <div class="topology-caption"><span>Une même curiosité, du schéma à la mise en production.</span><span class="topology-ping">● CONNECTÉ</span></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="signal-bar">
+            <div class="shell signals" aria-label="Domaines de prédilection">
+                <div class="signal">
+                    <span class="signal-icon"><i class="fa-solid fa-server"></i></span>
+                    <div><small>Build</small><strong>Systèmes & déploiement</strong></div>
+                </div>
+                <div class="signal">
+                    <span class="signal-icon"><i class="fa-solid fa-diagram-project"></i></span>
+                    <div><small>Connect</small><strong>Réseaux & services</strong></div>
+                </div>
+                <div class="signal">
+                    <span class="signal-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                    <div><small>Protect</small><strong>Cybersécurité & résilience</strong></div>
+                </div>
+            </div>
+        </div>
+
+        <section class="section projects reveal" id="projets">
+            <div class="shell">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Preuves par le projet</p>
+                        <h2>Des projets à voir, pas juste à citer.</h2>
                     </div>
-                    <p style="text-align:center; margin-top:15px;">Étudiant technicien supérieur modélisant mes compétences et architectures sous forme de topologie interactive.</p>
-                    <div class="btn-group" style="justify-content:center;">
-                        <a href="https://www.linkedin.com/in/ilyas-el-aamery-01a0612a9/" target="_blank" class="btn-download">
-                            <i class="fab fa-linkedin"></i> LinkedIn
-                        </a>
-                        <a href="old_index.html" class="btn-download secondary" target="_blank">
-                            <i class="fas fa-history"></i> Version Classique
-                        </a>
+                    <p>Architecture, interfaces, automatisation : voici les réalisations et les preuves derrière les mots.</p>
+                </div>
+
+                <article class="showcase">
+                    <div class="showcase-story">
+                        <div class="showcase-meta"><span class="tag">01 / Projet phare · équipe de 5</span><span>Infrastructure + application</span></div>
+                        <h3>Just Park It<span class="title-period">.</span></h3>
+                        <p class="showcase-lede">Guider les automobilistes vers des places disponibles, avec une application appuyée sur une architecture réseau segmentée.</p>
+                        <div class="showcase-facts">
+                            <div><small>Objectif</small><p>Relier carte, itinéraire, données de stationnement et services hébergés.</p></div>
+                            <div><small>Réalisation</small><p>Routage inter-VLAN, DMZ prévue pour l’API, serveurs Linux virtualisés, modèle MySQL et interface TypeScript avec Leaflet.</p></div>
+                        </div>
+                        <ul class="project-tech"><li>Cisco</li><li>VLAN / DMZ</li><li>Linux</li><li>MySQL</li><li>TypeScript</li><li>Leaflet</li></ul>
+                        <button class="project-open showcase-open" type="button" data-project="jpi">Explorer le projet et ses 7 visuels <i class="fa-solid fa-arrow-up-right-from-square"></i></button>
                     </div>
-                `
-            },
-
-            // --- RECHERCHE ALTERNANCE (NŒUD D'ALERTE) ---
-            5: {
-                title: "Recherche Alternance",
-                subtitle: "Contrat d'Apprentissage — Rentrée 2026",
-                html: `
-                    <span class="live-badge" style="background:#f59e0b; color:black;">Disponibilité : Septembre 2026</span>
-                    
-                    <h3 style="color:#00d2ff; font-size:1.1rem; border-bottom:1px solid #1e293b; padding-bottom:5px; margin-top:20px;">Mon Objectif</h3>
-                    <p>Actuellement en route pour ma 3ème année de BUT Informatique (Spécialité Administration Systèmes, Réseaux et Cybersécurité) à l'IUT de Nancy, je recherche l'entreprise qui m'accompagnera en alternance dès septembre 2026.</p>
-                    <p><strong>Mon ambition ?</strong> Intégrer une DSI exigeante sur un poste d'Administrateur Systèmes & Réseaux ou de Technicien Support Escalade (Niveau 2 / Niveau 3).</p>
-
-                    <h3 style="color:#00d2ff; font-size:1.1rem; border-bottom:1px solid #1e293b; padding-bottom:5px; margin-top:20px;">Pourquoi mon profil fait la différence</h3>
-                    <ul class="skills-list" style="border-left-color: #f59e0b;">
-                        <li><strong>Immédiatement opérationnel :</strong> Fort d'une immersion réussie en DSI de grand groupe, je maîtrise déjà les standards de production (Active Directory, SCCM, Réseaux Cisco) et le traitement des incidents complexes via les processus ITIL.</li>
-                        <li><strong>Une vision à 360° :</strong> Capable d'évoluer sur le maintien d'infrastructures critiques tout en concevant des applications web complètes de A à Z (React/Firebase), je comprends les enjeux techniques de bout en bout.</li>
-                        <li><strong>Calendrier stratégique :</strong> Mon rythme d'alternance est conçu pour une véritable intégration d'équipe. Après une première partie de cours (Septembre - Février), je basculerai à temps plein en entreprise de Février à Septembre, garantissant un suivi de projet ininterrompu.</li>
-                    </ul>
-                    <div class="btn-group">
-                        <a href="assets/docs/cv_el-aamery_ilyas.pdf" target="_blank" class="btn-download accent">
-                            <i class="fas fa-file-pdf"></i> Consulter mon CV (FR)
-                        </a>
+                    <div class="showcase-visual">
+                        <figure class="showcase-main"><img src="assets/img/jpi_park.png" alt="Carte des places de stationnement de Just Park It" loading="lazy"><figcaption>01 / Interface de stationnement</figcaption></figure>
+                        <figure class="showcase-detail"><img src="assets/img/jpi_reseau.png" alt="Topologie réseau Cisco de Just Park It" loading="lazy"><figcaption>02 / Topologie réseau</figcaption></figure>
                     </div>
-                `
-            },
+                </article>
 
-            // --- CATEGORIES ---
-            2: { title: "PROJETS", subtitle: "Portfolio de réalisations", html: "<p>Sélectionnez un équipement ou projet connecté pour visionner la démonstration.</p>" },
-            3: { title: "COMPÉTENCES", subtitle: "Hard Skills & Outils", html: "<p>Détail de mes pôles de compétences opérationnels.</p>" },
-            6: { title: "EXPÉRIENCES PRO", subtitle: "Parcours en Entreprise", html: "<p>Cliquez sur les infrastructures d'accueil pour voir le détail de mes missions.</p>" },
-            4: { title: "CONTACT", subtitle: "Coordonnées", html: "<p>Pour toute proposition ou échange technique :<br><br>📧 elaameryilyas12@gmail.com</p>" },
+                <div class="project-grid">
+                    <article class="project-card finance">
+                        <div class="project-card-media"><img src="assets/img/FA_home_page.png" alt="Tableau de bord de Finance App" loading="lazy"></div>
+                        <div class="project-card-body"><span class="tag">02 / Produit personnel</span><h3>Finance App</h3><p>Une PWA de suivi des budgets, comptes et investissements avec authentification et synchronisation des données.</p><ul class="project-tech"><li>React</li><li>Firebase Auth</li><li>Firestore</li></ul><button class="project-open" type="button" data-project="finance">Voir les 8 écrans <i class="fa-solid fa-arrow-right"></i></button></div>
+                    </article>
+                    <article class="project-card log">
+                        <div class="project-card-media video-still"><video muted playsinline preload="metadata" aria-label="Aperçu du projet Logs Connexion"><source src="assets/video/LogsConnexion.mp4" type="video/mp4"></video><span>▶ Démonstration</span></div>
+                        <div class="project-card-body"><span class="tag">03 / Système & sécurité</span><h3>Logs Connexion</h3><p>Un script Bash qui collecte et analyse les traces d’accès Linux pour rendre les événements exploitables.</p><ul class="project-tech"><li>Bash</li><li>Linux</li><li>Regex</li></ul><button class="project-open" type="button" data-project="logs">Voir le projet <i class="fa-solid fa-arrow-right"></i></button></div>
+                    </article>
+                    <article class="project-card database">
+                        <div class="project-card-media"><img src="assets/img/looping.png" alt="Modèle de données du projet Pueblo Zoo" loading="lazy"></div>
+                        <div class="project-card-body"><span class="tag">04 / Base de données</span><h3>Pueblo Zoo</h3><p>De l’analyse métier aux modèles MCD / MLD puis aux requêtes SQL d’une gestion de zoo.</p><ul class="project-tech"><li>MySQL</li><li>Modélisation</li><li>SQL</li></ul><button class="project-open" type="button" data-project="zoo">Voir le projet <i class="fa-solid fa-arrow-right"></i></button></div>
+                    </article>
+                    <article class="project-card game">
+                        <div class="project-card-media video-still"><video muted playsinline preload="metadata" aria-label="Aperçu du projet JeuX"><source src="assets/video/Jeux.mp4" type="video/mp4"></video><span>▶ Démonstration</span></div>
+                        <div class="project-card-body"><span class="tag">05 / Algorithmique</span><h3>JeuX</h3><p>Jeu de plateau en C à deux joueurs, avec calcul dynamique des scores et gestion de la mémoire.</p><ul class="project-tech"><li>C</li><li>GCC</li><li>Tableaux</li></ul><button class="project-open" type="button" data-project="jeux">Voir le projet <i class="fa-solid fa-arrow-right"></i></button></div>
+                    </article>
+                    <article class="project-card game">
+                        <div class="project-card-media video-still"><video muted playsinline preload="metadata" aria-label="Aperçu du projet Jeu de Nim"><source src="assets/video/JeuDeNim.mp4" type="video/mp4"></video><span>▶ Démonstration</span></div>
+                        <div class="project-card-body"><span class="tag">06 / Algorithmique</span><h3>Jeu de Nim</h3><p>Jeu en ligne de commande contre l’ordinateur, avec plusieurs niveaux de difficulté.</p><ul class="project-tech"><li>C</li><li>Stratégie</li><li>Nimbers</li></ul><button class="project-open" type="button" data-project="nim">Voir le projet <i class="fa-solid fa-arrow-right"></i></button></div>
+                    </article>
+                    <article class="project-card web">
+                        <div class="project-card-media f1-media"><span>F1<span class="f1-slash">/</span> 2010s</span></div>
+                        <div class="project-card-body"><span class="tag">07 / Intégration web</span><h3>Site Formule 1</h3><p>Un site responsive réalisé en équipe de quatre, de la maquette PDF à l’intégration.</p><ul class="project-tech"><li>HTML</li><li>CSS</li><li>Responsive</li></ul><button class="project-open" type="button" data-project="f1">Voir la maquette <i class="fa-solid fa-arrow-right"></i></button></div>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-            // --- EXPERIENCES EN ENTREPRISE ---
-            61: {
-                title: "Demathieu Bard (DSI)",
-                subtitle: "Stage Administrateur Système, Réseaux & Cybersécurité",
-                html: `
-                    <span class="live-badge" style="background:#581c87;">Avril – Juin 2026</span>
-                    <p style="margin-top:15px;">Immersion au sein de la Direction des Systèmes d'Information. Maintien en conditions opérationnelles et sécurisation des infrastructures.</p>
-                    <ul class="skills-list exp">
-                        <li><strong>Admin. Système & Déploiement :</strong> Industrialisation de la masterisation d'un parc de 500 postes clients via Microsoft SCCM (PXE) et automatisation de la migration des données par scripts PowerShell.</li>
-                        <li><strong>Infrastructures & Réseaux :</strong> Déploiement et administration de serveurs d'impression sécurisés (Active Directory, SafeQ, LDAP, SSO). Résolution d'incidents critiques sur architectures distribuées (VLAN, DHCP, DNS).</li>
-                        <li><strong>Cybersécurité & Gouvernance :</strong> Isolation réseau et remédiation via EDR CrowdStrike. Automatisation de la rotation des mots de passe locaux (LAPS UI) et audits des vulnérabilités de l'AD.</li>
-                    </ul>
-                    <p style="font-style: italic; font-size: 0.85em; color: #94a3b8; margin-top: 15px;">* Référence managériale (Responsable Production Informatique) disponible sur demande.</p>
-                `
-            },
-
-            // --- PROJETS DÉTAILLÉS ---
-            21: { 
-                title: "Just Park It",
-                subtitle: "App de Mobilité & Infrastructure Complète",
-                html: `
-                    <span class="live-badge" style="background:#2563eb;">🚀 Projet Majeur</span>
-                    <p style="margin-top: 15px;">
-                        Conception globale d'une application client/serveur d'aide à la mobilité urbaine. 
-                        L'objectif : géolocaliser et guider les conducteurs en temps réel vers des places de stationnement disponibles.
+        <section class="section shell reveal" id="experience">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Expérience terrain</p>
+                    <h2>Comprendre les enjeux de production.</h2>
+                </div>
+                <p>Une immersion en DSI qui m’a confronté à des systèmes utilisés au quotidien, aux incidents et aux exigences de sécurité.</p>
+            </div>
+            <article class="experience-card">
+                <div class="experience-intro">
+                    <span class="case-label"><i class="fa-solid fa-briefcase"></i> DSI · Demathieu Bard · avril–juin 2026</span>
+                    <h3>Administrer. Industrialiser. Sécuriser.</h3>
+                    <p>
+                        Stage en systèmes, réseaux et cybersécurité : des missions concrètes, dans un environnement où
+                        la qualité des procédures a un impact direct sur les utilisateurs.
                     </p>
-                    
-                    <div class="media-container" style="background: white; padding: 10px;">
-                        <img src="assets/img/jpi_flyer.png" class="project-img" alt="Affiche Just Park It" style="max-height: 400px; object-fit: contain; margin-bottom: 0;">
-                    </div>
+                    <div class="metric"><strong>500</strong><span>postes concernés<br>par la masterisation</span></div>
+                </div>
+                <ul class="mission-list">
+                    <li>
+                        <strong>Déploiement à l’échelle</strong>
+                        <span>Masterisation via Microsoft SCCM / PXE et automatisation de migrations de données avec PowerShell.</span>
+                    </li>
+                    <li>
+                        <strong>Services et identité</strong>
+                        <span>Active Directory, serveurs d’impression sécurisés, SafeQ, LDAP et SSO dans un contexte de production.</span>
+                    </li>
+                    <li>
+                        <strong>Diagnostic réseau</strong>
+                        <span>Résolution d’incidents distribués autour des VLAN, DNS et DHCP, avec une logique de cause racine.</span>
+                    </li>
+                    <li>
+                        <strong>Posture cybersécurité</strong>
+                        <span>Isolation et remédiation EDR CrowdStrike, LAPS et contrôle de vulnérabilités Active Directory.</span>
+                    </li>
+                </ul>
+            </article>
+        </section>
 
-                    <h3 style="color:#00d2ff; margin-top:25px; font-size:1.2rem; border-bottom:1px solid #1e293b; padding-bottom:5px;">1. Infrastructure & Réseau</h3>
-                    <p>Déploiement d'une architecture sécurisée sur matériel Cisco pour isoler et héberger les services.</p>
-                    <ul class="skills-list">
-                        <li><strong>Topologie :</strong> Routage inter-VLAN, création d'une zone DMZ pour l'exposition de l'API.</li>
-                        <li><strong>Matériel :</strong> Configuration de Routeurs (Série 2911) et de Switches (Série 2960).</li>
-                        <li><strong>Services :</strong> Serveurs Linux virtualisés pour le Web et la Base de données.</li>
-                    </ul>
-                    <div class="media-container">
-                        <img src="assets/img/jpi_reseau.png" class="project-img" alt="Topologie Cisco Packet Tracer" style="margin-bottom: 0;">
-                    </div>
+        <section class="section shell reveal" id="competences">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Stack opérationnelle</p>
+                    <h2>Des outils au service d’un résultat.</h2>
+                </div>
+                <p>Je ne collectionne pas les logos. Je construis une boîte à outils adaptée au contexte, au niveau de risque et aux utilisateurs.</p>
+            </div>
+            <div class="capability-layout">
+                <aside class="profile-note">
+                    <span class="quote-mark">“</span>
+                    <h3>Un bon système est celui que l’équipe peut comprendre et faire évoluer.</h3>
+                    <p>Mon objectif : progresser auprès d’experts, contribuer à des environnements exigeants et approfondir mon parcours en master puis en alternance.</p>
+                    <a href="#contact">Parlons de votre environnement <i class="fa-solid fa-arrow-right"></i></a>
+                </aside>
+                <div class="skill-groups">
+                    <article class="skill-group">
+                        <h3>Systèmes</h3>
+                        <ul class="skill-list"><li>Windows Server</li><li>Windows 11</li><li>Debian / Ubuntu</li><li>Red Hat</li><li>VMware</li><li>Active Directory</li><li>GPO</li><li>SCCM</li><li>PowerShell</li></ul>
+                    </article>
+                    <article class="skill-group">
+                        <h3>Réseaux</h3>
+                        <ul class="skill-list"><li>Cisco</li><li>LAN / WLAN</li><li>VLAN</li><li>TCP/IP</li><li>DNS</li><li>DHCP</li><li>Routage</li><li>Wireshark</li></ul>
+                    </article>
+                    <article class="skill-group">
+                        <h3>Sécurité & ITSM</h3>
+                        <ul class="skill-list"><li>CrowdStrike EDR</li><li>LAPS</li><li>LDAP / SSO</li><li>Segmentation</li><li>Gestion d’incidents</li><li>EasyVista</li><li>ITIL</li><li>Documentation</li></ul>
+                    </article>
+                    <article class="skill-group">
+                        <h3>Développement</h3>
+                        <ul class="skill-list"><li>C</li><li>Python</li><li>Bash</li><li>SQL / MySQL</li><li>JavaScript</li><li>TypeScript</li><li>React</li><li>Firebase</li><li>Git</li></ul>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-                    <h3 style="color:#00d2ff; margin-top:25px; font-size:1.2rem; border-bottom:1px solid #1e293b; padding-bottom:5px;">2. Base de Données</h3>
-                    <p>Modélisation et requêtage (MySQL) pour gérer l'état du parc de stationnement et les utilisateurs.</p>
-                    <ul class="skills-list">
-                        <li><strong>Conception :</strong> Rédaction du MCD/MLD.</li>
-                        <li><strong>Gestion :</strong> Profils utilisateurs, favoris, types de véhicules et accessibilité (PMR).</li>
-                    </ul>
-                    <div class="media-container">
-                        <img src="assets/img/jpi_bdd.png" class="project-img" alt="Schéma relationnel MySQL" style="margin-bottom: 0;">
-                    </div>
+        <section class="section shell reveal" id="profil">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Profil étudiant</p>
+                    <h2>Un profil technique, une curiosité entière.</h2>
+                </div>
+                <p>
+                    Je construis mon projet professionnel autour des systèmes, des réseaux et de la cybersécurité,
+                    sans perdre l’approche concrète du développement et des utilisateurs.
+                </p>
+            </div>
+            <div class="value-grid">
+                <article class="value-card" data-index="01">
+                    <span class="value-icon"><i class="fa-solid fa-location-dot"></i></span>
+                    <h3>Où je suis</h3>
+                    <p>Nancy, Grand Est. Étudiant à l’Université de Lorraine, avec une ouverture aux opportunités qui feront progresser mon projet.</p>
+                </article>
+                <article class="value-card" data-index="02">
+                    <span class="value-icon"><i class="fa-solid fa-graduation-cap"></i></span>
+                    <h3>Ce que j’étudie</h3>
+                    <p>3<sup>e</sup> année de BUT Informatique, parcours DACS, avec une spécialisation systèmes, réseaux et cybersécurité.</p>
+                </article>
+                <article class="value-card" data-index="03">
+                    <span class="value-icon"><i class="fa-solid fa-language"></i></span>
+                    <h3>Mes langues</h3>
+                    <p>Français C2 · Italien C2 · Anglais B2 · Arabe B2. Je suis à l’aise dans la documentation et les échanges techniques en anglais.</p>
+                </article>
+                <article class="value-card" data-index="04">
+                    <span class="value-icon"><i class="fa-solid fa-compass"></i></span>
+                    <h3>Ce que je cherche</h3>
+                    <p>Un stage puis un master et une alternance pour grandir auprès d’une équipe exigeante, en systèmes, réseau ou cybersécurité.</p>
+                </article>
+            </div>
+            <p class="profile-summary">Mon objectif : apprendre vite, contribuer proprement et devenir un professionnel fiable pour l’équipe qui m’accompagnera.</p>
+        </section>
 
-                    <h3 style="color:#00d2ff; margin-top:25px; font-size:1.2rem; border-bottom:1px solid #1e293b; padding-bottom:5px;">3. Application (Frontend)</h3>
-                    <p>Interface utilisateur dynamique intégrant une carte interactive.</p>
-                    <ul class="skills-list">
-                        <li><strong>Stack :</strong> TypeScript, librairie Leaflet (Cartographie).</li>
-                        <li><strong>Fonctionnalités :</strong> Calcul d'itinéraire (distance/durée), affichage des places en temps réel et navigation étape par étape.</li>
-                    </ul>
-                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                        <img src="assets/img/jpi_cox.png" style="width: 48%; border-radius: 8px; border: 1px solid #334155; object-fit: cover;">
-                        <img src="assets/img/jpi_park.png" style="width: 48%; border-radius: 8px; border: 1px solid #334155; object-fit: cover;">
-                    </div>
+        <section class="section shell reveal" id="parcours" aria-labelledby="trajectory-title">
+            <div class="trajectory">
+                <div>
+                    <p class="eyebrow">Mon parcours</p>
+                    <h2 id="trajectory-title">Un étudiant qui construit sa trajectoire, étape par étape.</h2>
+                    <p>Le BUT m’apporte des bases solides et des projets concrets. La suite : les approfondir en master et devenir un contributeur durable en alternance.</p>
+                </div>
+                <ol class="roadmap">
+                    <li><span class="road-step">01</span><div><strong>BUT Informatique · 2024 — aujourd’hui</strong><span>Fondations en développement, bases de données, réseau et travail en équipe.</span></div></li>
+                    <li><span class="road-step">02</span><div><strong>Stage · première expérience DSI</strong><span>Mettre les apprentissages à l’épreuve d’un environnement de production.</span></div></li>
+                    <li><span class="road-step">03</span><div><strong>Master & alternance · prochaine étape</strong><span>Approfondir l’architecture et la sécurité dans la durée, au sein d’une équipe.</span></div></li>
+                </ol>
+            </div>
+        </section>
 
-                    <h3 style="color:#00d2ff; margin-top:25px; font-size:1.2rem; border-bottom:1px solid #1e293b; padding-bottom:5px;">4. Gestion de Projet</h3>
-                    <p>Travail collaboratif (5 membres) piloté via des méthodes agiles et un suivi rigoureux des itérations.</p>
-                    <div class="media-container">
-                        <img src="assets/img/jpi_gannt.png" class="project-img" alt="Diagramme de Gantt" style="margin-bottom: 0;">
-                    </div>
-                `
-            },
-            22: {
-                title: "JeuX",
-                subtitle: "Application de plateau en Langage C",
-                html: `
-                    <p>Développement d'un moteur de jeu de stratégie bidimensionnel intégrant le calcul dynamique matriciel des scores.</p>
-                    <div class="media-container">
-                        <video controls class="project-video">
-                            <source src="assets/video/Jeux.mp4" type="video/mp4">
-                            Navigateur obsolète.
-                        </video>
-                    </div>
-                    <p><strong>Pôle :</strong> Algorithmique pure, allocation dynamique de mémoire, compilation GCC.</p>
-                `
-            },
-            23: {
-                title: "Jeu de Nim",
-                subtitle: "Logique algorithmique appliquée",
-                html: `
-                    <p>Création du traditionnel jeu de Nim exécutable en ligne de commande, proposant un algorithme d'opposition (IA basique).</p>
-                    <div class="media-container">
-                        <video controls class="project-video">
-                            <source src="assets/video/JeuDeNim.mp4" type="video/mp4">
-                            Navigateur obsolète.
-                        </video>
-                    </div>
-                    <p><strong>Pôle :</strong> Langage C, structures conditionnelles complexes.</p>
-                `
-            },
-            24: {
-                title: "Analyseur de Logs",
-                subtitle: "Automatisation de scripts système",
-                html: `
-                    <p>Script système conçu pour automatiser l'extraction et l'analyse de fichiers d'événements Linux (logs de connexions).</p>
-                    <div class="media-container">
-                        <video controls class="project-video">
-                            <source src="assets/video/LogsConnexion.mp4" type="video/mp4">
-                            Navigateur obsolète.
-                        </video>
-                    </div>
-                    <p><strong>Pôle :</strong> Scripting Bash, expressions régulières (Regex), sécurité système.</p>
-                `
-            },
-            25: {
-                title: "Pueblo Zoo",
-                subtitle: "Modélisation Relationnelle (SQL)",
-                html: `
-                    <p>Étude, conception et requêtage d'une base de données complexe simulant la gestion d'un parc animalier (animaux, enclos, affectations).</p>
-                    <p><strong>Pôle :</strong> Rédaction des modèles conceptuels (MCD/MLD), requêtes imbriquées, jointures avancées.</p>
-                `
-            },
-            26: {
-                title: "E-Vitrine Formule 1",
-                subtitle: "Intégration Web Responsive",
-                html: `
-                    <p>Développement d'un portail web informatif dédié à l'univers de la F1 mettant en avant la conformité des maquettes graphiques.</p>
-                    <div class="btn-group">
-                        <a href="assets/docs/maquete_f1.pdf" class="btn-download" target="_blank">
-                            <i class="fas fa-file-pdf"></i> Ouvrir la Maquette (PDF)
-                        </a>
-                    </div>
-                `
-            },
-            // 7. FINANCE APP (REACT/FIREBASE)
-            27: {
-                title: "Finance App (PWA)",
-                subtitle: "Application de Gestion Financière",
-                html: `
-                    <span class="live-badge" style="background:#0ea5e9;">⚛️ React.js & Firebase</span>
-                    <p style="margin-top: 15px;">Une Progressive Web App (PWA) de gestion de finances personnelles. Conçue en "mobile-first", elle permet de suivre revenus, dépenses, budgets et investissements en temps réel.</p>
-                    
-                    <h3 style="color:#00d2ff; font-size:1.1rem; border-bottom:1px solid #1e293b; padding-bottom:5px; margin-top:20px;">1. Sécurité & Authentification</h3>
-                    <p>Tunnel d'authentification privé via <strong>Firebase Auth</strong> avec persistance de session et déconnexion automatique d'inactivité.</p>
-                    <div style="text-align: center; margin-bottom: 25px;">
-                        <img src="assets/img/FA_coffre_fort.png" alt="Authentification" style="width: 45%; max-width: 200px; border: 1px solid #334155; border-radius: 8px;">
-                    </div>
+        <section class="contact shell reveal" id="contact">
+            <div class="contact-box">
+                <div>
+                    <p class="eyebrow">Un projet, une opportunité ?</p>
+                    <h2>Faisons connaissance.</h2>
+                    <p>Je suis disponible pour échanger autour d’un stage, d’une poursuite d’études, d’une alternance ou simplement de vos enjeux infrastructure et cybersécurité.</p>
+                </div>
+                <div class="contact-actions">
+                    <a class="button button-primary" href="mailto:elaameryilyas12@gmail.com"><i class="fa-solid fa-paper-plane"></i> Écrire un email</a>
+                    <a class="button button-quiet" href="https://www.linkedin.com/in/ilyas-el-aamery-01a0612a9/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> Me retrouver sur LinkedIn</a>
+                    <a class="button button-quiet" href="assets/docs/resume_el-aamery_ilyas.pdf" target="_blank" rel="noopener"><i class="fa-solid fa-file-pdf"></i> Resume · English</a>
+                </div>
+            </div>
+            <footer class="footer">
+                <span>© <span id="year">2026</span> Ilyas El Aamery · Nancy, France.</span>
+                <span>Curieux des systèmes, attentif aux détails.</span>
+            </footer>
+        </section>
+    </main>
 
-                    <h3 style="color:#00d2ff; font-size:1.1rem; border-bottom:1px solid #1e293b; padding-bottom:5px;">2. Dashboard & Budget Intelligent</h3>
-                    <p>Tableau de bord dynamique intégrant des graphiques SVG (<strong>Recharts</strong>) et un système d'enveloppes budgétaires pour calculer automatiquement le reste à vivre.</p>
-                    <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 25px;">
-                        <img src="assets/img/FA_home_page.png" alt="Dashboard" style="width: 48%; border: 1px solid #334155; border-radius: 6px;">
-                        <img src="assets/img/FA_visu_mensuelle.png" alt="Bilan" style="width: 48%; border: 1px solid #334155; border-radius: 6px;">
-                    </div>
+    <dialog id="project-dialog" aria-labelledby="modal-title">
+        <button class="modal-close" type="button" aria-label="Fermer la fiche"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-content" id="modal-content"></div>
+    </dialog>
 
-                    <h3 style="color:#00d2ff; font-size:1.1rem; border-bottom:1px solid #1e293b; padding-bottom:5px;">3. Saisie & Automatisation CSV</h3>
-                    <p>Ajout manuel des transactions catégorisées ou automatisation de masse via l'importation de relevés bancaires format CSV (parsés avec <strong>PapaParse</strong>).</p>
-                    <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 25px;">
-                        <img src="assets/img/FA_trans_man.png" alt="Transactions" style="width: 48%; border: 1px solid #334155; border-radius: 6px;">
-                        <img src="assets/img/FA_import_csv.png" alt="Import CSV" style="width: 48%; border: 1px solid #334155; border-radius: 6px;">
-                    </div>
+    <script>
+        (function () {
+            var nav = document.querySelector(".nav");
+            var menuButton = document.querySelector(".menu-button");
+            var navLinks = document.querySelectorAll(".nav-links a");
 
-                    <h3 style="color:#00d2ff; font-size:1.1rem; border-bottom:1px solid #1e293b; padding-bottom:5px;">4. Patrimoine & Investissements</h3>
-                    <p>Vue globale des comptes courants, barres de progression vers les objectifs d'épargne et suivi en temps réel du portefeuille d'investissement.</p>
-                    <div style="display: flex; gap: 5px; justify-content: space-between; margin-bottom: 25px;">
-                        <img src="assets/img/FA_accounts.png" alt="Comptes" style="width: 32%; border: 1px solid #334155; border-radius: 6px;">
-                        <img src="assets/img/FA_objectives.png" alt="Objectifs" style="width: 32%; border: 1px solid #334155; border-radius: 6px;">
-                        <img src="assets/img/FA_invest.png" alt="Investissements" style="width: 32%; border: 1px solid #334155; border-radius: 6px;">
-                    </div>
+            menuButton.addEventListener("click", function () {
+                var isOpen = nav.classList.toggle("is-open");
+                menuButton.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                menuButton.setAttribute("aria-label", isOpen ? "Fermer le menu" : "Ouvrir le menu");
+                menuButton.innerHTML = isOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+            });
 
-                    <h3 style="color:#00d2ff; font-size:1.1rem; border-bottom:1px solid #1e293b; padding-bottom:5px;">Architecture Technique</h3>
-                    <ul class="skills-list">
-                        <li><strong>Frontend (UI/UX) :</strong> React.js (Vite), Tailwind CSS (v3), Mode Sombre adaptatif, 100% Responsive.</li>
-                        <li><strong>Logique Applicative :</strong> Context API, Hooks, manipulation de tableaux JS (map, filter, reduce).</li>
-                        <li><strong>Backend & BDD :</strong> Firebase Firestore (NoSQL en temps réel).</li>
-                    </ul>
-                `
-            },
-
-            // --- COMPÉTENCES ---
-            31: { 
-                title: "Systèmes & Infrastructures", 
-                html: `
-                    <ul class='skills-list'>
-                        <li><strong>Écosystème Microsoft :</strong> Administration Active Directory (GPO, gestion des droits), Industrialisation et déploiement via Microsoft SCCM.</li>
-                        <li><strong>Environnements OS :</strong> Windows Server & Windows 11. Administration Linux (Debian, Ubuntu, Red Hat).</li>
-                        <li><strong>Écosystème Apple :</strong> Gestion MacOS et MDM.</li>
-                    </ul>
-                ` 
-            },
-            32: { 
-                title: "Réseaux & Cybersécurité", 
-                html: `
-                    <ul class='skills-list'>
-                        <li><strong>Administration réseau :</strong> Configuration des équipements Cisco (LAN, WLAN).</li>
-                        <li><strong>Diagnostic :</strong> Maîtrise des couches TCP/IP, DNS, DHCP, VLANs.</li>
-                        <li><strong>Sécurité :</strong> Sensibilisation et application stricte des bonnes pratiques de Cybersécurité.</li>
-                    </ul>
-                ` 
-            },
-            33: { 
-                title: "Support & Outils (ITSM)", 
-                html: `
-                    <ul class='skills-list' style='border-left-color: #ef4444;'>
-                        <li><strong>Support Technique :</strong> Gestion des incidents et requêtes de niveau 1 et 2.</li>
-                        <li><strong>ITSM :</strong> Maîtrise des outils de ticketing (EasyVista) en environnements ITIL.</li>
-                        <li><strong>Processus :</strong> Rédaction de documentation technique et procédures d'exploitation.</li>
-                    </ul>
-                ` 
-            },
-            34: { 
-                title: "Développement & Web", 
-                html: `
-                    <ul class='skills-list'>
-                        <li><strong>Frontend :</strong> React, Tailwind CSS. Conception UI/UX avec approche "Mobile-First" et intégration de graphiques dynamiques.</li>
-                        <li><strong>Backend / BaaS :</strong> Firebase (Authentification sécurisée, Base de données temps réel).</li>
-                    </ul>
-                ` 
-            },
-            35: {
-                title: "Soft Skills",
-                html: `
-                    <ul class='skills-list' style='border-left-color: #3b82f6;'>
-                        <li><strong>Savoir-être :</strong> Résilience et gestion des urgences (forgées en service client). Autonomie en production et grande capacité d'adaptation.</li>
-                        <li><strong>Langues :</strong> Anglais technique B2 (Niveau C1 opérationnel).</li>
-                        <li><strong>Créativité :</strong> Montage vidéo et retouche d'image (Adobe Premiere Pro, Photoshop).</li>
-                    </ul>
-                `
-            }
-        };
-
-        // ==========================================
-        // 2. CONFIGURATION DE LA TOPOLOGIE (VIS.JS)
-        // ==========================================
-        var nodes = new vis.DataSet([
-            // Centre
-            { id: 1, shape: 'circularImage', image: 'assets/img/photo_ilyas.jpeg', size: 55, borderWidth: 4, color: { border: '#00d2ff', background: '#fff' }, label: "ILYAS" },
-
-            // ALERTE CRITIQUE (Alternance)
-            { id: 5, label: '🚨 ALTERNANCE\nSEPT. 2026', shape: 'dot', size: 26, color: '#f59e0b', font:{color:'#f59e0b', size:15, bold:true} },
-
-            // Planètes principales
-            { id: 2, label: 'PROJETS', shape: 'dot', size: 22, color: '#00d2ff', font:{color:'white', size:15} },
-            { id: 6, label: 'EXPÉRIENCES', shape: 'dot', size: 22, color: '#a855f7', font:{color:'white', size:15} },
-            { id: 3, label: 'SKILLS', shape: 'dot', size: 22, color: '#34d399', font:{color:'white', size:15} },
-            { id: 4, label: 'CONTACT', shape: 'dot', size: 18, color: '#f472b6', font:{color:'white', size:14} },
-
-            // --- SOUS-NŒUDS EXPÉRIENCES ---
-            { id: 61, label: 'Stage IT\n(Demathieu Bard)', shape: 'box', color: '#581c87', font:{color:'white'} },
-
-            // --- SOUS-NŒUDS PROJETS ---
-            { id: 21, label: 'Just Park It\n(Transversal)', shape: 'circularImage', image: 'assets/img/logo_jp.png', size: 35, borderWidth: 2, color: {border:'#00d2ff'} },
-            { id: 22, label: 'JeuX\n(C)', shape: 'box', color: '#1e3a8a', font:{color:'white'} },
-            { id: 23, label: 'Nim\n(C)', shape: 'box', color: '#1e3a8a', font:{color:'white'} },
-            { id: 24, label: 'Logs\n(Bash)', shape: 'box', color: '#1e3a8a', font:{color:'white'} },
-            { id: 25, label: 'Zoo\n(SQL)', shape: 'box', color: '#1e3a8a', font:{color:'white'} },
-            { id: 26, label: 'F1 Site\n(Web)', shape: 'box', color: '#1e3a8a', font:{color:'white'} },
-            { id: 27, label: 'Finance App\n(React)', shape: 'circularImage', image: 'assets/img/FA_logo.png', size: 35, borderWidth: 2, color: {border:'#0ea5e9'} },
-
-            // --- SKILLS ---
-            { id: 31, label: 'Systèmes\n& Infra', shape: 'ellipse', color: '#064e3b', font:{color:'#a7f3d0'} },
-            { id: 32, label: 'Réseaux\n& Cyber', shape: 'ellipse', color: '#064e3b', font:{color:'#a7f3d0'} },
-            { id: 33, label: 'Support\n& ITSM', shape: 'ellipse', color: '#991b1b', font:{color:'#fca5a5'} },
-            { id: 34, label: 'Dev\n& Web', shape: 'ellipse', color: '#064e3b', font:{color:'#a7f3d0'} },
-            { id: 35, label: 'Soft\nSkills', shape: 'ellipse', color: '#1e3a8a', font:{color:'#bfdbfe'} }
-        ]);
-
-        var edges = new vis.DataSet([
-            // Liens vers le centre
-            { from: 1, to: 2, width: 2, color: { color: 'rgba(255,255,255,0.1)' } },
-            { from: 1, to: 3, width: 2, color: { color: 'rgba(255,255,255,0.1)' } },
-            { from: 1, to: 4, width: 2, color: { color: 'rgba(255,255,255,0.1)' } },
-            { from: 1, to: 6, width: 2, color: { color: 'rgba(255,255,255,0.1)' } },
-            
-            // Lien d'alerte haute priorité (Alternance)
-            { from: 1, to: 5, width: 4, color: '#f59e0b', dashes: true, length: 140 },
-
-            // Branche Expériences
-            { from: 6, to: 61, length: 140, color: '#a855f7', width: 2 },
-
-            // Branche Projets
-            { from: 2, to: 21, length: 180, color: '#00d2ff', width: 2 },
-            { from: 2, to: 22, length: 150, color: '#1e3a8a' },
-            { from: 2, to: 23, length: 150, color: '#1e3a8a' },
-            { from: 2, to: 24, length: 150, color: '#1e3a8a' },
-            { from: 2, to: 25, length: 150, color: '#1e3a8a' },
-            { from: 2, to: 26, length: 150, color: '#1e3a8a' },
-            { from: 2, to: 27, length: 150, color: '#0ea5e9' },
-
-            // Liens Skills
-            { from: 3, to: 31, color: '#34d399' },
-            { from: 3, to: 32, color: '#34d399' },
-            { from: 3, to: 33, color: '#ef4444', width: 2 }, // Lien rouge pour l'ITSM
-            { from: 3, to: 34, color: '#34d399' },
-            { from: 3, to: 35, color: '#3b82f6', width: 2 }  // Lien bleu pour les Soft Skills
-        ]);
-
-        // Moteur de rendu
-        var container = document.getElementById('mynetwork');
-        var data = { nodes: nodes, edges: edges };
-        var options = {
-            nodes: { font: { face: 'Segoe UI', color: '#ffffff', size: 14 }, borderWidth: 1, shadow: true },
-            edges: { width: 1, smooth: { type: 'continuous', forceDirection: 'none' } },
-            physics: { stabilization: false, barnesHut: { gravitationalConstant: -3800, springConstant: 0.03, springLength: 180 } },
-            interaction: { hover: true }
-        };
-
-        var network = new vis.Network(container, data, options);
-
-        // ==========================================
-        // 3. LOGIQUE D'INTERACTION ET SÉQUENCE AUTOMATIQUE
-        // ==========================================
-        
-        // Fonction d'ouverture d'une fiche
-        function openNodeCard(nodeId) {
-            const info = contentData[nodeId];
-            if (info) {
-                const htmlContent = `
-                    <div class="card-header">
-                        <h2>${info.title}</h2>
-                        <span class="subtitle">${info.subtitle || ''}</span>
-                    </div>
-                    <div>${info.html}</div>
-                `;
-                document.getElementById('card-content').innerHTML = htmlContent;
-                document.getElementById('info-card').classList.add('active');
-
-                const isMobile = window.innerWidth < 768;
-                const offsetX = isMobile ? 0 : -250;
-                const newScale = isMobile ? 0.9 : 1.2;
-
-                network.focus(nodeId, {
-                    scale: newScale,
-                    offset: { x: offsetX, y: 0 },
-                    animation: { duration: 800, easingFunction: "easeInOutQuad" }
+            navLinks.forEach(function (link) {
+                link.addEventListener("click", function () {
+                    nav.classList.remove("is-open");
+                    menuButton.setAttribute("aria-expanded", "false");
+                    menuButton.setAttribute("aria-label", "Ouvrir le menu");
+                    menuButton.innerHTML = '<i class="fa-solid fa-bars"></i>';
                 });
+            });
+
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: .11 });
+            document.querySelectorAll(".reveal").forEach(function (section) { observer.observe(section); });
+
+            document.getElementById("year").textContent = new Date().getFullYear();
+
+            var dialog = document.getElementById("project-dialog");
+            var modalContent = document.getElementById("modal-content");
+            var closeModal = document.querySelector(".modal-close");
+            var projects = {
+                jpi: {
+                    label: "Étude de cas · Infrastructure & application",
+                    title: "Just Park It",
+                    summary: "Conception d’une solution complète pour guider les automobilistes vers des places disponibles. Le projet connecte une application web à une infrastructure volontairement structurée et sécurisée.",
+                    gallery: [
+                        { src: "assets/img/jpi_flyer.png", alt: "Affiche de présentation Just Park It", label: "Présentation du projet" },
+                        { src: "assets/img/jpi_reseau.png", alt: "Topologie réseau Cisco Just Park It", label: "Infrastructure & segmentation réseau" },
+                        { src: "assets/img/jpi_bdd.png", alt: "Schéma de base de données Just Park It", label: "Modélisation de la base de données" },
+                        { src: "assets/img/jpi_cox.png", alt: "Écran de connexion Just Park It", label: "Interface · connexion" },
+                        { src: "assets/img/jpi_park.png", alt: "Carte des places de stationnement Just Park It", label: "Interface · carte & places" },
+                        { src: "assets/img/jpi_navig.png", alt: "Écran de navigation Just Park It", label: "Interface · navigation" },
+                        { src: "assets/img/jpi_gannt.png", alt: "Diagramme de Gantt Just Park It", label: "Organisation du projet" }
+                    ],
+                    sections: [
+                        ["Infrastructure pensée pour l’exposition", ["Routage inter-VLAN et séparation des flux.", "Zone DMZ prévue pour l’exposition contrôlée de l’API.", "Services web et base de données sur des serveurs Linux virtualisés."]],
+                        ["Application et données", ["Modélisation MySQL pour les utilisateurs, véhicules, favoris et places.", "Interface TypeScript avec Leaflet : carte, itinéraire et statut des places.", "Travail d’équipe à cinq, suivi par itérations et planification."]]
+                    ]
+                },
+                finance: {
+                    label: "Étude de cas · Produit personnel",
+                    title: "Finance App",
+                    summary: "Une Progressive Web App de suivi financier pensée mobile-first : budget, transactions, comptes, objectifs et investissements dans une seule interface.",
+                    gallery: [
+                        { src: "assets/img/FA_coffre_fort.png", alt: "Écran d'authentification Finance App", label: "Authentification" },
+                        { src: "assets/img/FA_home_page.png", alt: "Tableau de bord Finance App", label: "Dashboard" },
+                        { src: "assets/img/FA_visu_mensuelle.png", alt: "Visualisation mensuelle Finance App", label: "Budget mensuel" },
+                        { src: "assets/img/FA_trans_man.png", alt: "Saisie de transaction Finance App", label: "Saisie manuelle" },
+                        { src: "assets/img/FA_import_csv.png", alt: "Import CSV Finance App", label: "Import CSV" },
+                        { src: "assets/img/FA_accounts.png", alt: "Vue des comptes Finance App", label: "Comptes" },
+                        { src: "assets/img/FA_objectives.png", alt: "Objectifs Finance App", label: "Objectifs" },
+                        { src: "assets/img/FA_invest.png", alt: "Suivi investissements Finance App", label: "Investissements" }
+                    ],
+                    sections: [
+                        ["Sécuriser l’accès et les données", ["Authentification Firebase avec persistance de session et déconnexion après inactivité.", "Firestore pour synchroniser les données métier en temps réel.", "Import CSV pour limiter la saisie répétitive."]],
+                        ["Construire une expérience claire", ["React, Context API et Hooks pour la logique applicative.", "Recharts pour une lecture visuelle des budgets.", "Tailwind CSS et interface responsive en mode sombre."]]
+                    ]
+                },
+                logs: {
+                    label: "Étude de cas · Scripting système",
+                    title: "Logs Connexion",
+                    summary: "Un projet Bash conçu pour suivre les accès utilisateurs à un fichier sous Linux et transformer des traces brutes en informations exploitables.",
+                    video: "assets/video/LogsConnexion.mp4",
+                    sections: [
+                        ["Ce que le script collecte", ["Utilisateur, hôte, adresse IP, terminal et horodatage lors d’un accès.", "Extraction et filtrage des événements à l’aide d’outils Linux et d’expressions régulières.", "Consultation des connexions par jour, semaine ou mois."]],
+                        ["Ce que ce projet m’a appris", ["Structurer un script Bash lisible et réutilisable.", "Considérer les logs comme une source de détection et d’analyse.", "Relier l’administration système aux enjeux de traçabilité."]]
+                    ],
+                    download: "downloads/LogsConnexion.zip"
+                },
+                jeux: {
+                    label: "Projet académique · Algorithmique",
+                    title: "JeuX",
+                    summary: "Un jeu de plateau à deux joueurs programmé en C. Le défi : représenter le plateau, appliquer les règles et calculer les scores au fil de la partie.",
+                    video: "assets/video/Jeux.mp4",
+                    sections: [
+                        ["Ce que le programme gère", ["Plateau de taille impaire et placement croissant des jetons.", "Calcul des valeurs autour de la dernière case libre.", "Mise à jour de l’état du jeu après chaque coup."]],
+                        ["Compétences mobilisées", ["Algorithmique, tableaux et calcul matriciel.", "Allocation dynamique de mémoire.", "Compilation GCC et débogage d’un programme C."]]
+                    ],
+                    download: "downloads/JeuX.zip"
+                },
+                nim: {
+                    label: "Projet académique · Algorithmique",
+                    title: "Jeu de Nim",
+                    summary: "Une adaptation en ligne de commande d’un jeu de la famille de Nim, jouable contre l’ordinateur avec plusieurs niveaux de difficulté.",
+                    video: "assets/video/JeuDeNim.mp4",
+                    sections: [
+                        ["Fonctionnalités", ["Grille personnalisable de 5×5 à 30×30.", "Déplacements contrôlés et gestion des règles.", "Adversaire allant d’un comportement aléatoire à une stratégie gagnante."]],
+                        ["Compétences mobilisées", ["Structures conditionnelles et boucles en C.", "Raisonnement sur les positions via les nimbers.", "Conception d’une logique de jeu robuste en ligne de commande."]]
+                    ],
+                    download: "downloads/JeuDeNim.zip"
+                },
+                zoo: {
+                    label: "Projet académique · Base de données",
+                    title: "Pueblo Zoo",
+                    summary: "Une base de données fictive pour modéliser et gérer le fonctionnement d’un zoo : animaux, enclos, affectations et informations métier.",
+                    image: "assets/img/looping.png",
+                    imageAlt: "Aperçu de la base de données Pueblo Zoo",
+                    sections: [
+                        ["De l’idée au modèle", ["Analyse du besoin et identification des entités métier.", "Rédaction des modèles conceptuel et logique de données.", "Structuration des relations entre animaux, enclos et affectations."]],
+                        ["Interroger les données", ["Requêtes SQL pour contrôler et exploiter les informations.", "Jointures et requêtes imbriquées.", "Première expérience complète de conception relationnelle."]]
+                    ],
+                    download: "downloads/PuebloZoo.zip"
+                },
+                f1: {
+                    label: "Projet académique · Web",
+                    title: "Site Formule 1",
+                    summary: "Un site web responsive consacré à la Formule 1 des années 2010, réalisé en équipe de quatre dans le cadre d’un projet universitaire.",
+                    sections: [
+                        ["Le projet", ["Conception d’une maquette avant l’intégration.", "Pages d’accueil, d’histoire, de classement et de pilotes.", "Répartition des tâches, autonomie et collaboration d’équipe."]],
+                        ["Compétences mobilisées", ["HTML et CSS responsive.", "Respect d’une identité visuelle et d’une maquette.", "Organisation de projet sur une échéance d’un mois."]]
+                    ],
+                    downloads: [
+                        ["Ouvrir la maquette PDF", "assets/docs/maquete_f1.pdf"]
+                    ]
+                }
+            };
+
+            function createList(items) {
+                return "<ul>" + items.map(function (item) { return "<li>" + item + "</li>"; }).join("") + "</ul>";
             }
-        }
 
-        // Clic utilisateur
-        network.on("click", function (params) {
-            document.getElementById('intro-overlay').style.opacity = '0';
-            if (params.nodes.length > 0) {
-                openNodeCard(params.nodes[0]);
-            } else {
-                closeCard();
-            }
-        });
+            document.querySelectorAll("[data-project]").forEach(function (button) {
+                button.addEventListener("click", function () {
+                    var project = projects[button.dataset.project];
+                    var body = '<p class="eyebrow">' + project.label + '</p><h2 id="modal-title">' + project.title + '</h2><p>' + project.summary + '</p>';
+                    if (project.image) {
+                        body += '<img class="modal-hero" src="' + project.image + '" alt="' + project.imageAlt + '">';
+                    }
+                    if (project.gallery) {
+                        body += '<figure class="modal-gallery"><div class="gallery-stage"><button class="gallery-control prev" type="button" data-gallery-step="-1" aria-label="Photo précédente"><i class="fa-solid fa-arrow-left"></i></button><img data-gallery-image src="' + project.gallery[0].src + '" alt="' + project.gallery[0].alt + '"><button class="gallery-control next" type="button" data-gallery-step="1" aria-label="Photo suivante"><i class="fa-solid fa-arrow-right"></i></button></div><figcaption class="gallery-caption"><span data-gallery-label>' + project.gallery[0].label + '</span><span data-gallery-count>1 / ' + project.gallery.length + '</span></figcaption></figure>';
+                    }
+                    if (project.video) {
+                        body += '<video controls preload="metadata"><source src="' + project.video + '" type="video/mp4">Votre navigateur ne peut pas lire cette vidéo.</video>';
+                    }
+                    project.sections.forEach(function (section) {
+                        body += "<h3>" + section[0] + "</h3>" + createList(section[1]);
+                    });
+                    if (project.download) {
+                        body += '<div class="modal-links"><a class="button button-primary" href="' + project.download + '" download><i class="fa-solid fa-download"></i> Télécharger le projet</a></div>';
+                    }
+                    if (project.downloads) {
+                        body += '<div class="modal-links">' + project.downloads.map(function (link) {
+                            return '<a class="button button-quiet" href="' + link[1] + '" target="_blank" rel="noopener">' + link[0] + ' <i class="fa-solid fa-arrow-up-right-from-square"></i></a>';
+                        }).join("") + '</div>';
+                    }
+                    modalContent.innerHTML = body;
+                    if (project.gallery) {
+                        var galleryIndex = 0;
+                        var galleryImage = modalContent.querySelector("[data-gallery-image]");
+                        var galleryLabel = modalContent.querySelector("[data-gallery-label]");
+                        var galleryCount = modalContent.querySelector("[data-gallery-count]");
+                        function updateGallery(step) {
+                            galleryIndex = (galleryIndex + step + project.gallery.length) % project.gallery.length;
+                            var slide = project.gallery[galleryIndex];
+                            galleryImage.src = slide.src;
+                            galleryImage.alt = slide.alt;
+                            galleryLabel.textContent = slide.label;
+                            galleryCount.textContent = (galleryIndex + 1) + " / " + project.gallery.length;
+                        }
+                        modalContent.querySelectorAll("[data-gallery-step]").forEach(function (control) {
+                            control.addEventListener("click", function () {
+                                updateGallery(Number(control.dataset.galleryStep));
+                            });
+                        });
+                    }
+                    dialog.showModal();
+                });
+            });
 
-        function closeCard() {
-            document.getElementById('info-card').classList.remove('active');
-            network.fit({ animation: { duration: 800, easingFunction: "easeInOutQuad" } });
-        }
-
-        // --- BOOT SEQUENCE : OUVERTURE AUTOMATIQUE SUR L'ALTERNANCE ---
-        // Exécution automatique après stabilisation initiale du graphe (1,2 seconde)
-        setTimeout(() => {
-            network.selectNodes([5]); // Met en surbrillance le nœud d'alternance
-            openNodeCard(5);          // Ouvre automatiquement sa fiche descriptive
-        }, 1200);
-
+            closeModal.addEventListener("click", function () { dialog.close(); });
+            dialog.addEventListener("click", function (event) {
+                var bounds = dialog.getBoundingClientRect();
+                var outside = event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom;
+                if (outside) { dialog.close(); }
+            });
+        }());
     </script>
 </body>
 </html>
